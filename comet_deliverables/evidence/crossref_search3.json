@@ -1,0 +1,193 @@
+[
+  {
+    "query": "Evaluating the interpretability of LIME and SHAP for imbalanced datasets Chen",
+    "results": [
+      {
+        "title": [
+          "Spectral Zones-Based SHAP/LIME: Enhancing Interpretability in Spectral Deep Learning Models Through Grouped Feature Analysis"
+        ],
+        "DOI": "10.1021/acs.analchem.4c02329.s001",
+        "author": null,
+        "published": null,
+        "abstract": null,
+        "URL": "https://doi.org/10.1021/acs.analchem.4c02329.s001"
+      },
+      {
+        "title": [
+          "Enhancing Performance and Interpretability on Small Imbalanced Datasets: A Case Study Using SMOTE and SHAP"
+        ],
+        "DOI": "10.1109/iccc64910.2025.11077317",
+        "author": [
+          {
+            "given": "Rosamma",
+            "family": "K S",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Marian College Kuttikkanam Autonomous,Department of Computer Applications,Peermade,India"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2025,
+              5,
+              23
+            ]
+          ]
+        },
+        "abstract": null,
+        "URL": "https://doi.org/10.1109/iccc64910.2025.11077317"
+      }
+    ]
+  },
+  {
+    "query": "An Investigation of Feature-Grouping for Robust SHAP Explanations in IoT Intrusion Detection",
+    "results": [
+      {
+        "title": [
+          "An Investigation of Feature-Grouping for Robust SHAP Explanations in IoT Intrusion Detection"
+        ],
+        "DOI": "10.1109/itnac66378.2025.11302604",
+        "author": [
+          {
+            "given": "Dedy",
+            "family": "Hendro",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Victoria University of Wellington,School of Engineering and Computer Science,New Zealand"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Yi",
+            "family": "Mei",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Victoria University of Wellington,School of Engineering and Computer Science,New Zealand"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Ian",
+            "family": "Welch",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Victoria University of Wellington,School of Engineering and Computer Science,New Zealand"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2025,
+              11,
+              26
+            ]
+          ]
+        },
+        "abstract": null,
+        "URL": "https://doi.org/10.1109/itnac66378.2025.11302604"
+      },
+      {
+        "title": [
+          "HGWO-SHAP: A Hybrid Grey Wolf Optimizer with Shapley Additive Explanations for Intelligent Feature Selection in IoT Intrusion Detection Systems"
+        ],
+        "DOI": "10.1007/s11227-026-08788-9",
+        "author": [
+          {
+            "given": "Umar",
+            "family": "Islam",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Fakhrud",
+            "family": "Din",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Anwar",
+            "family": "Ul Haq",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0001-8847-294X",
+            "authenticated-orcid": false,
+            "given": "Inayat",
+            "family": "Ali",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2026,
+              8,
+              15
+            ]
+          ]
+        },
+        "abstract": null,
+        "URL": "https://doi.org/10.1007/s11227-026-08788-9"
+      }
+    ]
+  }
+]

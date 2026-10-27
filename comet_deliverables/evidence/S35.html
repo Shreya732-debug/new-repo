@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Dangers of Post-hoc Interpretability: Unjustified Counterfactual Explanations | IJCAI</title>
+<meta name='robots' content='max-image-preview:large' />
+<meta name="citation_title" content="The Dangers of Post-hoc Interpretability: Unjustified Counterfactual Explanations">
+<meta name="citation_author" content="Laugel, Thibault">
+<meta name="citation_author_institution" content="Sorbonne Université , CNRS , Laboratoire d&#039;Informatique de Paris 6 , LIP6 , F-75005 Paris , France">
+<meta name="citation_author" content="Lesot, Marie-Jeanne">
+<meta name="citation_author_institution" content="Sorbonne Université , CNRS , Laboratoire d&#039;Informatique de Paris 6 , LIP6 , F-75005 Paris , France">
+<meta name="citation_author" content="Marsala, Christophe">
+<meta name="citation_author_institution" content="Sorbonne Université , CNRS , Laboratoire d&#039;Informatique de Paris 6 , LIP6 , F-75005 Paris , France">
+<meta name="citation_author" content="Renard, Xavier">
+<meta name="citation_author_institution" content="AXA , Paris , France">
+<meta name="citation_author" content="Detyniecki, Marcin">
+<meta name="citation_author_institution" content="Sorbonne Université , CNRS , Laboratoire d&#039;Informatique de Paris 6 , LIP6 , F-75005 Paris , France; AXA , Paris , France; Polish Academy of Science , IBS PAN , Warsaw , Poland">
+<meta name="citation_publication_date" content="2019">
+<meta name="citation_conference_title" content="Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence">
+<meta name="citation_publisher" content="International Joint Conferences on Artificial Intelligence Organization">
+<meta name="citation_firstpage" content="2801">
+<meta name="citation_lastpage" content="2807">
+<meta name="citation_doi" content="10.24963/ijcai.2019/388">
+<meta name="citation_pdf_url" content="https://ijcai.org/proceedings/2019/0388.pdf">
+<meta name="citation_abstract_html_url" content="https://ijcai.org/proceedings/2019/388">
+<link rel="canonical" href="https://ijcai.org/proceedings/2019/388">
+<link rel="alternate" type="text/markdown" href="https://ijcai.org/proceedings/2019/388.md">
+<link rel="alternate" type="application/json" href="https://ijcai.org/proceedings/2019/388.json">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","headline":"The Dangers of Post-hoc Interpretability: Unjustified Counterfactual Explanations","name":"The Dangers of Post-hoc Interpretability: Unjustified Counterfactual Explanations","abstract":"Post-hoc interpretability approaches have been proven to be powerful tools to generate explanations for the predictions made by a trained black-box model. However, they create the risk of having explanations that are a result of some artifacts learned by the model instead of actual knowledge from the data. This paper focuses on the case of counterfactual explanations and asks whether the generated instances can be justified, i.e. continuously connected to some ground-truth data. We evaluate the risk of generating unjustified counterfactual examples by investigating the local neighborhoods of instances whose predictions are to be explained and show that this risk is quite high for several datasets. Furthermore, we show that most state of the art approaches do not differentiate justified from unjustified counterfactual examples, leading to less useful explanations.","author":[{"@type":"Person","name":"Thibault Laugel","url":"https://ijcai.org/authors/thibault-laugel/","affiliation":{"@type":"Organization","name":"Sorbonne Université , CNRS , Laboratoire d'Informatique de Paris 6 , LIP6 , F-75005 Paris , France"}},{"@type":"Person","name":"Marie-Jeanne Lesot","url":"https://ijcai.org/authors/marie-jeanne-lesot/","affiliation":{"@type":"Organization","name":"Sorbonne Université , CNRS , Laboratoire d'Informatique de Paris 6 , LIP6 , F-75005 Paris , France"}},{"@type":"Person","name":"Christophe Marsala","url":"https://ijcai.org/authors/christophe-marsala/","affiliation":{"@type":"Organization","name":"Sorbonne Université , CNRS , Laboratoire d'Informatique de Paris 6 , LIP6 , F-75005 Paris , France"}},{"@type":"Person","name":"Xavier Renard","url":"https://ijcai.org/authors/xavier-renard/","affiliation":{"@type":"Organization","name":"AXA , Paris , France"}},{"@type":"Person","name":"Marcin Detyniecki","url":"https://ijcai.org/authors/marcin-detyniecki/","affiliation":{"@type":"Organization","name":"Sorbonne Université , CNRS , Laboratoire d'Informatique de Paris 6 , LIP6 , F-75005 Paris , France; AXA , Paris , France; Polish Academy of Science , IBS PAN , Warsaw , Poland"}}],"datePublished":"2019","isPartOf":{"@type":"Book","name":"Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence","isbn":"978-0-9992411-4-1","url":"https://ijcai.org/proceedings/2019/"},"publisher":{"@type":"Organization","name":"International Joint Conferences on Artificial Intelligence Organization"},"url":"https://ijcai.org/proceedings/2019/388","keywords":"Machine Learning: Interpretability; Machine Learning: Explainable Machine Learning; Machine Learning: Classification","identifier":{"@type":"PropertyValue","propertyID":"DOI","value":"10.24963/ijcai.2019/388"},"sameAs":"https://doi.org/10.24963/ijcai.2019/388","pageStart":2801,"pageEnd":2807,"encoding":{"@type":"MediaObject","encodingFormat":"application/pdf","contentUrl":"https://ijcai.org/proceedings/2019/0388.pdf"}}</script>
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+<style id="wp-block-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the block styles printed at wp_footer." }
+/*# sourceURL=wp-block-styles-placeholder-inline-css */
+</style>
+<style id="wp-global-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the global-styles printed at wp_footer." }
+/*# sourceURL=wp-global-styles-placeholder-inline-css */
+</style>
+<link rel='stylesheet' id='ijcai-main-css' href='https://ijcai.org/wp-content/themes/ijcai/assets/css/main.css?ver=1.0.13' media='all' />
+<link rel='stylesheet' id='ijcai-archive-css' href='https://ijcai.org/wp-content/themes/ijcai/assets/css/archive.css?ver=1.1.0' media='all' />
+<link rel="https://api.w.org/" href="https://ijcai.org/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://ijcai.org/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.1.3" />
+<link rel="icon" href="https://ijcai.org/wp-content/themes/ijcai/assets/img/favicon.ico?v=2" sizes="any">
+<link rel="icon" href="https://ijcai.org/wp-content/themes/ijcai/assets/img/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="https://ijcai.org/wp-content/themes/ijcai/assets/img/apple-touch-icon.png?v=2">
+</head>
+<body class="wp-theme-ijcai ijcai-archive ijcai-archive--article">
+
+<header class="site-header">
+    <div class="site-header__bar">
+        <span class="site-header__spacer"></span>
+        <a href="https://ijcai.org/" class="site-logo">
+            <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/logo.svg"
+                 width="247" height="105" alt="IJCAI">
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation"
+                aria-expanded="false" aria-controls="nav-panel">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <nav id="nav-panel" class="nav-panel" aria-label="Primary Navigation">
+        <ul id="menu-primary" class="nav-panel__menu"><li id="menu-item-230" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-230"><a href="https://ijcai.org/future_conferences/">Conferences</a>
+<ul class="sub-menu">
+	<li id="menu-item-231" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-231"><a href="https://ijcai.org/future_conferences/">Future Conferences</a></li>
+	<li id="menu-item-232" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-232"><a href="https://ijcai.org/past_conferences/">Past Conferences</a></li>
+</ul>
+</li>
+<li id="menu-item-233" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-233"><a href="https://ijcai.org/all_proceedings/">Proceedings</a>
+<ul class="sub-menu">
+	<li id="menu-item-234" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-234"><a href="/proceedings/2026/">IJCAI 2026 Proceedings</a></li>
+	<li id="menu-item-235" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-235"><a href="https://ijcai.org/all_proceedings/">All Proceedings</a></li>
+</ul>
+</li>
+<li id="menu-item-236" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-236"><a href="https://ijcai.org/awards/">Awards</a></li>
+<li id="menu-item-237" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-237"><a href="https://ijcai.org/trustees/current_trustees/">Trustees/officers</a>
+<ul class="sub-menu">
+	<li id="menu-item-238" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-238"><a href="https://ijcai.org/trustees/current_trustees/">Current trustees</a></li>
+	<li id="menu-item-239" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-239"><a href="https://ijcai.org/trustees/trustees_elect/">Trustees Elect</a></li>
+	<li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://ijcai.org/officers/ijcai_secretariat/">IJCAI Secretariat</a></li>
+	<li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://ijcai.org/officers/sponsorship_publicity/">IJCAI Sponsorship and Publicity Officers</a></li>
+	<li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://ijcai.org/officers/ijcai_team/">IJCAI Team</a></li>
+	<li id="menu-item-243" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-243"><a href="https://ijcai.org/officers/local_arrangements_chairs/">Local Arrangements Chairs</a></li>
+	<li id="menu-item-244" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-244"><a href="https://ijcai.org/trustees/former_trustees_serving_on_the_executive_committee/">Former Trustees serving on the Executive Committee</a></li>
+	<li id="menu-item-245" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-245"><a href="https://ijcai.org/officers/other_former_officers/">Other Former Officers</a></li>
+</ul>
+</li>
+<li id="menu-item-246" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-246"><a href="https://ijcai.org/aijd/">AI Journal</a></li>
+<li id="menu-item-247" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-247"><a href="https://ijcai.org/aboutijcai/">About</a>
+<ul class="sub-menu">
+	<li id="menu-item-248" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-248"><a href="https://ijcai.org/aboutijcai/">About IJCAI</a></li>
+	<li id="menu-item-314" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-314"><a href="https://ijcai.org/documents/">Documents</a></li>
+	<li id="menu-item-249" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-249"><a href="https://ijcai.org/contact/">Contact Information</a></li>
+</ul>
+</li>
+</ul>    </nav>
+</header>
+
+<main id="main" class="site-main">
+    <div class="page-banner" style="background-image: url('https://ijcai.org/wp-content/themes/ijcai/assets/img/banners/proceedings.jpg?v=1');">
+    <details class="section-nav section-nav--overlay">
+    <summary>Proceedings</summary>
+    <ul>
+                    <li>
+                <a href="/proceedings/2026/">
+                    IJCAI 2026 Proceedings                </a>
+            </li>
+                    <li>
+                <a href="https://ijcai.org/all_proceedings/">
+                    All Proceedings                </a>
+            </li>
+            </ul>
+</details>
+</div>
+    <article class="panel archive-record">
+        <nav class="archive-crumbs" aria-label="Breadcrumb">
+            <a href="https://ijcai.org/all_proceedings/">Proceedings</a>
+                            <span aria-hidden="true">›</span>
+                <a href="https://ijcai.org/proceedings/2019/">IJCAI 2019</a>
+                    </nav>
+
+        
+        <div class="entry-content">
+            <div class="article">
+    <div class="article__grid">
+        <div class="article__main">
+            <h1 class="article__title">The Dangers of Post-hoc Interpretability: Unjustified Counterfactual Explanations</h1>
+
+            <p class="article__authors">
+                <span title="Sorbonne Université , CNRS , Laboratoire d&#039;Informatique de Paris 6 , LIP6 , F-75005 Paris , France"><a href="https://ijcai.org/authors/thibault-laugel/">Thibault Laugel</a></span>, <span title="Sorbonne Université , CNRS , Laboratoire d&#039;Informatique de Paris 6 , LIP6 , F-75005 Paris , France"><a href="https://ijcai.org/authors/marie-jeanne-lesot/">Marie-Jeanne Lesot</a></span>, <span title="Sorbonne Université , CNRS , Laboratoire d&#039;Informatique de Paris 6 , LIP6 , F-75005 Paris , France"><a href="https://ijcai.org/authors/christophe-marsala/">Christophe Marsala</a></span>, <span title="AXA , Paris , France"><a href="https://ijcai.org/authors/xavier-renard/">Xavier Renard</a></span>, <span title="Sorbonne Université , CNRS , Laboratoire d&#039;Informatique de Paris 6 , LIP6 , F-75005 Paris , France; AXA , Paris , France; Polish Academy of Science , IBS PAN , Warsaw , Poland"><a href="https://ijcai.org/authors/marcin-detyniecki/">Marcin Detyniecki</a></span>            </p>
+
+            <div class="article__actions">
+                                                    <a class="action action--pdf" href="/proceedings/2019/0388.pdf"><span class="action__icon" aria-hidden="true">PDF</span>Download</a>
+                                <a class="action action--bib" href="/proceedings/2019/bibtex/388"><span class="action__icon" aria-hidden="true">Bib</span>BibTeX</a>
+                <a class="action action--cite" href="#cite" data-tab-open="cite"><span class="action__icon" aria-hidden="true">“”</span>Cite</a>
+            </div>
+
+            <p class="article__venue">
+                <a href="/proceedings/2019/">Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence</a>.
+                Main track. Pages 2801-2807.
+            </p>
+                            <p class="article__doi"><a href="https://doi.org/10.24963/ijcai.2019/388">https://doi.org/10.24963/ijcai.2019/388</a></p>
+            
+                            <div class="article__keywords">
+                    <p class="eyebrow">Keywords</p>
+                    <ul>
+                                                    <li>Machine Learning: Interpretability</li>
+                                                    <li>Machine Learning: Explainable Machine Learning</li>
+                                                    <li>Machine Learning: Classification</li>
+                                            </ul>
+                </div>
+                    </div>
+
+        <div class="article__abstract">
+            <p class="eyebrow">Abstract</p>
+                            <p>Post-hoc interpretability approaches have been proven to be powerful tools to generate explanations for the predictions made by a trained black-box model. However, they create the risk of having explanations that are a result of some artifacts learned by the model instead of actual knowledge from the data. This paper focuses on the case of counterfactual explanations and asks whether the generated instances can be justified, i.e. continuously connected to some ground-truth data. We evaluate the risk of generating unjustified counterfactual examples by investigating the local neighborhoods of instances whose predictions are to be explained and show that this risk is quite high for several datasets. Furthermore, we show that most state of the art approaches do not differentiate justified from unjustified counterfactual examples, leading to less useful explanations.</p>                    </div>
+    </div>
+
+    <div class="article-tabs" data-tabs>
+        <div class="article-tabs__list" role="tablist">
+                            <button role="tab" id="tab-references" aria-controls="references" aria-selected="true">References (23)</button>
+                                        <button role="tab" id="tab-fulltext" aria-controls="fulltext" aria-selected="false">Full text</button>
+                                    <button role="tab" id="tab-cite" aria-controls="cite" aria-selected="false">Cite</button>
+            <button role="tab" id="tab-data" aria-controls="data" aria-selected="false">Data</button>
+        </div>
+
+                    <section role="tabpanel" id="references" aria-labelledby="tab-references">
+                <ol class="references">
+                                            <li value="1">
+                            [Alvarez Melis and Jaakkola, 2018] David Alvarez Melis and Tommi Jaakkola. Towards robust interpretability with self-explaining neural networks. Advances in Neural In- formation Processing Systems, 31:7786-7795, 2018.                                                                                </li>
+                                            <li value="2">
+                            [Baehrens et al., 2010] David Baehrens, Timon Schroeter, Stefan Harmeling, Katja Hansen, and Klaus-Robert Muller. How to Explain Individual Classification Deci- sions Motoaki Kawanabe. Journal of Machine Learning Research, 11:1803-1831, 2010.                                                                                </li>
+                                            <li value="3">
+                            [Bottou et al., 2013] Léon Bottou, Jonas Peters, Joaquin Quiñonero Candela, Denis X. Charles, D. Max Chicker- ing, Elon Portugaly, Dipankar Ray, Patrice Simard, and Ed Snelson. Counterfactual reasoning and learning sys- tems: The example of computational advertising. Journal of Machine Learning Research, 14:3207-3260, 2013.                                                                                </li>
+                                            <li value="4">
+                            [Craven and Shavlik, 1996] Mark W. Craven and Jude W. Shavlik. Extracting tree-structured representations of trained neural networks. Advances in Neural Information Processing Systems, 8:24-30, 1996.                                                                                </li>
+                                            <li value="5">
+                            [Ester et al., 1996] Martin Ester, Hans-Peter Kriegel, Jörg Sander, and Xiaowei Xu. A density-based algorithm for discovering clusters in large spatial databases with noise. In Proc. of the 2nd Int. Conf. on Knowledge Discovery and Data Mining (KDD&#039;96), pages 226-231, 1996.                                                                                </li>
+                                            <li value="6">
+                            [Guidotti et al., 2018a] Riccardo Guidotti, Anna Monreale, Salvatore Ruggieri, Dino Pedreschi, Franco Turini, and Fosca Giannotti. Local rule-based explanations of black box decision systems. arXiv preprint 1805.10820, 2018.                                                                                </li>
+                                            <li value="7">
+                            [Guidotti et al., 2018b] Riccardo Guidotti, Anna Monreale, Salvatore Ruggieri, Franco Turini, Fosca Giannotti, and Dino Pedreschi. A survey of methods for explaining black box models. ACM Computing Surveys (CSUR), 51(5):93, 2018.                                                                                </li>
+                                            <li value="8">
+                            [Hara and Hayashi, 2016] Satoshi Hara and Kohei Hayashi. Making tree ensembles interpretable. ICML Workshop on Human Interpretability in Machine Learning (WHI 2016), 2016.                                                                                </li>
+                                            <li value="9">
+                            [Harrison and Rubinfeld, 1978] David Harrison and Daniel Rubinfeld. Hedonic prices and the demand for clean air. Environment Economics and Management, 5:81-102, 1978.                                                                                </li>
+                                            <li value="10">
+                            [Jiang et al., 2018] Heinrich Jiang, Been Kim, Melody Guan, and Maya Gupta. To trust or not to trust a classi- fier. Advances in Neural Information Processing Systems, 31:5541-5552, 2018.                                                                                </li>
+                                            <li value="11">
+                            [Kabra et al., 2015] Mayank Kabra, Alice Robie, and Kristin Branson. Understanding classifier errors by examining in- fluential neighbors. 2015 IEEE Conf. on Computer Vision and Pattern Recognition (CVPR), pages 3917-3925, 2015.                                                                                </li>
+                                            <li value="12">
+                            [Kim et al., 2014] Been Kim, Cynthia Rudin, and Julie A Shah. The Bayesian Case Model: A generative ap- proach for case-based reasoning and prototype classifica- tion. Advances in Neural Information Processing Systems, 27:1952-1960, 2014.                                                                                </li>
+                                            <li value="13">
+                            [Larson et al., 2016] Jeff Larson, Surya Mattu, Lauren Kirchner, and Julia Angwin. How we analyzed the compas recidivism algorithm. ProPublica, 2016.                                                                                </li>
+                                            <li value="14">
+                            [Lash et al., 2017] Michael Lash, Qihang Lin, Nick Street, Jennifer Robinson, and Jeffrey Ohlmann. Generalized in- verse classification. In Proc. of the 2017 SIAM Int. Conf. on Data Mining, pages 162-170, 2017.                                                                                </li>
+                                            <li value="15">
+                            [Laugel et al., 2018a] Thibault Laugel, Marie-Jeanne Lesot, Christophe Marsala, Xavier Renard, and Marcin De- tyniecki. Comparison-based inverse classification for in- terpretability in machine learning. In Information Process- ing and Management of Uncertainty in Knowledge-Based Systems, pages 100-111, 2018.                                                                                </li>
+                                            <li value="16">
+                            [Laugel et al., 2018b] Thibault Laugel, Xavier Renard, Marie-Jeanne Lesot, Christophe Marsala, and Marcin Detyniecki. Defining locality for surrogates in post-hoc in- terpretablity. ICML Workshop on Human Interpretability in Machine Learning (WHI 2018), 2018.                                                                                </li>
+                                            <li value="17">
+                            [Lipton, 2017] Zachary C. Lipton. The mythos of model in- terpretability. ICML Workshop on Human Interpretability in Machine Learning (WHI 2017), 2017.                                                                                </li>
+                                            <li value="18">
+                            [Lundberg and Lee, 2017] Scott M Lundberg and Su-In Lee. A unified approach to interpreting model predictions. Advances in Neural Information Processing Systems, 30:4765-4774, 2017.                                                                                </li>
+                                            <li value="19">
+                            [Ribeiro et al., 2016] Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. &quot;Why should I trust you?&quot;: Ex- plaining the predictions of any classifier. In Proc. of the 22nd ACM SIGKDD Int. Conf. on Knowledge Discovery and Data Mining, KDD &#039;16, pages 1135-1144, 2016.                                                                                </li>
+                                            <li value="20">
+                            [Rudin, 2018] Cynthia Rudin. Please stop explaining black box models for high stakes decisions. NeurIPS Workshop on Critiquing and Correcting Trends in Machine Learning, 2018.                                                                                </li>
+                                            <li value="21">
+                            [Tenenbaum et al., 2000] Joshua B. Tenenbaum, Vin de Silva, and John C. Langford. A global geometric frame- work for nonlinear dimensionality reduction. Science, 290(5500):2319-2323, 2000.                                                                                </li>
+                                            <li value="22">
+                            [Turner, 2015] Ryan Turner. A model explanation system. NIPS Workshop on Black Box Learning and Inference, 2015.                                                                                </li>
+                                            <li value="23">
+                            [Wachter et al., 2018] Sandra Wachter, Brent Mittelstadt, and Chris Russell. Counterfactual explanations with- out opening the black box; automated decisions and the GDPR. Harvard Journal of Law &amp; Technology, 31(2):841-887, 2018.                                                                                </li>
+                                    </ol>
+                <p class="tab-note">References were extracted automatically from the PDF and may contain errors.</p>
+            </section>
+        
+                    <section role="tabpanel" id="fulltext" aria-labelledby="tab-fulltext" hidden>
+                <p class="tab-note">Full text extracted automatically from the PDF; figures, tables and equations may differ. The PDF is the version of record.</p>
+                <div class="fulltext"><h2>1 Introduction</h2>
+<p>Among the soaring number of methods proposed to generate explanations for a machine learning classifier, post-hoc interpretability aproaches [Guidotti et al., 2018b] have been the subject of debates recently in the community [Rudin, 2018]. By generating explanations for the predictions of a trained predictive model without using any knowledge about it whatsoever (treating it as a black-box), these systems are inherently flexible enough to be used in any situation (model, task...) by any user, which makes them popular today in various industries. However, their main downside is that, under these assumptions, there is no guarantee that the built explanations are faithful to the original data that were used to train the model.</p>
+<p>This is in particular the case for counterfactual example approaches that, based on counterfactual reasoning (see e.g. [Bottou et al., 2013]), aim at answering the question: given a classifier and an observation, how is the prediction altered when the observation changes? In the context of classification, they identify the minimal perturbation required to change the predicted class of a given observation: a user is thus able to understand what features locally impact the prediction and therefore how it can be changed. Among interpretability methods, counterfactual examples have been shown to be useful solutions [Wachter et al., 2018] that can be easily understood and thus directly facilitate decisions for a user.</p>
+<p>∗Contact Author</p>
+<p>However, without any guarantee on existing data, counterfactual examples in the post-hoc paradigm are vulnerable to issues raised by the robustness of the classifier, leading to explanations that are arguably not satisfying in the context of interpretability. More generally, this paper argues that a crucial property a counterfactual example should satisfy is that it should be connected to the training data of the classifier. Formally, we define this relation using the notion of connectedness and argue that there should be a continuous path between a counterfactual and an instance from the training data, as discussed and defined in Section 3.</p>
+<p>This paper aims at showing that generating such post-hoc counterfactual explanations can be difficult. The contributions are the following:</p>
+<ul>
+<li style="list-style-type: '· ';">We propose an intuitive desideratum for more relevant counterfactual explanations, based on ground-truth labelled data, that helps generating better explanations.</li>
+<li style="list-style-type: '· ';">We design a test to highlight the risk of having undesirable counterfactual examples disturb the generation of counterfactual explanations.</li>
+<li style="list-style-type: '· ';">We apply this test to several datasets and classifiers and show that the risk of generating undesirable counterfactual examples is high.</li>
+<li style="list-style-type: '· ';">Additionally, we design a second test and show that state of the art post-hoc counterfactual approaches may generate unjustified explanations.</li>
+</ul>
+<p>Section 2 is devoted to discussing the state of the art of post-hoc interpretability and counterfactual explanations, as well as presenting studies related to this work. Section 3 proposes a definition for ground-truth backed counterfactual explanations that we use in this paper. In Section 4, the central procedure of this paper is proposed, which aims at assessing the risk of generating unjustified counterfactual explanations, and experimental results are shown. Finally, the vulnerability of methods from the literature to this risk is evaluated in Section 5.</p>
+<h2>2 Background</h2>
+<p>This section presents some existing interpretability methods and analyses that have been already conducted.</p>
+<h2>2.1 Post-hoc Interpretability</h2>
+<p>In order to build explanations for predictions made by a trained black-box model, post-hoc interpretability approaches generally rely on sampling instances and labelling them with the model to gather information about its behavior, either locally around a prediction [Ribeiro et al., 2016] or globally [Craven and Shavlik, 1996]. These instances are then used to approximate the decision function of the black-box and build understandable explanations, either using a surrogate model (e.g. a linear model [Ribeiro et al., 2016] or a decision tree [Hara and Hayashi, 2016]), or by computing meaningful coefficients [Turner, 2015; Lundberg and Lee, 2017]). Other methods rely on using specific instances to build explanations using comparison to relevant neighbors, such as prototype-based approaches [Kim et al., 2014] and counterfactual explanation approaches.</p>
+<p>Instead of simply identifying important features, the latter aim at finding the minimal perturbation required to alter the prediction of a given observation. A counterfactual explanation is thus a data instance, close to this observation, that is predicted to belong to a different class. This form of explanation provides a user tangible explanations that are directly understandable and actionable, which can be seen as an advantage. This can be opposed to other explanations using feature importance vectors, which are arguably harder to use and to understand for a non-expert user [Wachter et al., 2018]. Several formalizations of the counterfactual problem can be found in the literature, depending on the formulation of the inverse problem and on the used distance. For instance, [Laugel et al., 2018a] (resp. [Guidotti et al., 2018a]) look for the L2 (resp. L0)-closest instance of an other class, while [Lash et al., 2017] try to find the instance that has the highest probability of belonging to another class within a certain maximum distance. Another example is the formulation as a tradeoff between the L1 closest instance and a certain classification score target [Wachter et al., 2018].</p>
+<h2>2.2 Comparison of Post-hoc Interpretability Approaches</h2>
+<p>The post-hoc paradigm, and in particular the need for posthoc approaches to use instances that were not used to train the model to build their explanations, raises questions about their relevance and usefulness. Several troublesome issues have been identified: [Baehrens et al., 2010] e.g. notice that modeling the decision function of a black-box classifier with a surrogate model trained on generated instances can result in explanation vectors that point in the wrong directions in some areas of the feature space in a trivial problem. The stability of post-hoc explainer systems has been criticized as well, showing that some of these approaches are locally not stable enough [Alvarez Melis and Jaakkola, 2018] or on the contrary too stable and thus not locally accurate enough [Laugel et al., 2018b].</p>
+<p>However, there seems to have been few works [Lipton, 2017; Rudin, 2018] questioning the post-hoc paradigm itself,</p>
+<figure><img src="/proceedings/2019/fulltext/388/image_000000_e0b55ced44357f15ba7d992cdae3419386e538e9d6537303766d278bd35b57e1.png"></figure>
+<ul>
+<li>(a) RF with 3 estimators</li>
+</ul>
+<figure><figcaption><div class="caption">(b) SVC with RBF kernel</div></figcaption><img src="/proceedings/2019/fulltext/388/image_000001_4f75eaf31ff814b41df3e870c3775327e7f58f8726428282afd87ba401bc3a53.png"></figure>
+<p>Figure 1: Two classifiers have been trained on 80% of the dataset (a 2D version of the iris dataset) and have the same accuracy over the test set, 0.78. Left picture: because of its low robustness, the random forest classifier makes questionable generalizations (e.g. small red square in the dark blue region) Right picture: the support vector classifier makes questionable decisions in regions far away from the training data (red area in the top left corner).</p>
+<p>and wondering about the risks of generating explanations that are disconnected from the ground truth. The work of [Kabra et al., 2015] can be related to this issue, as it attempts to identify which neighbors from the training data are the most influential for a given prediction made by a trained classifier. However, their approach relies on retraining the classifier to induce a notion of causality, and thus lies beyond the posthoc context. In a similar fashion, [Jiang et al., 2018] try to identify which predictions can be trusted in regard to ground truth instances based on their distance to training data.</p>
+<h2>3 Ground-truth Justification</h2>
+<p>This section presents motivations and formalization for the notion of ground-truth justification, central to this paper.</p>
+<h2>3.1 Motivations</h2>
+<p>The notion of ground-truth justification we seek aims at making a distinction between an explanation that has been generated because of some previous knowledge (such as training data) and one that would be a consequence of an artifact of the classifier. In the post-hoc paradigm, explainer systems do not have access to the training data; making this distinction is thus not trivial. In the case of counterfactual explanations that rely on specific instances, the risk would be having counterfactual instances (i.e. predictions from another class) caused by these artifacts. Artifacts can be created in particular because of a lack of robustness of the model, or because it is forced to make a prediction for an observation in an area that was not being covered by the training set. Fig. 1 shows an illustration of how easily such situations can arise in a trivial problem. In both cases, some regions can be found where the classifier makes questionable improvisations in areas he has no information about (no training data), either because it is not robust enough (left image) or because of its complexity (right image). Although not harmful in the context of prediction (a desirable property of a classifier remains its ability to generalize to new observations), having an explanation caused by an artifact such that it can not be associated to any existing knowledge by a human user may be undesirable in the context of interpretability: for instance, a physician using a diagnostic tool and an explanation for a prediction that is not based on existing medical cases would be conceptually useless, if not very dangerous.</p>
+<h2>3.2 Definitions</h2>
+<p>We propose to define this relation between an explanation and some existing knowledge (ground-truth data used to train the black-box model) using the topological notion of path, used when defining the path connectedness of a set. In order to be more easily understood and employed by a user, we argue that the counterfactual instance should be continuously connected to an observation from the training dataset. The idea of this justification is not to identify the instances that are responsible for a prediction (such as in the aforementioned work of [Kabra et al., 2015]), but the ones that are correctly being predicted to belong to the same class for similar reasons.</p>
+<p>Definition 1 (Justification). Given a classifier f : X → Y trained on a dataset X, a counterfactual example e ∈ X is justified by an instance a ∈ X correctly predicted if f(e) = f(a) and if there exists a continuous path h between e and a such that no decision boundary of f is met.</p>
+<p>Formally, e is justified by a ∈ X if: ∃ h : [0, 1] → X such that: (i) h is continuous, (ii) h(0) = a, (iii) h(1) = e and (iv) ∀t ∈ [0, 1], f(h(t)) = f(e).</p>
+<p>To adapt this continuous notion to the context of a blackbox classifier, we replace the connectedness constraint with ϵ-chainability, with ϵ ∈ R+: an ϵ-chain between e and a is a finite sequence e0, e1, ... eN ∈ X such that e0 = e, eN = a and ∀i &lt; N, d(ei, ei+1) &lt; ϵ, with d a distance metric.</p>
+<p>Definition 2 (ϵ-justification). Given a trained classifier f : X → Y trained on a dataset X, a counterfactual example e ∈ X is ϵ-justified by an instance a ∈ X correctly predicted if f(e) = f(a) and if there exists an ϵ-chain {ei}i≤N between e and a such that ∀i ≤ N, f(ei) = f(e).</p>
+<p>This definition is equivalent to approximating the aforementioned function h by a sequence (ei)i:, when ϵ decreases towards 0, this definition becomes a weak version of Definition 1. Consequently, we call a justified (resp. unjustified) counterfactual (written JCF, resp. UCF) a counterfactual example that does (resp. does not) satisfy Definition 2.</p>
+<p>Setting parameter ϵ then allows to build an ϵ-graph of instances classified similarly. Using such a graph to approximate connectedness is also found in some manifold learning approaches (e.g. Isomap [Tenenbaum et al., 2000]), where local neighborhoods help to approximate connectedness and thus reduce the dimension of the data.</p>
+<p>This definition of connectedness can also be related to the one used in density-based clustering methods, such as the well-known DBSCAN [Ester et al., 1996]: in DBSCAN, two parameters ϵ and minPts control the resulting clusters (resp. outliers), built from the core points, which are instances that have at least (resp. less than) minPts neighbors in an ϵball. Thus, having an instance being ϵ-justified by another is equivalent to having them both belong to the same DBSCAN cluster, with parameters minP ts = 2 and same ϵ.</p>
+<figure><img src="/proceedings/2019/fulltext/388/image_000002_4b7a60647fbb4b98d1648fd31b59e879501447c36b84bd75c8fd1f43a551eb5b.png"></figure>
+<figure><figcaption><div class="caption">Figure 2: Illustration of the Local Risk Assessment procedure in the context of binary classification. Left: Definition and Initial Assessment steps; right: Iteration step.</div></figcaption><img src="/proceedings/2019/fulltext/388/image_000003_2ca217c2afc57ebf7be3c0064fcec48f8ef8d88a3d49bdb154e1ea7091c23cea.png"></figure>
+<h2>4 Assessment of the Local Risk of Generating Unjustified Counterfactuals</h2>
+<p>The goal of this section is to design a test, the Local Risk Assessment (LRA) procedure, highlighting the existence of UCF in low-dimensional structured data.</p>
+<h2>4.1 LRA Procedure</h2>
+<p>Given a black-box classifier f : X → Y trained on the dataset X of instances of X and an instance x ∈ X whose prediction f(x) is to be explained, the aim is to assess the risk of generating unjustified counterfactual examples in a local neighborhood of x. To do this, we propose a generative approach that aims at finding which regions of this neighborhood are ϵ-connected to an instance of X (i.e. verify Definition 2). In the rest of the paper, given a subset of instances A of X, we note Al = {z ∈ A | f(z) = l}. The LRA procedure, commented below, is detailed in Algorithm 1 and illustrated in a two-dimensional setting in Fig. 2: the red dot represents x, the observation whose prediction is to be interpreted, while green squares (a0, a1 and a2) are correctly classified instances from the training set X. The decision boundary of f, the considered binary classifier, is represented by the black lines.</p>
+<p>For clarity purposes, the procedure is split in three steps: first, the studied area is defined in the Definition step. Then, an Initial Risk Assessment step is performed in this area. Finally, if needed, the procedure is repeated in the Iteration step.</p>
+<h2>Definition Step</h2>
+<p>We first define the studied local neighborhood, i.e. the region of x which we are trying to assess the risk of, as the ball with center x and radius defined by its distance to its closest neighbor from X correctly predicted to belong to another class: B(x, d(x, a0)), with a0 = arg min z∈Xl̸=f(x)d(x, z), s.t. f(a0) is correct. The distance</p>
+<p>d(x, a0) represents an approximation of the minimal distance between x and the decision boundary of f , and is hence a reasonable distance to look for counterfactual examples: as it is ϵ-connected to itself, a0 represents a "close" justified counterfactual explanation by itself. The limit of B(x, d(x, a0)) is illustrated in the left picture of Fig. 2 by the blue dashed circle.</p>
+<h2>Initial Assessment Step</h2>
+<p>A high number n of instances Bx = {xi}i≤n are then sampled in B(x, d(x, a0)) following a uniform distribution and labelled using f .</p>
+<p>Using Definition 2, the goal of LRA is to identify which instances of Bf(a0) x are connected to X through an ϵ-chain. The process to set the value of ϵ is detailed in Section 4.4. As mentioned earlier, an easy way to implement this is to use the clustering algorithm DBSCAN on Bf (a0) x ∪{a0} with parameter values ϵ and minPts = 2. We note {Ct}t the resulting clusters and outliers: according to Def. 2, the instances belonging to the same cluster as a0 are ϵ-justified.</p>
+<p>This Initial Assessment step is written in lines 2 to 9 of Algorithm 1, and illustrated in the left image of Fig. 2: instances are generated in Bx (blue dashed circle; the generated instances are not shown in the illustration), and the ones belonging to Bf(a0) x are assigned to clusters C1 (unjustified at this step), C2 (justified, since a0 ∈ C2) and C3 (non-justified).</p>
+<h2>Iteration Step</h2>
+<p>However, at this step, there is no certainty that the other instances of Bf(a0) are unjustified, as they could simply be connected to other instances from Xf(a0) than a0, or using an ϵ-path that can not be fully included in the explored area B(x, d(x, a0)) (see Fig. 2, instances belonging to cluster C1 are actually justified by a1 but are not connected within Bx). To answer this question, we define a1 as the second closest instance of Xf(a0) to x correctly predicted and broaden the exploration region to the hyperspherical layer defined as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Instances SL1 are generated uniformly in SL1, and the instances from SLf(a0) 1 ∪ {a1} can then be assigned either to previous clusters Ct or to a1 using the same criteria, i.e. if their minimum distance to an instance of an existing cluster is less than ϵ (right image of Fig. 2: cluster C1 can now be connected to a1 through the instances generated in SL1).</p>
+<p>This step is repeated by generating hyperspherical layers defined by all instances fromXf(a0) until all the initial clusters Ct can either be justified or are not being updated by any new instances anymore (such as cluster C3 of Fig. 2, which was not updated between the two iterations). This step is illustrated in the "while" loop of Algorithm 1, lines 10 to 19). If some non-connected clusters are still being updated when all instances from the training set have been explored (e.g. red region in the top left corner of the left picture of Fig. 1), they are considered as non-connected.</p>
+<p>In the end, the LRA procedure returns nJ (resp. nU) the number of JCF (resp. UCF) originally generated in B(x, d(x, a0)). If nU &gt; 0, there exists a risk of generating unjustified counterfactual examples in the studied area.</p>
+<h2>4.2 Metrics</h2>
+<p>Using these results, we evaluate the proportion of generated UCF with the 2 criteria:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>We are mainly interested in Sx, which labels the studied instance x as being vulnerable to the risk (i.e. having a nonnull risk). The risk itself, measured by Rx, describes the like-</p>
+<h2>Algorithm 1 Local risk assessment</h2>
+<h2>Require: x, f, X</h2>
+<ul>
+<li>1: Sort correctly predicted instances from Xl̸=f(x) =</li>
+<li>{a0, a1, ...} in increasing order of their distance to x</li>
+<li>2: Bx = {xi}i≤n ∼ Uniform(B(x, a0))</li>
+<li>3: ϵ = max xi∈Bx min xj ∈Bxd(xi, xj )</li>
+<li>4: Bf(a0) x = {xi ∈ Bx : f(xi) = f(a0)}</li>
+<li>5: {Ct}t ←DBSCAN(Bf(a0) x ∪ {a0}, ϵ,minPts = 2)</li>
+<li>6: CJ = {Ct0 } s.t. a0 ∈ Ct0 ; nJ = |CJ|</li>
+<li>7: CNC = {Ct}t \ Ct0 ; nNC = |CNC|</li>
+<li>8: CU = {} ; nU = 0</li>
+<li>9: k = 0</li>
+<li>10: while nNC &gt; 0 do</li>
+<li>11: k = k +1</li>
+<li>12: SLk = {xi}i ∼ Uniform(SLk)</li>
+<li>13: SLf(ak) k = {xi ∈ SLk : f(xi) = f(ak)}</li>
+<li>14: {C ′ t }t ← DBSCAN(SLf(ak) k ∪{ak}, ϵ,minPts = 2)</li>
+<li>15: Update CJ and CNC with {C ′ t }t</li>
+<li>16: Update CU whith clusters from CNC that are not growing anymore</li>
+<li>17: Update nJ, nU and nNC</li>
+<li>18: end while</li>
+<li>19: return nJ, nU</li>
+</ul>
+<p>lihood of having an unjustified counterfactual example in the studied area when looking for counterfactual examples.</p>
+<p>As these scores are calculated for a specific instance x with a random generation component, we are also interested in their average values ¯ S and ¯R for 10 runs of the procedure for each x and over multiple instances.</p>
+<h2>4.3 Illustrative Results</h2>
+<p>For the purpose of giving insights about the procedure results, a toy dataset (half-moons dataset) is used. A classifier, deliberately chosen for its low complexity (random forest classifiers with only 3 trees), is trained on 70% of the data (98% accuracy on the rest of the dataset). The left image of Fig. 3 shows the result of the LRA procedure for a specific instance x (yellow instance), exploring the neighborhood B(x, d(x, a0)) (blue circle) delimited by its closest neighbor from opposite class a0 (orange instance). The red and blue dots are the instances used to train the classifier, while the red and blue areas represent its decision function: x is predicted to belong to the blue class and a0 to the red one. Within B(x, d(x, a0)), a red square "pocket" is detected as a group of unjustified counterfactual examples since there is no red instance in this pocket: Sx = 1.</p>
+<p>This simple example illustrates the fact that the risk of generating unjustified counterfactual examples does exist. Full results of the LRA procedure run over multiple instances of several datasets are available in Section 4.5.</p>
+<h2>4.4 LRA Parameters: n and ϵ</h2>
+<p>The values of n and ϵ are obviously crucial since they define the notion of ϵ-justification and impact the average distance between the number of generated instances n. Broadly speaking, the higher n and the smaller ϵ are, the better the approximation of the topology of the local neighborhood is: if the value of n is too low, small "pockets" of unjustified counterfactual examples might be missed. Similarly, if the value of ϵ is too high, an ϵ-chain will not be a good approximation of a connected path between two instances. However, there is obviously a tradeoff between this accuracy and the computation time of the algorithm, the complexity of which can be evaluated to be at worst O(pn2 ), with p the size of Xf(a0) . In practice, because the instances Bx are generated before running DBSCAN, we can set it to the maximum value of the distances of B to their closest neighbors: ϵ = max xi∈Bx min xj∈Bx\{xi}d(xi, xj). However, this requires the whole procedure to be run several time to make sure ϵ does not take an absurd value (e.g. in the case where one single instance would be generated far away from the others). Thus, the problem becomes of setting the value of n alone.</p>
+<figure><figcaption><div class="caption">Figure 3: Illustrative result of the Local Risk Assessment procedure (left: Sx = 1) and the Vulnerability Evaluation test (right: Jx = 1) for an instance of the half-moons dataset.</div></figcaption><img src="/proceedings/2019/fulltext/388/image_000004_b694eb8c1e9ac7fa93a2a4998d0bf9defb8d28c89d28a684ea41826d8146bd07.png"></figure>
+<p>The role of parameter n is to make sure that the explored area is "saturated" enough and that no subtelty of the model's decion border, as well as potential unjustified counterfactual examples, are left undetected. Thus, for each observation x we assume there exists a threshold above which the complexity of the decision boundary of f would be fully "captured". When this value is met, increasing n has very little impact over the found clusters and therefore on the risk score Rx. We validate this intuition empirically by looking at the evolution of Rx depending on n for multiple instances, but due to space, do not include the results in the present paper. However, the obtained results and code to reproduce them are available in an online repository (https://github.com/thibaultlaugel/truce). Although seemingly high, the complexity of the LRA procedure is not seen as an issue as it is proposed as a diagnostic tool, rather than used to generate explanations by a user.</p>
+<h2>4.5 Quantitative Results</h2>
+<p>This section describes the datasets and approaches used in the experiments. For each considered dataset, a train-test split of the data is performed with 70%-30% proportion, and a binary classifier is trained. To mitigate the impact the choice of the classifier would make, we use the same classifier for every dataset, a random forest (RF) with 200 trees. However, we also train a Support Vector classifier (SVC) with Gaussian kernel on one of the Boston dataset (see below) to make sure the highlighted issue is not a characteristic feature of random forests.</p>
+<table><caption><div class="caption">Table 1: Proportion of instances being at risk (average S score) over the test sets, and risk (average percentage and standard deviation values of R) of generating an UCF for 5 datasets.</div></caption><tbody><tr><th>Dataset</th><th>¯ S</th><th>¯R [%]</th></tr><tr><th>Iris</th><td>0.41</td><td>0.05 (0.04)</td></tr><tr><th>Half-moons</th><td>0.37</td><td>7.01 (17.1)</td></tr><tr><th>BostonRF</th><td>0.63</td><td>16.0 (25.2)</td></tr><tr><th>BostonSVC</th><td>0.29</td><td>6.1 (13.6)</td></tr><tr><th>Recidivism</th><td>0.81</td><td>26.6 (30.8)</td></tr></tbody></table>
+<p>The test set is then used to run the experiments: for each instance it contains, Algorithm 1 is run and scores ¯R and ¯ S are calculated. The code and data to reproduce all the experiments are available online in the aforementioned repository.</p>
+<h2>Datasets</h2>
+<p>The datasets considered for these experiments include 2 lowdimensional datasets (half-moons and iris) as well as 2 real datasets: Boston Housing [Harrison and Rubinfeld, 1978] and Propublica Recidivism [Larson et al., 2016]. These structured datasets are commonly used in the interpretability (and fairness) literature.</p>
+<h2>Results</h2>
+<p>The results of the Local Risk Assessment procedure are shown in Table 1. Among all the considered datasets, between 29% and 81% of the studied instances have unjustified counterfactual examples in their neighborhood (Sx=1).</p>
+<p>An important thing to note is that the ¯R score varies greatly between the instances of a single dataset (high standard deviation), as well as between the datasets. This can be explained by the local complexity of both the used datasets and classifiers. Supposedly, an instance located far away from the decision boundary of the classifier will have greater chance to generate unjustified counterfactual examples than an instance located closer, since the neighborhood explored by the Local Risk Assessment procedure will be much wider. More generally, these results depend on assumptions such as characteristics of the classifier (SVC with Gaussian kernel seems to achieve better results than RF), of the data (dimensionality, density) as well as its labels (number of classes, classes separability), and the classifier's accuracy. These have not been studied here as they lie out of the frame of this work, but are somehow illustrated by the variability of ¯R between datasets. The learning algorithm of the classifier itself may also have an impact, as models such as logistic regression or 1-NN classifier have, by design, no UCF ( ¯ S = 0.0). Thus, the link between connectedness and overfitting is not obvious and needs to be further explored.</p>
+<p>These results confirm the intuition that the risk of generating UCF exists and is important. In this context, since they do not have the ability to distinguish a ground-truth backed decision from a classifier artifact, post-hoc counterfactual approaches are vulnerable to this issue. The next section studies the extent of this vulnerability.</p>
+<h2>5 Vulnerability of Post-hoc CF Approaches</h2>
+<p>Once the risk of generating UCF has been established, we analyze how troublesome it is for existing counterfactual approaches. This section presents a second procedure, called Vulnerability Evaluation, which aims at assessing how a posthoc interpretability method behaves in the presence of UCF.</p>
+<h2>5.1 Vulnerability Evaluation Procedure: VE</h2>
+<p>The goal of the VE procedure is to assess the risk for state of the art methods to generate UCF in vulnerable regions. Given an instance x ∈ X, we use the LRA procedure to assess the risk Rx and focus on the instances where this risk is "significant" (imposing Rx &gt; 0.25). Using the method to be evaluated, a counterfactual explanation E(x) ∈ X is generated.</p>
+<p>To check whether E(x) is justified or not, a similar procedure as LRA is used: instances BE(x) are generated uniformly in a local region defined as the hyperball with center E(x) and radius d(E(x), b0), where b0 denotes the closest instance to E(x) correctly predicted to belong to the same class, i.e. b0 = argmin xi∈Xf(E(x))d(E(x), xi). The DBSCAN al-</p>
+<p>gorithm is also used with the same parameters as previously. If E(x) is assigned to the same cluster as the closest instance to b0, then there exists an ϵ-chain linking E(x) and b0, meaning E(x) is a JCF according to Definition 2.</p>
+<p>If not, similarly as previously, the explored area is expanded to the hyperspherical layer defined by the distance to b1, the second closest instance fromXf(E(x) correctly predicted. This step is repeated by widening the studied area as many times as necessary: if no instance from Xf(E(x)) can be connected, then E(x) is labelled as being unjustified.</p>
+<p>As for state of the art methods, we focus on the approaches: HCLS [Lash et al., 2017], Growing Spheres [Laugel et al., 2018a] and LORE [Guidotti et al., 2018a] (modified to return counterfactual examples rather than rules).</p>
+<h2>5.2 Metrics</h2>
+<p>The goal being to check wether a counterfactual example E(x) is justified or not, we simply define the justification score JE(x) as a binary score that equals 1 if E(x) is justified, 0 in the other case. Again, we also measure the average value ¯ J of JE(x) over multiple instances and multiple runs.</p>
+<h2>5.3 Illustrative Results</h2>
+<p>The considered post-hoc counterfactual approaches are applied to a toy dataset to illustrate how they can behave, in the aforementioned setup (see Section 4.3), see Fig. 3 (right image). As this instance has a risk score Rx ≥ 0.25, we apply VE. A counterfactual example is generated using HCLS [Lash et al., 2017] with budget B = d(x, b0). The output E(x) is represented by the green instance. In this situation, E(x) lies in the unjustified area, meaning HCLS generated an unjustified counterfactual example (JE(x) = 0). This example illustrates the fact that, when there is a consequent risk Rx, post-hoc approaches are vulnerable to it.</p>
+<h2>5.4 Quantitative Results</h2>
+<p>The results of the VE procedure are shown in Table 2. As expected, when confronted to situations with a local risk of generating unjustified counterfactual examples (Rx ≥ 0.25), the considered approaches fail to generate JCF: the proportion of generated JCF with state of the art approaches can fall as low as 63 %. This confirms the assumption that posthoc counterfactual approaches are, by construction, vulnerable to the studied issue. Among the considered approaches, HCLS seems to achieve slightly better performance than GS. This could be explained by the fact that HCLS tries to maximize the classification confidence, leading to counterfactuals that may be located further from x than GS and hence with a higher chance of avoiding unjustified classification regions. The same observation and conclusion can be made for LORE, which minimizes a L0 norm. Hence, connectedness seems to be able to be favored at the expense of the distance.</p>
+<table><caption><div class="caption">Table 2: Proportion of generated counterfactuals that are justified ( ¯ J) for vulnerable instances (Rx ≥ 0.25)</div></caption><tbody><tr><th>Dataset</th><th>HCLS</th><th>GS</th><th>LORE</th></tr><tr><th>Iris</th><td>0.63</td><td>0.63</td><td>0.70</td></tr><tr><th>Half-moons</th><td>0.83</td><td>0.67</td><td>0.83</td></tr><tr><th>BostonSVC</th><td>0.95</td><td>0.93</td><td>1.0</td></tr><tr><th>BostonRF</th><td>0.86</td><td>0.84</td><td>1.0</td></tr><tr><th>Recidivism</th><td>0.94</td><td>0.94</td><td>0.98</td></tr></tbody></table>
+<p>Again, a major variability in ¯ J can be observed between instances. This confirms the previously made assumption that the connectedness of the classes predicted by f heavily depends on the data and considered classifier.</p>
+<h2>6 Conclusions</h2>
+<p>In this work, we propose a justification definition that counterfactual explanations should satisfy, motivated by an intuitive requirement based on path connectedness. We propose a procedure to assess the risk of generating unjustified counterfactual examples in the post-hoc context, and additionally show that post-hoc counterfactual explanations are indeed vulnerable to such risk.</p>
+<p>In this context, we argue that there is no existing satisfying way to provide post-hoc explanations that are both faithful to the classifier and to ground-truth data and further research is necessary. In the mean time, using the train instances, although not always possible in the utilisation context of posthoc methods, seems to remain necessary.</p>
+<p>In light of this study, further works include adapting the current procedure to high-dimensional data and making a more in-depth study of the role of the classifier's complexity in justification. Prospective works also include studying the connectedness of adversarial examples, as ongoing experiments suggest that they verify the proposed justification definition.</p>
+<h2>Aknowledgements</h2>
+<p>This work has been done as part of the Joint Research Initiative (JRI) project "Interpretability for human-friendly machine learning models" funded by the AXA Research Fund. We would like to thank Arthur Guillon for stimulating discussions and useful comments.</p></div>
+            </section>
+        
+        
+        <section role="tabpanel" id="cite" aria-labelledby="tab-cite" hidden>
+            <div class="cite" data-cite>
+                <div class="cite__formats" role="radiogroup" aria-label="Citation format">
+                                            <button type="button" data-format="acm" aria-pressed="true">ACM</button>
+                                            <button type="button" data-format="apa" aria-pressed="false">APA</button>
+                                            <button type="button" data-format="bibtex" aria-pressed="false">BibTeX</button>
+                                            <button type="button" data-format="ris" aria-pressed="false">RIS</button>
+                                    </div>
+                                    <div class="cite__text" data-format-text="acm" >Thibault Laugel, Marie-Jeanne Lesot, Christophe Marsala, Xavier Renard, and Marcin Detyniecki. 2019. The Dangers of Post-hoc Interpretability: Unjustified Counterfactual Explanations. In <i>Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence, IJCAI-19</i>. IJCAI, 2801–2807. https://doi.org/10.24963/ijcai.2019/388</div>
+                                    <div class="cite__text" data-format-text="apa" hidden>Laugel, T., Lesot, M., Marsala, C., Renard, X., &amp; Detyniecki, M. (2019). The Dangers of Post-hoc Interpretability: Unjustified Counterfactual Explanations. In <i>Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence, IJCAI-19</i> (pp. 2801–2807). IJCAI. https://doi.org/10.24963/ijcai.2019/388</div>
+                                                    <pre class="cite__text" data-format-text="bibtex" hidden>@inproceedings{ijcai2019p388,
+  title     = {The Dangers of Post-hoc Interpretability: Unjustified Counterfactual Explanations},
+  author    = {Laugel, Thibault and Lesot, Marie-Jeanne and Marsala, Christophe and Renard, Xavier and Detyniecki, Marcin},
+  booktitle = {Proceedings of the Twenty-Eighth International Joint Conference on
+               Artificial Intelligence, {IJCAI-19}},
+  publisher = {International Joint Conferences on Artificial Intelligence Organization},
+  editor    = {Sarit Kraus},
+  pages     = {2801--2807},
+  year      = {2019},
+  month     = {8},
+  note      = {Main track},
+  doi       = {10.24963/ijcai.2019/388},
+  url       = {https://doi.org/10.24963/ijcai.2019/388},
+}
+</pre>
+                                    <pre class="cite__text" data-format-text="ris" hidden>TY  - CPAPER
+TI  - The Dangers of Post-hoc Interpretability: Unjustified Counterfactual Explanations
+AU  - Laugel, Thibault
+AU  - Lesot, Marie-Jeanne
+AU  - Marsala, Christophe
+AU  - Renard, Xavier
+AU  - Detyniecki, Marcin
+T2  - Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence, IJCAI-19
+PB  - International Joint Conferences on Artificial Intelligence Organization
+PY  - 2019
+SP  - 2801
+EP  - 2807
+DO  - 10.24963/ijcai.2019/388
+UR  - https://doi.org/10.24963/ijcai.2019/388
+ER  - 
+</pre>
+                                <button type="button" class="button" data-copy>Copy</button>
+                <span class="cite__copied" role="status" hidden>Copied</span>
+            </div>
+        </section>
+
+        <section role="tabpanel" id="data" aria-labelledby="tab-data" hidden>
+            <p>Machine-readable versions of this paper, for tools and AI agents:</p>
+            <ul>
+                <li><a href="/proceedings/2019/388.md">Markdown</a> — metadata, abstract, full text and references</li>
+                <li><a href="/proceedings/2019/388.json">JSON</a> — metadata and structured references</li>
+                <li><a href="/proceedings/2019/bibtex/388">BibTeX</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <nav class="article-nav" aria-label="Previous and next paper">
+                    <a class="article-nav__prev" href="/proceedings/2019/387" title="Meta Reinforcement Learning with Task Embedding and Shared Policy">◀ <span class="screen-reader-text">Previous paper</span></a>
+                            <a class="article-nav__next" href="/proceedings/2019/389" title="Correlation-Sensitive Next-Basket Recommendation"><span class="screen-reader-text">Next paper</span> ▶</a>
+            </nav>
+</div>
+        </div>
+    </article>
+</main>
+
+<section class="image-grid">
+            <a class="image-grid__tile" href="https://ijcai.org/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/welcome.jpg" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">Welcome</span>
+        </a>
+            <a class="image-grid__tile" href="https://ijcai.org/future_conferences/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/future-conferences.jpg" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">Future Conferences</span>
+        </a>
+            <a class="image-grid__tile" href="https://ijcai.org/aijd/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/ai-journal.png" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">AI Journal Division</span>
+        </a>
+            <a class="image-grid__tile" href="https://ijcai.org/all_proceedings/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/proceedings.jpg" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">IJCAI Proceedings</span>
+        </a>
+            <a class="image-grid__tile" href="https://ijcai.org/aboutijcai/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/about.jpg" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">About IJCAI</span>
+        </a>
+            <a class="image-grid__tile" href="https://ijcai.org/awards/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/awards.jpg" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">IJCAI Awards</span>
+        </a>
+    </section>
+
+<footer class="site-footer">
+    <div class="sponsors">
+    <div class="container">
+        <h2 class="sponsors__title">Organization thanks to</h2>
+        <div class="sponsors__list">
+                            <a class="sponsors__item" href="https://www.didiglobal.com/" target="_blank" rel="noopener">
+                    <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/sponsors/didi.png" alt="DiDi" loading="lazy">
+                </a>
+                            <a class="sponsors__item" href="https://www.baidu.com/" target="_blank" rel="noopener">
+                    <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/sponsors/baidu.png" alt="Baidu" loading="lazy">
+                </a>
+                            <a class="sponsors__item" href="https://www.huawei.com" target="_blank" rel="noopener">
+                    <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/sponsors/huawei.png" alt="Huawei" loading="lazy">
+                </a>
+                    </div>
+        <hr class="sponsors__divider">
+    </div>
+</div>
+
+    <div class="site-footer__bottom">
+        <div class="container">
+            <div class="footer-columns">
+                                    <div class="footer-column">
+                        <ul id="menu-footer-1" class="footer-menu"><li id="menu-item-250" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-250"><a href="https://ijcai.org/future_conferences/">Conferences</a>
+<ul class="sub-menu">
+	<li id="menu-item-251" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-251"><a href="https://ijcai.org/future_conferences/">Future Conferences</a></li>
+	<li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://ijcai.org/past_conferences/">Past Conferences</a></li>
+</ul>
+</li>
+<li id="menu-item-253" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-253"><a href="https://ijcai.org/all_proceedings/">Proceedings</a>
+<ul class="sub-menu">
+	<li id="menu-item-254" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-254"><a href="/proceedings/2026/">IJCAI 2026 Proceedings</a></li>
+	<li id="menu-item-255" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-255"><a href="https://ijcai.org/all_proceedings/">All Proceedings</a></li>
+</ul>
+</li>
+<li id="menu-item-256" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-256"><a href="https://ijcai.org/awards/">Awards</a></li>
+</ul>                    </div>
+                                    <div class="footer-column">
+                        <ul id="menu-footer-2" class="footer-menu"><li id="menu-item-257" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-257"><a href="https://ijcai.org/trustees/current_trustees/">Trustees/officers</a>
+<ul class="sub-menu">
+	<li id="menu-item-258" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-258"><a href="https://ijcai.org/trustees/current_trustees/">Current trustees</a></li>
+	<li id="menu-item-259" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-259"><a href="https://ijcai.org/trustees/trustees_elect/">Trustees Elect</a></li>
+	<li id="menu-item-260" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-260"><a href="https://ijcai.org/officers/ijcai_secretariat/">IJCAI Secretariat</a></li>
+	<li id="menu-item-261" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><a href="https://ijcai.org/officers/sponsorship_publicity/">IJCAI Sponsorship and Publicity Officers</a></li>
+	<li id="menu-item-262" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-262"><a href="https://ijcai.org/officers/ijcai_team/">IJCAI Team</a></li>
+	<li id="menu-item-263" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-263"><a href="https://ijcai.org/officers/local_arrangements_chairs/">Local Arrangements Chairs</a></li>
+	<li id="menu-item-264" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-264"><a href="https://ijcai.org/trustees/former_trustees_serving_on_the_executive_committee/">Former Trustees serving on the Executive Committee</a></li>
+	<li id="menu-item-265" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-265"><a href="https://ijcai.org/officers/other_former_officers/">Other Former Officers</a></li>
+</ul>
+</li>
+</ul>                    </div>
+                                    <div class="footer-column">
+                        <ul id="menu-footer-3" class="footer-menu"><li id="menu-item-266" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-266"><a href="https://ijcai.org/aijd/">AI Journal</a></li>
+<li id="menu-item-267" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-267"><a href="https://ijcai.org/aboutijcai/">About</a>
+<ul class="sub-menu">
+	<li id="menu-item-268" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-268"><a href="https://ijcai.org/aboutijcai/">About IJCAI</a></li>
+	<li id="menu-item-313" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-313"><a href="https://ijcai.org/documents/">Documents</a></li>
+	<li id="menu-item-269" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-269"><a href="https://ijcai.org/contact/">Contact Information</a></li>
+</ul>
+</li>
+</ul>                    </div>
+                            </div>
+
+            <a href="#top" class="back-to-top">
+                <span class="back-to-top__triangle"></span>
+                <span>Back to top</span>
+            </a>
+
+            <div class="legal-row">
+                                                <span>&copy; 2026 International Joint Conferences on Artificial Intelligence</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/ijcai/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+<script id="ijcai-archive-js" src="https://ijcai.org/wp-content/themes/ijcai/assets/js/archive.js?ver=1.1.0"></script>
+<script id="ijcai-main-js" src="https://ijcai.org/wp-content/themes/ijcai/assets/js/main.js?ver=1.0.2"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://ijcai.org/wp-includes/js/wp-emoji-release.min.js?ver=7.1.3"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://ijcai.org/wp-includes/js/wp-emoji-loader.min.js
+</script>
+</body>
+</html>

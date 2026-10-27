@@ -1,0 +1,50 @@
+ID,Title,URL,Retrieval,Use
+S01,A Unified Approach to Interpreting Model Predictions,https://arxiv.org/abs/1705.07874,200,Primary page retrieved; see claim-level qualifications
+S02,"""Why Should I Trust You?"": Explaining the Predictions of Any Classifier",https://arxiv.org/abs/1602.04938,200,Primary page retrieved; see claim-level qualifications
+S03,The Disagreement Problem in Explainable Machine Learning: A Practitioner's Perspective,https://arxiv.org/abs/2202.01602,200,Primary page retrieved; see claim-level qualifications
+S04,groupShapley: Efficient prediction explanation with Shapley values for feature groups,https://arxiv.org/abs/2106.12228,200,Primary page retrieved; see claim-level qualifications
+S05,Explaining individual predictions when features are dependent: More accurate approximations to Shapley values,https://arxiv.org/abs/1903.10464,200,Primary page retrieved; see claim-level qualifications
+S06,True to the Model or True to the Data?,https://arxiv.org/abs/2006.16234,200,Primary page retrieved; see claim-level qualifications
+S07,Aggregating explanation methods for stable and robust explainability,https://arxiv.org/abs/1903.00519,200,Primary page retrieved; see claim-level qualifications
+S08,Evaluating and Aggregating Feature-based Model Explanations,https://www.ijcai.org/Proceedings/2020/417,200,Primary page retrieved; see claim-level qualifications
+S09,InterpretML: A Unified Framework for Machine Learning Interpretability,https://arxiv.org/abs/1909.09223,200,Primary page retrieved; see claim-level qualifications
+S10,Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead,https://www.nature.com/articles/s42256-019-0048-x,200,Primary page retrieved; see claim-level qualifications
+S11,Robust Counterfactual Explanations for Tree-Based Ensembles,https://proceedings.mlr.press/v162/dutta22a.html,200,Primary page retrieved; see claim-level qualifications
+S12,Probabilistically Robust Recourse: Navigating the Trade-offs between Costs and Robustness in Algorithmic Recourse,https://arxiv.org/abs/2203.06768,200,Primary page retrieved; see claim-level qualifications
+S13,Algorithmic Recourse in the Wild: Understanding the Impact of Data and Model Shifts,https://arxiv.org/abs/2012.11788,200,Primary page retrieved; see claim-level qualifications
+S14,Towards Robust and Reliable Algorithmic Recourse,https://arxiv.org/abs/2102.13620,200,Primary page retrieved; see claim-level qualifications
+S15,Explaining Machine Learning Classifiers through Diverse Counterfactual Explanations,https://arxiv.org/abs/1905.07697,200,Primary page retrieved; see claim-level qualifications
+S16,Algorithmic Recourse: from Counterfactual Explanations to Interventions,https://arxiv.org/abs/2002.06278,200,Primary page retrieved; see claim-level qualifications
+S17,"Turning the Tables: Biased, Imbalanced, Dynamic Tabular Datasets for ML Evaluation",https://arxiv.org/abs/2211.13358,200,Primary page retrieved; see claim-level qualifications
+S18,Counterfactual Explanations for Conformal Prediction Sets,https://proceedings.mlr.press/v266/maalej25a.html,200,Primary page retrieved; see claim-level qualifications
+S19,Algorithmic Recourse Under Competition,https://arxiv.org/abs/2609.39877,200,Primary page retrieved; see claim-level qualifications
+S20,UCI Machine Learning Repository,https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients,200,Primary page retrieved; see claim-level qualifications
+S21,,https://github.com/fico-xai/heloc-dataset,HTTP Error 404: Not Found,Excluded/unresolved
+S22,shap.TreeExplainer — SHAP latest documentation,https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html,200,Primary page retrieved; see claim-level qualifications
+S23,shap.PartitionExplainer — SHAP latest documentation,https://shap.readthedocs.io/en/latest/generated/shap.PartitionExplainer.html,200,Primary page retrieved; see claim-level qualifications
+S24,ExplainableBoostingClassifier — InterpretML documentation,https://interpret.ml/docs/python/api/ExplainableBoostingClassifier.html,200,Primary page retrieved; see claim-level qualifications
+S25,linkage — SciPy v1.18.0 Manual,https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html,200,Primary page retrieved; see claim-level qualifications
+S26,numpy.quantile — NumPy v2.5 Manual,https://numpy.org/doc/stable/reference/generated/numpy.quantile.html,200,Primary page retrieved; see claim-level qualifications
+S27,Statistical Comparisons of Classifiers over Multiple Data Sets,https://www.jmlr.org/papers/v7/demsar06a.html,200,Primary page retrieved; see claim-level qualifications
+S28,§ 1002.9   Notifications. | Consumer Financial Protection Bureau,https://www.consumerfinance.gov/rules-policy/regulations/1002/9/,200,Primary page retrieved; see claim-level qualifications
+S29,§ 1002.6   Rules concerning evaluation of applications. | Consumer Financial Protection Bureau,https://www.consumerfinance.gov/rules-policy/regulations/1002/6/,200,Primary page retrieved; see claim-level qualifications
+S30,,https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng,202,Excluded/unresolved
+S31,15 U.S. Code § 1681g - Disclosures to consumers | U.S. Code | US Law | LII / Legal Information Institute,https://www.law.cornell.edu/uscode/text/15/1681g,200,Primary page retrieved; see claim-level qualifications
+S32,An Interpretable Model with Globally Consistent Explanations for Credit Risk,https://arxiv.org/abs/1811.12615,200,Primary page retrieved; see claim-level qualifications
+S33,Consistent Individualized Feature Attribution for Tree Ensembles,https://arxiv.org/abs/1802.03888,200,Primary page retrieved; see claim-level qualifications
+S34,Counterfactual Explanations without Opening the Black Box: Automated Decisions and the GDPR,https://arxiv.org/abs/1711.00399,200,Primary page retrieved; see claim-level qualifications
+S35,The Dangers of Post-hoc Interpretability: Unjustified Counterfactual Explanations,https://www.ijcai.org/proceedings/2019/388,200,Primary page retrieved; see claim-level qualifications
+S36,Sanity Checks for Saliency Maps,https://arxiv.org/abs/1810.03292,200,Primary page retrieved; see claim-level qualifications
+S37,"Unrestricted Permutation forces Extrapolation: Variable Importance Requires at least One More Model, or There Is No Free Variable Importance",https://arxiv.org/abs/1905.03151,200,Primary page retrieved; see claim-level qualifications
+S38,Simulation-efficient marginal posterior estimation with swyft: stop wasting your precious time,https://arxiv.org/abs/2011.13951,200,Excluded/unresolved
+S39,Fooling LIME and SHAP: Adversarial Attacks on Post hoc Explanation Methods,https://arxiv.org/abs/1911.02508,200,Primary page retrieved; see claim-level qualifications
+S40,Bayesian Metric Learning for Uncertainty Quantification in Image Retrieval,https://arxiv.org/abs/2302.01332,200,Excluded/unresolved
+N01,Quantifying Explanation Disagreement Between SHAP and LIME Across Tabular Classification Models,https://doi.org/10.26438/ijcse.v14i1.7255,Metadata,See dossier for limits
+N02,BioMark: biomarker analysis tool,https://doi.org/10.1186/s12859-025-06346-3,Publisher text,See dossier for limits
+N03,An Investigation of Feature-Grouping for Robust SHAP Explanations in IoT Intrusion Detection,https://doi.org/10.1109/ITNAC66378.2025.11302604,Metadata,See dossier for limits
+N04,Quantifying overall agreement between explanation methods to address the disagreement problem,https://doi.org/10.1007/s12065-026-01145-y,Publisher abstract,See dossier for limits
+N05,SHAP-McNemar stepwise feature selection for machine learning in credit risk modeling,https://doi.org/10.1016/j.mlwa.2026.100977,Metadata,See dossier for limits
+N06,Faithful Model Explanations through Energy-Constrained Conformal Counterfactuals,https://doi.org/10.1609/aaai.v38i10.28956,Metadata,See dossier for limits
+N07,Counterfactual Explanations for Conformal Regression Intervals,https://doi.org/10.1007/978-3-032-23833-7_11,Metadata,See dossier for limits
+N08,Interpretable machine learning for imbalanced credit scoring datasets,https://doi.org/10.1016/j.ejor.2023.06.036,Metadata,See dossier for limits
+N09,Evaluating the stability of model explanations in instance-dependent cost-sensitive credit scoring,https://doi.org/10.1016/j.ejor.2025.05.039,Metadata,See dossier for limits

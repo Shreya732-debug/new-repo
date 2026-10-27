@@ -1,0 +1,14 @@
+test_complete_linkage_within_group (test_demo.Contracts.test_complete_linkage_within_group) ... ok
+test_hand_computed_rbo (test_demo.Contracts.test_hand_computed_rbo) ... ok
+test_identical_rbo (test_demo.Contracts.test_identical_rbo) ... ok
+test_linear_shap_additivity (test_demo.Contracts.test_linear_shap_additivity) ... ok
+test_negative_shift_clipped (test_demo.Contracts.test_negative_shift_clipped) ... ok
+test_owen_not_feature_sum (test_demo.Contracts.test_owen_not_feature_sum) ... ok
+test_quantile_off_by_one_regression (test_demo.Contracts.test_quantile_off_by_one_regression) ... ok
+test_rbo_rejects_unequal_or_empty (test_demo.Contracts.test_rbo_rejects_unequal_or_empty) ... ok
+test_small_sample_margin_is_infinite (test_demo.Contracts.test_small_sample_margin_is_infinite) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.003s
+
+OK

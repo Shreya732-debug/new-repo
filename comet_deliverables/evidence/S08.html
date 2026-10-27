@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Evaluating and Aggregating Feature-based Model Explanations | IJCAI</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<meta name="citation_title" content="Evaluating and Aggregating Feature-based Model Explanations">
+<meta name="citation_author" content="Bhatt, Umang">
+<meta name="citation_author_institution" content="University of Cambridge; Carnegie Mellon University">
+<meta name="citation_author" content="Weller, Adrian">
+<meta name="citation_author_institution" content="University of Cambridge; The Alan Turing Institute">
+<meta name="citation_author" content="Moura, José M. F.">
+<meta name="citation_author_institution" content="Carnegie Mellon University">
+<meta name="citation_publication_date" content="2020">
+<meta name="citation_conference_title" content="Proceedings of the Twenty-Ninth International Joint Conference on Artificial Intelligence">
+<meta name="citation_publisher" content="International Joint Conferences on Artificial Intelligence Organization">
+<meta name="citation_firstpage" content="3016">
+<meta name="citation_lastpage" content="3022">
+<meta name="citation_doi" content="10.24963/ijcai.2020/417">
+<meta name="citation_pdf_url" content="https://ijcai.org/proceedings/2020/0417.pdf">
+<meta name="citation_abstract_html_url" content="https://ijcai.org/proceedings/2020/417">
+<link rel="canonical" href="https://ijcai.org/proceedings/2020/417">
+<link rel="alternate" type="text/markdown" href="https://ijcai.org/proceedings/2020/417.md">
+<link rel="alternate" type="application/json" href="https://ijcai.org/proceedings/2020/417.json">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","headline":"Evaluating and Aggregating Feature-based Model Explanations","name":"Evaluating and Aggregating Feature-based Model Explanations","abstract":"A feature-based model explanation denotes how much each input feature contributes to a model's output for a given data point. As the number of proposed explanation functions grows, we lack quantitative evaluation criteria to help practitioners know when to use which explanation function. This paper proposes quantitative evaluation criteria for feature-based explanations: low sensitivity, high faithfulness, and low complexity. We devise a framework for aggregating explanation functions. We develop a procedure for learning an aggregate explanation function with lower complexity and then derive a new aggregate Shapley value explanation function that minimizes sensitivity.","author":[{"@type":"Person","name":"Umang Bhatt","url":"https://ijcai.org/authors/umang-bhatt/","affiliation":{"@type":"Organization","name":"University of Cambridge; Carnegie Mellon University"}},{"@type":"Person","name":"Adrian Weller","url":"https://ijcai.org/authors/adrian-weller/","affiliation":{"@type":"Organization","name":"University of Cambridge; The Alan Turing Institute"}},{"@type":"Person","name":"José M. F. Moura","url":"https://ijcai.org/authors/jose-m-f-moura/","affiliation":{"@type":"Organization","name":"Carnegie Mellon University"}}],"datePublished":"2020","isPartOf":{"@type":"Book","name":"Proceedings of the Twenty-Ninth International Joint Conference on Artificial Intelligence","isbn":"978-0-9992411-6-5","url":"https://ijcai.org/proceedings/2020/"},"publisher":{"@type":"Organization","name":"International Joint Conferences on Artificial Intelligence Organization"},"url":"https://ijcai.org/proceedings/2020/417","keywords":"Machine Learning: Interpretability; Machine Learning: Explainable Machine Learning; AI Ethics: Explainability","identifier":{"@type":"PropertyValue","propertyID":"DOI","value":"10.24963/ijcai.2020/417"},"sameAs":"https://doi.org/10.24963/ijcai.2020/417","pageStart":3016,"pageEnd":3022,"encoding":{"@type":"MediaObject","encodingFormat":"application/pdf","contentUrl":"https://ijcai.org/proceedings/2020/0417.pdf"}}</script>
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+<style id="wp-block-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the block styles printed at wp_footer." }
+/*# sourceURL=wp-block-styles-placeholder-inline-css */
+</style>
+<style id="wp-global-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the global-styles printed at wp_footer." }
+/*# sourceURL=wp-global-styles-placeholder-inline-css */
+</style>
+<link rel='stylesheet' id='ijcai-main-css' href='https://ijcai.org/wp-content/themes/ijcai/assets/css/main.css?ver=1.0.13' media='all' />
+<link rel='stylesheet' id='ijcai-archive-css' href='https://ijcai.org/wp-content/themes/ijcai/assets/css/archive.css?ver=1.1.0' media='all' />
+<link rel="https://api.w.org/" href="https://ijcai.org/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://ijcai.org/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.1.3" />
+<link rel="icon" href="https://ijcai.org/wp-content/themes/ijcai/assets/img/favicon.ico?v=2" sizes="any">
+<link rel="icon" href="https://ijcai.org/wp-content/themes/ijcai/assets/img/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="https://ijcai.org/wp-content/themes/ijcai/assets/img/apple-touch-icon.png?v=2">
+</head>
+<body class="wp-theme-ijcai ijcai-archive ijcai-archive--article">
+
+<header class="site-header">
+    <div class="site-header__bar">
+        <span class="site-header__spacer"></span>
+        <a href="https://ijcai.org/" class="site-logo">
+            <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/logo.svg"
+                 width="247" height="105" alt="IJCAI">
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation"
+                aria-expanded="false" aria-controls="nav-panel">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <nav id="nav-panel" class="nav-panel" aria-label="Primary Navigation">
+        <ul id="menu-primary" class="nav-panel__menu"><li id="menu-item-230" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-230"><a href="https://ijcai.org/future_conferences/">Conferences</a>
+<ul class="sub-menu">
+	<li id="menu-item-231" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-231"><a href="https://ijcai.org/future_conferences/">Future Conferences</a></li>
+	<li id="menu-item-232" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-232"><a href="https://ijcai.org/past_conferences/">Past Conferences</a></li>
+</ul>
+</li>
+<li id="menu-item-233" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-233"><a href="https://ijcai.org/all_proceedings/">Proceedings</a>
+<ul class="sub-menu">
+	<li id="menu-item-234" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-234"><a href="/proceedings/2026/">IJCAI 2026 Proceedings</a></li>
+	<li id="menu-item-235" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-235"><a href="https://ijcai.org/all_proceedings/">All Proceedings</a></li>
+</ul>
+</li>
+<li id="menu-item-236" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-236"><a href="https://ijcai.org/awards/">Awards</a></li>
+<li id="menu-item-237" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-237"><a href="https://ijcai.org/trustees/current_trustees/">Trustees/officers</a>
+<ul class="sub-menu">
+	<li id="menu-item-238" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-238"><a href="https://ijcai.org/trustees/current_trustees/">Current trustees</a></li>
+	<li id="menu-item-239" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-239"><a href="https://ijcai.org/trustees/trustees_elect/">Trustees Elect</a></li>
+	<li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://ijcai.org/officers/ijcai_secretariat/">IJCAI Secretariat</a></li>
+	<li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://ijcai.org/officers/sponsorship_publicity/">IJCAI Sponsorship and Publicity Officers</a></li>
+	<li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://ijcai.org/officers/ijcai_team/">IJCAI Team</a></li>
+	<li id="menu-item-243" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-243"><a href="https://ijcai.org/officers/local_arrangements_chairs/">Local Arrangements Chairs</a></li>
+	<li id="menu-item-244" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-244"><a href="https://ijcai.org/trustees/former_trustees_serving_on_the_executive_committee/">Former Trustees serving on the Executive Committee</a></li>
+	<li id="menu-item-245" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-245"><a href="https://ijcai.org/officers/other_former_officers/">Other Former Officers</a></li>
+</ul>
+</li>
+<li id="menu-item-246" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-246"><a href="https://ijcai.org/aijd/">AI Journal</a></li>
+<li id="menu-item-247" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-247"><a href="https://ijcai.org/aboutijcai/">About</a>
+<ul class="sub-menu">
+	<li id="menu-item-248" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-248"><a href="https://ijcai.org/aboutijcai/">About IJCAI</a></li>
+	<li id="menu-item-314" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-314"><a href="https://ijcai.org/documents/">Documents</a></li>
+	<li id="menu-item-249" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-249"><a href="https://ijcai.org/contact/">Contact Information</a></li>
+</ul>
+</li>
+</ul>    </nav>
+</header>
+
+<main id="main" class="site-main">
+    <div class="page-banner" style="background-image: url('https://ijcai.org/wp-content/themes/ijcai/assets/img/banners/proceedings.jpg?v=1');">
+    <details class="section-nav section-nav--overlay">
+    <summary>Proceedings</summary>
+    <ul>
+                    <li>
+                <a href="/proceedings/2026/">
+                    IJCAI 2026 Proceedings                </a>
+            </li>
+                    <li>
+                <a href="https://ijcai.org/all_proceedings/">
+                    All Proceedings                </a>
+            </li>
+            </ul>
+</details>
+</div>
+    <article class="panel archive-record">
+        <nav class="archive-crumbs" aria-label="Breadcrumb">
+            <a href="https://ijcai.org/all_proceedings/">Proceedings</a>
+                            <span aria-hidden="true">›</span>
+                <a href="https://ijcai.org/proceedings/2020/">IJCAI 2020</a>
+                    </nav>
+
+        
+        <div class="entry-content">
+            <div class="article">
+    <div class="article__grid">
+        <div class="article__main">
+            <h1 class="article__title">Evaluating and Aggregating Feature-based Model Explanations</h1>
+
+            <p class="article__authors">
+                <span title="University of Cambridge; Carnegie Mellon University"><a href="https://ijcai.org/authors/umang-bhatt/">Umang Bhatt</a></span>, <span title="University of Cambridge; The Alan Turing Institute"><a href="https://ijcai.org/authors/adrian-weller/">Adrian Weller</a></span>, <span title="Carnegie Mellon University"><a href="https://ijcai.org/authors/jose-m-f-moura/">José M. F. Moura</a></span>            </p>
+
+            <div class="article__actions">
+                                                            <a class="action action--video" href="#video" data-tab-open="video">
+                                            <span class="action__icon" aria-hidden="true">▶</span>Video                    </a>
+                                                    <a class="action action--pdf" href="/proceedings/2020/0417.pdf"><span class="action__icon" aria-hidden="true">PDF</span>Download</a>
+                                <a class="action action--bib" href="/proceedings/2020/bibtex/417"><span class="action__icon" aria-hidden="true">Bib</span>BibTeX</a>
+                <a class="action action--cite" href="#cite" data-tab-open="cite"><span class="action__icon" aria-hidden="true">“”</span>Cite</a>
+            </div>
+
+            <p class="article__venue">
+                <a href="/proceedings/2020/">Proceedings of the Twenty-Ninth International Joint Conference on Artificial Intelligence</a>.
+                Main track. Pages 3016-3022.
+            </p>
+                            <p class="article__doi"><a href="https://doi.org/10.24963/ijcai.2020/417">https://doi.org/10.24963/ijcai.2020/417</a></p>
+            
+                            <div class="article__keywords">
+                    <p class="eyebrow">Keywords</p>
+                    <ul>
+                                                    <li>Machine Learning: Interpretability</li>
+                                                    <li>Machine Learning: Explainable Machine Learning</li>
+                                                    <li>AI Ethics: Explainability</li>
+                                            </ul>
+                </div>
+                    </div>
+
+        <div class="article__abstract">
+            <p class="eyebrow">Abstract</p>
+                            <p>A feature-based model explanation denotes how much each input feature contributes to a model&#039;s output for a given data point. As the number of proposed explanation functions grows, we lack quantitative evaluation criteria to help practitioners know when to use which explanation function. This paper proposes quantitative evaluation criteria for feature-based explanations: low sensitivity, high faithfulness, and low complexity. We devise a framework for aggregating explanation functions. We develop a procedure for learning an aggregate explanation function with lower complexity and then derive a new aggregate Shapley value explanation function that minimizes sensitivity.</p>                    </div>
+    </div>
+
+    <div class="article-tabs" data-tabs>
+        <div class="article-tabs__list" role="tablist">
+                            <button role="tab" id="tab-references" aria-controls="references" aria-selected="true">References (27)</button>
+                                        <button role="tab" id="tab-fulltext" aria-controls="fulltext" aria-selected="false">Full text</button>
+                                        <button role="tab" id="tab-video" aria-controls="video" aria-selected="false">Video</button>
+                        <button role="tab" id="tab-cite" aria-controls="cite" aria-selected="false">Cite</button>
+            <button role="tab" id="tab-data" aria-controls="data" aria-selected="false">Data</button>
+        </div>
+
+                    <section role="tabpanel" id="references" aria-labelledby="tab-references">
+                <ol class="references">
+                                            <li value="1">
+                            [Baehrens et al., 2010] David Baehrens, Timon Schroeter, Stefan Harmeling, Motoaki Kawanabe, Katja Hansen, and Klaus-Robert Muller. How to explain individual classifi- cation decisions. JMLR, 11(Jun):1803-1831, 2010.                                                                                </li>
+                                            <li value="2">
+                            [Batterman and Rice, 2014] Robert W Batterman and Collin C Rice. Minimal model explanations. Philosophy of Science, 81(3):349-376, 2014.                                                                                </li>
+                                            <li value="3">
+                            [Berger, 2013] James O Berger. Statistical decision theory and Bayesian analysis. Springer Science &amp; Business Me- dia, 2013.                                                                                </li>
+                                            <li value="4">
+                            [Bhatt et al., 2019a] Umang Bhatt, Pradeep Ravikumar, et al. Building human-machine trust via interpretability. In Proceedings of the AAAI Conference on Artificial Intel- ligence, volume 33, pages 9919-9920, 2019.                                                                                </li>
+                                            <li value="5">
+                            [Bhatt et al., 2019b] Umang Bhatt, Pradeep Ravikumar, and José M. F. Moura. Towards aggregating weighted feature attributions. arXiv:1901.10040, 2019.                                                                                </li>
+                                            <li value="6">
+                            [Bhatt et al., 2020] Umang Bhatt, Alice Xiang, Shubham Sharma, Adrian Weller, Ankur Taly, Yunhan Jia, Joydeep Ghosh, Ruchir Puri, José M. F. Moura, and Peter Ecker- sley. Explainable machine learning in deployment. ACM Conference on Fairness, Accountability, and Transparency (FAT*), 2020.                                                                                </li>
+                                            <li value="7">
+                            [Camburu et al., 2019] Oana-Maria Camburu, Eleonora Giunchiglia, Jakob Foerster, Thomas Lukasiewicz, and Phil Blunsom. Can I trust the explainer? Verifying post-hoc explanatory methods. arXiv:1910.02065, 2019.                                                                                </li>
+                                            <li value="8">
+                            [Chang et al., 2019] Chun-Hao Chang, Elliot Creager, Anna Goldenberg, and David Duvenaud. Explaining image clas- sifiers by counterfactual generation. In International Con- ference on Learning Representations, 2019.                                                                                </li>
+                                            <li value="9">
+                            [Chen et al., 2019] Jianbo Chen, Le Song, Martin J Wain- wright, and Michael I Jordan. L-shapley and C-shapley: Efficient model interpretation for structured data. Interna- tional Conference on Learning Representations, 2019.                                                                                </li>
+                                            <li value="10">
+                            [Dua and Graff, 2017] Dheeru Dua and Casey Graff. UCI machine learning repository, 2017.                                                                                </li>
+                                            <li value="11">
+                            [Ghorbani et al., 2019] Amirata Ghorbani, Abubakar Abid, and James Zou. Interpretation of neural networks is frag- ile. In Proceedings of the AAAI Conference on Artificial Intelligence, volume 33, pages 3681-3688, 2019.                                                                                </li>
+                                            <li value="12">
+                            [Goold and Lipkin Jr, 1999] Susan Dorr Goold and Mack Lipkin Jr. The doctor-patient relationship: challenges, opportunities, and strategies. Journal of general internal medicine, 14(Suppl 1):S26, 1999.                                                                                </li>
+                                            <li value="13">
+                            [Hooker et al., 2019] Sara Hooker, Dumitru Erhan, Pieter- Jan Kindermans, and Been Kim. A benchmark for inter- pretability methods in deep neural networks. In Advances in Neural Information Processing Systems, pages 9734- 9745, 2019.                                                                                </li>
+                                            <li value="14">
+                            [Johnson et al., 2016] Alistair EW Johnson, Tom J Pollard, Lu Shen, Li-wei H Lehman, Mengling Feng, Mohammad Ghassemi, Benjamin Moody, Peter Szolovits, Leo An- thony Celi, and Roger G Mark. Mimic-iii, a freely ac- cessible critical care database. Scientific Data, 2016.                                                                                </li>
+                                            <li value="15">
+                            [Lage et al., 2019] Isaac Lage, Emily Chen, Jeffrey He, Menaka Narayanan, Been Kim, Samuel J Gershman, and Finale Doshi-Velez. Human evaluation of models built for interpretability. In Proceedings of the AAAI Conference on Human Computation and Crowdsourcing, volume 7, pages 59-67, 2019.                                                                                </li>
+                                            <li value="16">
+                            [LeCun et al., 1998] Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning ap- plied to document recognition. Proceedings of the IEEE, 86(11):2278-2324, 1998.                                                                                </li>
+                                            <li value="17">
+                            [Lipton, 2003] Peter Lipton. Inference to the best explana- tion. Routledge, 2003.                                                                                </li>
+                                            <li value="18">
+                            [Lundberg and Lee, 2017] Scott M Lundberg and Su-In Lee. A unified approach to interpreting model predictions. In Advances in Neural Information Processing Systems 30 (NeurIPS 2017), pages 4765-4774, 2017.                                                                                </li>
+                                            <li value="19">
+                            [Melis and Jaakkola, 2018] David Alvarez Melis and Tommi Jaakkola. Towards robust interpretability with self- explaining neural networks. In Advances in Neural Infor- mation Processing Systems (NeurIPS 2018), 2018.                                                                                </li>
+                                            <li value="20">
+                            [Purushotham et al., 2018] Sanjay Purushotham, Chuizheng Meng, Zhengping Che, and Yan Liu. Benchmarking deep learning models on large healthcare datasets. Journal of Biomedical Informatics, 83:112-134, 2018.                                                                                </li>
+                                            <li value="21">
+                            [Ruben, 2015] David-Hillel Ruben. Explaining explanation. Routledge, 2015.                                                                                </li>
+                                            <li value="22">
+                            [Shapley, 1953] Lloyd S Shapley. A value for n-person games. In Contributions to the Theory of Games II, pages 307-317, 1953.                                                                                </li>
+                                            <li value="23">
+                            [Shrikumar et al., 2017] Avanti Shrikumar, Peyton Green- side, and Anshul Kundaje. Learning important features through propagating activation differences. In Proceed- ings of the 34th International Conference on Machine Learning-Volume 70 (ICML 2017), pages 3145-3153. Journal of Machine Learning Research, 2017.                                                                                </li>
+                                            <li value="24">
+                            [Štrumbelj and Kononenko, 2014] Erik Štrumbelj and Igor Kononenko. Explaining prediction models and individ- ual predictions with feature contributions. Knowledge and Information Systems, 41(3):647-665, 2014.                                                                                </li>
+                                            <li value="25">
+                            [Sundararajan et al., 2017] Mukund Sundararajan, Ankur Taly, and Qiqi Yan. Axiomatic attribution for deep net- works. In Proceedings of the 34th International Confer- ence on Machine Learning-Volume 70 (ICML 2017), pages 3319-3328. Journal of Machine Learning Research, 2017.                                                                                </li>
+                                            <li value="26">
+                            [Yang and Kim, 2019] Mengjiao Yang and Been Kim. BIM: Towards quantitative evaluation of interpretability meth- ods with ground truth. arXiv:1907.09701, 2019.                                                                                </li>
+                                            <li value="27">
+                            [Yeh et al., 2019] Chih-Kuan Yeh, Cheng-Yu Hsieh, Arun Suggala, David I Inouye, and Pradeep K Ravikumar. On the (in) fidelity and sensitivity of explanations. In Ad- vances in Neural Information Processing Systems, pages 10965-10976, 2019.                                                                                </li>
+                                    </ol>
+                <p class="tab-note">References were extracted automatically from the PDF and may contain errors.</p>
+            </section>
+        
+                    <section role="tabpanel" id="fulltext" aria-labelledby="tab-fulltext" hidden>
+                <p class="tab-note">Full text extracted automatically from the PDF; figures, tables and equations may differ. The PDF is the version of record.</p>
+                <div class="fulltext"><h2>1 Introduction</h2>
+<p>There has been great interest in understanding blackbox machine learning models via post-hoc explanations. Much of this work has focused on feature-level importance scores for how much a given input feature contributes to a model's output. These techniques are popular amongst machine learning scientists who want to sanity check a model before deploying it in the real world [Bhatt et al., 2020]. Many feature-based explanation functions are gradient-based techniques that analyze the gradient flow through a model to determine salient input features [Shrikumar et al., 2017; Sundararajan et al., 2017]. Other explanation functions perturb input values to a reference output and measure the change in the model's output [ ˇStrumbelj and Kononenko, 2014; Lundberg and Lee, 2017].</p>
+<p>With many candidate explanation functions, machine learning practitioners find it difficult to pick which explanation function best captures how a model reaches a specific output for a given input. Though there has been work in qualitatively evaluating feature-based explanation functions on human subjects [Lage et al., 2019], there has been little exploration into formalizing quantitative techniques for evaluating model explanations. Recent work has created auxiliary tasks to test if attribution is assigned to relevant inputs [Yang and Kim, 2019] and has developed tools to verify if the features important to an explanation function are relevant to the model itself [Camburu et al., 2019].</p>
+<p>∗Contact Author</p>
+<p>Borrowing from the humanities, we motivate three criteria for assessing a feature-based explanation: sensitivity, faithfulness, and complexity. Philosophy of science research has advocated for explanations that vary proportionally with changes in the system being explained [Lipton, 2003]; as such, explanation functions should be insensitive to perturbations in the model inputs, especially if the model output does not change. Capturing relevancy faithfully is helpful in an explanation [Ruben, 2015]. Since humans cannot process a lot of information at once, some have argued for minimal model explanations that contain only relevant and representative features [Batterman and Rice, 2014]; therefore, an explanations should not be complex (i.e., use few features).</p>
+<p>In this paper, we first define these three distinct criteria: low sensitivity, high faithfulness, and low complexity. With many explanation function choices, we then propose methods for learning an aggregate explanation function that combines explanation functions. If we want to find the simplest explanation from a set of explanations, then we can aggregate explanations to minimize the complexity of the resulting explanation. If we want to learn a smoother explanation function that varies slowly as inputs are perturbed, we can leverage an aggregation scheme that learns a less sensitive explanation function. To the best of our knowledge, we are the first to rigorously explore aggregation of various explanations, while placing explanation evaluation on an objective footing. To that end, we highlight the contributions of this paper:</p>
+<ul>
+<li style="list-style-type: '· ';">We describe three desirable criteria for feature-based explanation functions: low sensitivity, high faithfulness, and low complexity.</li>
+<li style="list-style-type: '· ';">We develop an aggregation framework for combining explanation functions.</li>
+<li style="list-style-type: '· ';">We create two techniques that reduce explanation complexity by aggregating explanation functions.</li>
+<li style="list-style-type: '· ';">We derive an approximation for Shapley-value explanations by aggregating explanations from a point's nearest neighbors, minimizing explanation sensitivity and resembling how humans reason in medical settings.</li>
+</ul>
+<h2>2 Preliminaries</h2>
+<p>Restricting to supervised classification settings, let f be a black box predictor that maps an input x ∈ Rd to an output f(x) ∈ Y. An explanation function g from a family of explanation functions, G, takes in a predictor f and a point of interest x and returns importance scores g(f, x) = φx ∈ Rd for all features, where g(f, x)i = φx,i (simplified to φi in context) is the importance of (or attribution for) feature xi of x. By gj, we refer to a particular explanation function, usually from a set of explanation functions Gm = {g1, g2, . . . , gm}.</p>
+<p>We denote D : Rd × Rd ↦→ R≥0 to be a distance metric over explanations, while ρ : Rd × Rd ↦→ R≥0 denotes a distance metric over the inputs. An evaluation criterion µ takes in a predictor f, explanation function g, and input x, and outputs a scalar: µ(f, g; x). D = {(xi , yi )}ni=1 refers to a dataset of input-output pairs, and Dx denotes all xi in D.</p>
+<h2>3 Evaluating Explanations</h2>
+<p>With the number of techniques to develop feature level explanations growing in the explainability literature, picking which explanation function g to use can be difficult. In order to study the aggregation of explanation functions, we define three desiderata of an explanation function g.</p>
+<h2>3.1 Desideratum: Low Sensitivity</h2>
+<p>We want to ensure that, if inputs are near each other and their model outputs are similar, then their explanations should be close to each other. Assuming f is differentiable, we desire an explanation function g to have low sensitivity in the region around a point of interest x, implying local smoothness of g. While [Melis and Jaakkola, 2018] codified the property, [Ghorbani et al., 2019] empirically tested explanation function sensitivity. We follow the convention of the former and define max sensitivity and average sensitivity in the neighborhood of a point of interest x.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Definition 1 (Max Sensitivity). Given a predictor f, an explanation function g, distance metrics D and ρ, a radius r, and a point x, we define the max sensitivity of g at x as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Definition 2 (Average Sensitivity). Given a predictor f, an explanation function g, distance metrics D and ρ, a radius r, a distribution Px(·) over the inputs centered at point x, we define the average sensitivity of g at x as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>3.2 Desideratum: High Faithfulness</h2>
+<p>Faithfulness has been defined in [Yeh et al., 2019]. The feature importance scores from g should correspond to the important features of x for f; as such, when we set particular features xs to a baseline value ¯xs, the change in predictor's output should be proportional to the sum of attribution scores of features in xs. We measure this as the correlation between the sum of the attributions of xs and the difference in output when setting those features to a reference baseline. For a subset of indices S ⊆ {1, 2, . . . d}, xs = {xi, i ∈ S} denotes a sub-vector of input features that partitions the input, x = xs ∪ xc. x[xs=¯xs] denotes an input where xs is set to a reference baseline while xc remains unchanged: x[xs=¯xs] = ¯xs ∪ xc. When |S| = d, x[xs=¯xs] = ¯x.</p>
+<p>Remark (Reference Baselines). Recent work has discussed how to pick a proper reference baseline ¯x. [Sundararajan et al., 2017] suggests using a baseline where f(¯x) ≈ 0, while others have proposed taking the baseline to be the mean of the training data. [Chang et al., 2019] notes that the baseline can be learned using generative modeling.</p>
+<p>Definition 3 (Faithfulness). Given a predictor f, an explanation function g, a point x, and a subset size |S|, we define the faithfulness of g to f at x as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>For our experiments, we fix |S| then randomly sample subsets xs of the fixed size from x to estimate correlation. Since we do not see all ( [d] |S|) subsets in our calculation of faithfulness, we may not get an accurate estimate of the criterion. Though hard to codify and even harder to aggregate, faithfulness is desirable, as it demonstrates that an explanation captures which features the predictor uses to generate an output for a given input. Learning global feature importances that highlight, in expectation, which features a predictor relies on is a challenging problem left to future work.</p>
+<h2>3.3 Desideratum: LowComplexity</h2>
+<p>A complex explanation is one that uses all d features in its explanation of which features of x are important to f. Though this explanation may be faithful to the model (as defined above), it may be too difficult for the user to understand (especially if d is large). We define a fractional contribution distribution, where | · | denotes absolute value:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Note that Pg is a valid probability distribution. Let Pg(i) denote the fractional contribution of feature xi to the total magnitude of the attribution. If every feature had equal attribution, the explanation would be complex (even if it is faithful). The simplest explanation would be concentrated on one feature. We define complexity as the entropy of Pg.</p>
+<p>Definition 4 (Complexity). Given a predictor f, explanation function g, and a point x, the complexity of g at x is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<h2>4 Aggregating Explanations</h2>
+<p>Given a trained predictor f, a set of explanation functions Gm = {g1, . . . , gm}, a criterion to optimize µ, and a set of inputs Dx, we want to find an aggregate explanation function gagg that satisfies µ at least as well as any gi ∈ Gm. Let h(·) represent some function that combines m explanations into a consensus gagg = h(Gm). We now explore different candidates for h(·).</p>
+<h2>4.1 Convex Combination</h2>
+<p>Suppose we have two different explanation functions g1 and g2 and have chosen a criterion µ to evaluate a g. Consider an aggregate explanation, gagg = h(g1, g2). A potential h(·) is a convex combination where gagg = h(g1, g2) = wg1 +(1w)g2 = w⊺Gm.</p>
+<p>Proposition 1. If D is the ℓ2 distance and µ = µA (average sensitivity), the following holds:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Proof. Assuming Px(z) is uniform, we can apply the triangle inequality and the convexity of D to arrive at the above.</p>
+<p>A convex combination of explanation functions thus yields an aggregate explanation function that is at most as sensitive as any of the explanation functions taken alone. In order to learn w given g1 and g2, we set up an objective as follows.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Assuming a uniform distribution around all x ∈ Dx, we can rewrite this as:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>By Cauchy-Schwartz, we get the following:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where a = wg1(f, x) + (1 - w)g2(f, x) and b = wg1(f, z) + (1 - w)g2(f, z). This implies that w∗ will be minimal when one element of w∗ is 0 and the other is 1. Therefore, a convex combination of two explanation functions, found by solving Equation (1), will be at most as sensitive as the least sensitive explanation function.</p>
+<h2>4.2 Centroid Aggregation</h2>
+<p>Another sensible candidate for h(·) to combine m explanation functions is based on centroids with respect to some distance function D : G × G ↦→ R, so that:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>where p is a positive constant. The simplest examples of distances are the ℓ2 and ℓ1 distances with real-valued attributions where G ⊆ Rd .</p>
+<p>Proposition 2. When D is the ℓ2 distance and p = 2, the aggregate explanation is the feature-wise sample mean.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Proposition 3. When D is the ℓ1 distance and p = 1, the aggregate explanation is the feature-wise sample median.</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Propositions 2 and 3 follow from standard results in statistics that the mean minimizes the sum of squared differences and the median minimizes the sum of absolute deviations [Berger, 2013].</p>
+<p>We could obtain rank-valued attributions by taking any quantitative vector-valued attributions and ranking features according to their values. If D is the Kendall-tau distance with rank-valued attributions where G ⊆ Sd (the set of permutations over d features), then the resulting aggregation mechanism via computing the centroid is called the KemenyYoung rule. For rank-valued attributions, any aggregation mechanism falls under the rank aggregation problem in social choice theory for which many practical "voting rules" exist [Bhatt et al., 2019a].</p>
+<p>We analyze the error of a candidate gagg. Suppose the optimal explanation for x using f is g∗ (f, x) and suppose gagg is the mean explanation for x in Equation (2). Let ǫi,x = ||g∗ (f, x) - gi(f, x)|| be the error between the optimal explanation and the ith explanation function.</p>
+<p>Proposition 4. The error between the aggregate explanation gagg(f, x) and the optimal explanation g* (f, x) satisfies:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Proof. For a fixed x, we have:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Averaging across Dx, we obtain the result.</p>
+<p>Hence, by aggregating, we do better than when using one explanation function alone. Many gradient-based explanation functions fit to noise [Hooker et al., 2019]. One way to reduce noise would be to aggregate by ensembling or averaging. As proven in Proposition 4, the typical error of the aggregate is less than the expected error of each function alone.</p>
+<h2>5 Lowering Complexity Via Aggregation</h2>
+<p>In this section, we describe iterative algorithms for aggregating explanation functions to obtain gagg(f, x) with lower complexity whilst combining m candidate explanation functions Gm = {g1, . . . , gm}. We desire a gagg(f, x) that contains information from all candidate explanations gi(f, x) yet has entropy less than or equal to that of each explanation gi(f, x). As discussed, a reasonable candidate for an aggregate explanation function is the sample mean given by Equation (2). We may want gagg(f, x) to approach the sample mean, gavg(f, x); however, the sample mean may have greater complexity than that of each gi(f, x).</p>
+<p>For example, let g1(f, x) = [-1, 0]T and g2(f, x) = [0, 1]T . The sample mean is gavg(f , x) = [-0.5, 0.5]T . Both g1 and g2 have the minimum possible complexity of 0, while gavg has the maximum possible complexity, log(2). Our aggregation technique must ensure that gagg(f, x) approaches gavg(f , x) while guaranteeing gagg(f , x) has complexity less than or equal to that of each gi(f, x). We now present two approaches for learning a lower complexity explanation, visually represented in Figure 1.</p>
+<h2>5.1 Gradient-Descent Style Method</h2>
+<p>Our first approach is similar to gradient descent. Starting from each gi(f, x), we iteratively move towards gavg(f, x) in each of the d directions (i.e., changing the kth feature by a small amount) if the complexity decreases with that move. We stop moving when the complexity no longer decreases or gavg(f, x) is reached. Simultaneously, we start from gavg(f, x) and iteratively move towards each gi(f, x) in each of the d directions if the complexity decreases. We stop moving when the complexity no longer decreases or any of the gi(f, x) are reached. The final gagg(f, x) is the location that has the smallest complexity from these 2d different walks. Since we only move if the complexity decreases and start from each gi(f, x), the entropy of gagg(f, x) is guaranteed to be less than or equal to the entropy of all gi(f, x).</p>
+<h2>5.2 Region ShrinkingMethod</h2>
+<p>In our second approach, we consider the closed region, R, which is the convex hull of all the explanation functions, gi(f, x). Notice region R initially contains gavg. We consider an iterative approach to find the global minimum in the region R. As before, we consider the convex combination formed by two explanation functions, gi and gj. Using convex optimization, we find the value on the line segment between gi and gj that has the minimum complexity; essentially, we iteratively shrink the region. For the region shrinking method, the convex combination formed by gi and gj is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>For every pair of functions in Gm, we find the functions that produces the minimum complexity in the convex combination of the functions, producing a new set of candidates G ′m. gagg is the element in set G ′m with minimal complexity after K iterations. In each iteration, a function is chosen if it has the minimum complexity of all the functions in a convex combination. Thus, the minimum complexity of the set G ′m decreases or remains constant with each iteration.</p>
+<h2>6 Lowering Sensitivity Via Aggregation</h2>
+<p>To construct an aggregate explanation function g that minimizes sensitivity, we would need to ensure that a test point's explanation is a function of the explanations of its nearest neighbors under ρ. This is a natural analog for how humans reason: we use past similar events (training data) and facts about the present (individual features) to make decisions [Bhatt et al., 2019b]. We now contribute a new explanation function gAVA that combines the Shapley value explanations of a test point's nearest neighbors to explain the test point.</p>
+<figure><figcaption><div class="caption">Figure 1: Visual examples of the two complexity lowering aggregation algorithms: gradient-descent style (a) and region shrinking (b) methods using explanation functions g1 , g2 , g3</div></figcaption><img src="/proceedings/2020/fulltext/417/image_000000_2239a5f47b7ee13dcf047be502ddc42d6e1d6ddb399c30105b460bad73865658.png"></figure>
+<h2>6.1 Shapley Value Review</h2>
+<p>Borrowing from game theory, Shapley values denote the marginal contributions of a player to the payoff of a coalitional game. Let T be the number of players and let v : 2T → R be the characteristic function, where v(S) denotes the worth (contribution) of the players in S ⊆ T . The Shapley value of player i's contribution (averaging player i's marginal contributions to all possible subsets S) is:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>Let Φ ∈ RT be a Shapley value contribution vector for all players in the game, where φi(v) is the ith element of Φ.</p>
+<h2>6.2 Shapley Values as Explanations</h2>
+<p>In the feature importance literature, we formulate a similar problem to where the game's payoff is the predictor's output y = f(x), the players are the d features of x, and the φi values represent the contribution of xi to the game f(x). Let the characteristic function be the importance score of a subset of features xs, where EY [·|x] is an expectation over Pf (·|x):</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This characteristic function denotes the negative of the expected number of bits required to encode the predictor's output based on the features in a subset S [Chen et al., 2019]. Shapley value contributions can be approximated via Monte Carlo sampling [ˇStrumbelj and Kononenko, 2014] or via weighted least squares [Lundberg and Lee, 2017].</p>
+<h2>6.3 Aggregate Valuation of Antecedents</h2>
+<p>We now explore how to explain a test point in terms of the Shapley value explanations of its neighbors. Termed Aggregate Valuation of Antecedents (AVA), we derive an explanation function that explains a data point in terms of the explanations of its neighbors. We do the following: suppose we want to find an explanation function gAVA(f , xtest) for a point of interest xtest. First we find the k nearest neighbors of xtest under ρ denoted by Nk(xtest, D).</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>We define gAVA(f, xtest) = Φxtest as the explanation function where:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>In essence, we weight each neighbor's Shapley value contribution by the inverse distance from the neighbor to the test point. AVA is closely related to bootstrap aggregation from classical statistics, as we take an average of model outputs to improve explanation function stability.</p>
+<p>Theorem 5. gAVA(f, xtest) is a Shapley value explanation.</p>
+<p>Proof. We want to show that gAVA(f, xtest) = Φxtest is indeed a vector of Shapley values. Let gSHAP(f, z) = Φz be the vector of Shapley value contributions for a point z ∈ Nk. By [Lundberg and Lee, 2017], we know gSHAP(f, z)i = φi(vz) is a unique Shapley value for the characteristic function vz. By linearity of Shapley values [Shapley, 1953], we know that:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This means that the Φz1 + Φz2 will yield a unique Shapley value contribution vector for the characteristic function vz1 + vz2 . By linearity (or additivity), we know for any scalar α:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>This means αΦz will yield a unique Shapley value contribution vector for the characteristic function αvz. Now define:</p>
+<div class="formula-not-decoded">Formula not decoded</div>
+<p>We can conclude that Φxtest is a vector of Shapley values</p>
+<p>While [Sundararajan et al., 2017] takes a path integral from a fixed reference baseline ¯x and [Lundberg and Lee, 2017] only considers attribution along the straight line path between ¯x and xtest, AVA takes a weighted average of attributions along paths from training points in Nk to xtest. AVA can similarly be thought of as a convex combination of explanation functions where the explanation functions are the explanations of the neighbors of xtest and the weights are ρ(xtest, z)-1 . Though the weights are guaranteed to be non-negative, we normalize the weights to sum to 1 and edit the AVA formulation to be: gAVA(f, xtest) = ρtotΦxtest where ρtot = ∑z∈Nk(xtest) ρ(xtest, z)-1 . Notice this formulation is a specific convex combination as described before; therefore, AVA will result in a lower sensitivity than gSHAP(f, x) alone.</p>
+<h2>6.4 Medical Connection</h2>
+<p>Similar to how a model uses input features to reach an output, medical professionals learn how to proactively search for risk predictors in a patient. Medical professionals not only use patient attributes (e.g., vital signs, personal information) to make a diagnosis but also leverage experiences with past patients; for example, if a doctor treated a rare disease over a decade ago, then that experience can be crucial when attributes alone are uninformative about how to diagnose [Goold and Lipkin Jr, 1999]. This is the analogous to "close" training points affecting a predictor's output. AVA combines the attributions of past training points (past patients) to explain an unseen test point (current patient). When using the MIMIC dataset [Johnson et al., 2016], AVA models the aforementioned intuition.</p>
+<h2>7 Experiments</h2>
+<p>We now report some empirical results. We evaluate models trained on the following datasets: Adult, Iris [Dua and Graff, 2017], MIMIC [Johnson et al., 2016], and MNIST [LeCun et al., 1998]. We use the following explanation functions: SHAP [Lundberg and Lee, 2017], Shapley Sampling (SS) [ˇStrumbelj and Kononenko, 2014], Gradient Saliency (Grad) [Baehrens et al., 2010], Grad*Input (G*I) [Shrikumar et al., 2017], Integrated Gradients (IG) [Sundararajan et al., 2017], and DeepLift (DL) [Shrikumar et al., 2017].</p>
+<p>For all tabular datasets, we train a multilayer perceptron (MLP) with leaky-ReLU activation using the ADAM optimizer. For Iris [Dua and Graff, 2017], we train our model to 96% test accuracy. For Adult [Dua and Graff, 2017], our model has 82% test accuracy. As motivated in Section 6.4, we use MIMIC (Medical Information Mart for Intensive Care III) [Johnson et al., 2016]. We extract seventeen real-valued features deemed critical, per [Purushotham et al., 2018], for sepsis prediction. Our model gets 91% test accuracy on the task. For MNIST [LeCun et al., 1998], our model is a convolutional neural network and has 90% test accuracy.</p>
+<p>For experiments with a baseline ¯x, zero baseline implies that we set features to 0 and average baseline uses the average feature value in D. Before doing aggregation, we unit norm all explanations. For the complexity criterion, we take the positive ℓ1 norm. We set D = ℓ2 and ρ = ℓ∞.</p>
+<h2>7.1 Faithfulness µF</h2>
+<p>In Table 2, we report results for faithfulness for various explanation functions. When evaluating, we take the average of multiple runs where, in each run, we see at least 50 datapoints; for each datapoint, we randomly select |S| features and replace them with baseline values. We then calculate the Pearson's correlation coefficient between the predicted logits of each modified test point and the average explanation attribution for only the subset of features. We notice that, as subset size increases, faithfulness increases until the subset is large enough to contain all informative features. We find that Shapley values, approximated with weighted least squares, are the most faithful explanation function for smaller datasets.</p>
+<h2>7.2 Max and Avg Sensitivity µM and µA</h2>
+<p>In Table 3, we report the max and average sensitivities for various explanation functions. To evaluate the sensitivity criterion, we sample a set of test points from D and an additional larger set of training points. We then find the training points that fall within a radius r neighborhood of each test point and find the distance between each nearby training point explanation and the test point explanation to get a mean and max. We average over ten random runs of this procedure. Sensitivity is highly dependent on the dimensionality d and on the radius r. We find that as sensitivity decreases as r increases. Empirically, for MIMIC, Shapley values approximated by weighted least squares (SHAP) are the least sensitive.</p>
+<figure><figcaption><div class="caption">Table 1: Qualitative example of aggregation to lower complexity (µC): We show that it is possible to lower complexity slightly with both of our approaches; note that achieving lowest complexity on an image would imply that all attribution is placed on a single pixel.</div></figcaption><img src="/proceedings/2020/fulltext/417/image_000001_c3d87ade2116c2cefc86d87b73001d2aaf6a4206ffdab329baa44c1152efa07c.png"></figure>
+<table><caption><div class="caption">Table 2: Faithfulness µF averaged over a test set: (Zero Baseline, Training Average Baseline). Exact quantities can be obtained by dividing table entries by 102</div></caption><tbody><tr><th>METHOD SUBSET</th><th>ADULT 2</th><th>IRIS 2</th><th>MIMIC 10</th><th>MIMIC 20</th></tr><tr><td>SHAP</td><td>(62, 60)</td><td>(67, 68)</td><td>(31, 36)</td><td>(37, 47)</td></tr><tr><td>SS</td><td>(46, 27)</td><td>(32, 36)</td><td>(59, 58)</td><td>(38, 45)</td></tr><tr><td>GRAD</td><td>(30, 53)</td><td>(14, 16)</td><td>(37, 41)</td><td>(28, 63)</td></tr><tr><td>G*I</td><td>(38, 39)</td><td>(27, 30)</td><td>(54, 48)</td><td>(59, 43)</td></tr><tr><td>IG</td><td>(47, 33)</td><td>(60, 57)</td><td>(66, 51)</td><td>(68, 51)</td></tr><tr><td>DL</td><td>(58, 43)</td><td>(46, 48)</td><td>(84, 54)</td><td>(43, 45)</td></tr></tbody></table>
+<table><caption><div class="caption">Table 3: Sensitivity: (Max µM, Avg µA). Exact quantities can be obtained by dividing table entries by 103</div></caption><tbody><tr><th>METHOD RADIUS</th><th>ADULT 2</th><th>IRIS 0.2</th><th>MIMIC 4</th></tr><tr><td>SHAP</td><td>(60, 54)</td><td>(310, 287)</td><td>(6, 5)</td></tr><tr><td>SS</td><td>(191, 168)</td><td>(477 , 345)</td><td>(83, 81)</td></tr><tr><td>GRAD</td><td>(60, 50)</td><td>(68, 66)</td><td>(28, 28)</td></tr><tr><td>G*I</td><td>(86, 71)</td><td>(298, 279)</td><td>(77, 50)</td></tr><tr><td>IG</td><td>(19, 17)</td><td>(495, 462)</td><td>(19, 15)</td></tr><tr><td>DL</td><td>(74, 74)</td><td>(850, 820)</td><td>(135, 111)</td></tr></tbody></table>
+<h2>7.3 MNIST Complexity µC</h2>
+<p>In Table 1, we provide a qualitative example for the gradient descent-style and region-shrinking methods for lowering complexity of explanations from a model trained on MNIST. We show an example with images since it illustrates the notion of lower complexity well; however, other data types (tabular) might be better suited for complexity optimization.</p>
+<h2>7.4 AVA</h2>
+<p>Our empirical findings support use of an AVA explanation if low sensitivity is desired. [Ghorbani et al., 2019] note that perturbation-based explanations (like gSHAP) are less sensitive than their gradient-based counterparts. In Table 4, we show that AVA explanations not only have lower sensitivities in all experiments but also have less complex explanations (depending on the radius r and number of features d). After finding the average distance between pairs of points, we use r = 1 for Adult, r = 0.3 for Iris, and r = 10 for MIMIC.</p>
+<table><caption><div class="caption">Table 4: AVA lowers the sensitivity of Shapley value explanations across all datasets. When d is small (fewer features), AVA explanations are slightly less complex.</div></caption><tbody><tr><th>METHOD</th><th>ADULT</th><th>IRIS</th><th>MIMIC</th></tr><tr><td>µA(f, gSHAP ) µA(f , gAVA )</td><td>0.16 ± 0.11 0.07 ± 0.07</td><td>0.22 ± 0.25 0.13 ± 0.18</td><td>0.47 ± 0.12 0.31 ± 0.13</td></tr><tr><td rowspan="2">µM(f, gSHAP ) µM(f, gAVA )</td><td>0.68 ± 0.13</td><td>1.20 ± 0.36</td><td>0.83 ± 0.17</td></tr><tr><td>0.52 ± 0.11</td><td>1.18 ± 0.28</td><td>0.72 ± 0.22</td></tr><tr><td rowspan="2">µC(f, gSHAP ) µC (f , gAVA )</td><td>1.94 ± 0.26</td><td>1.36 ± 0.36</td><td>2.33 ± 0.23</td></tr><tr><td>1.93 ± 0.24</td><td>1.24 ± 0.32</td><td>2.61 ± 0.29</td></tr></tbody></table>
+<h2>8 Conclusion</h2>
+<p>Borrowing from earlier work in social science and the philosophy of science, we codify low sensitivity, high faithfulness, and low complexity as three desirable properties of explanation functions. We define these three properties for featurebased explanation functions, develop an aggregation scheme for learning combinations of various explanation functions, and devise schemes to learn explanations with lower complexity (iterative approaches) and lower sensitivity (AVA). We hope that this work will provide practitioners with a principled way to evaluate feature-based explanations and to learn an explanation which aggregates and optimizes for criteria desired by end users. Though we consider one criterion at a time, future work could further axiomatize our criteria, explore the interaction between different evaluation criteria, and devise a multi-objective optimization approach to finding a desirable explanation; for example, can we develop a procedure for learning a less sensitive and less complex explanation function simultaneously?</p>
+<h2>Acknowledgements</h2>
+<p>We thank reviewers for their feedback. We thank Pradeep Ravikumar, John Shi, Brian Davis, Kathleen Ruan, Javier Antoran, and James Allingham for their comments. UB acknowledges support from DeepMind and the Leverhulme Trust via the CFI. AW acknowledges support from the David MacKay Newton Research Fellowship at Darwin College, The Alan Turing Institute under EPSRC grant EP/N510129/1 &amp; TU/B/000074, and the Leverhulme Trust via the CFI.</p></div>
+            </section>
+        
+                    <section role="tabpanel" id="video" aria-labelledby="tab-video" hidden>
+                                    <video class="paper-video" controls preload="none" playsinline data-hls-src="https://videos.ijcai20.org/25206/file_25206.m3u8"></video>
+                            </section>
+        
+        <section role="tabpanel" id="cite" aria-labelledby="tab-cite" hidden>
+            <div class="cite" data-cite>
+                <div class="cite__formats" role="radiogroup" aria-label="Citation format">
+                                            <button type="button" data-format="acm" aria-pressed="true">ACM</button>
+                                            <button type="button" data-format="apa" aria-pressed="false">APA</button>
+                                            <button type="button" data-format="bibtex" aria-pressed="false">BibTeX</button>
+                                            <button type="button" data-format="ris" aria-pressed="false">RIS</button>
+                                    </div>
+                                    <div class="cite__text" data-format-text="acm" >Umang Bhatt, Adrian Weller, and José M. F. Moura. 2020. Evaluating and Aggregating Feature-based Model Explanations. In <i>Proceedings of the Twenty-Ninth International Joint Conference on Artificial Intelligence, IJCAI-20</i>. IJCAI, 3016–3022. https://doi.org/10.24963/ijcai.2020/417</div>
+                                    <div class="cite__text" data-format-text="apa" hidden>Bhatt, U., Weller, A., &amp; Moura, J. M. F. (2020). Evaluating and Aggregating Feature-based Model Explanations. In <i>Proceedings of the Twenty-Ninth International Joint Conference on Artificial Intelligence, IJCAI-20</i> (pp. 3016–3022). IJCAI. https://doi.org/10.24963/ijcai.2020/417</div>
+                                                    <pre class="cite__text" data-format-text="bibtex" hidden>@inproceedings{ijcai2020p417,
+  title     = {Evaluating and Aggregating Feature-based Model Explanations},
+  author    = {Bhatt, Umang and Weller, Adrian and Moura, José M. F.},
+  booktitle = {Proceedings of the Twenty-Ninth International Joint Conference on
+               Artificial Intelligence, {IJCAI-20}},
+  publisher = {International Joint Conferences on Artificial Intelligence Organization},
+  editor    = {Christian Bessiere},
+  pages     = {3016--3022},
+  year      = {2020},
+  month     = {7},
+  note      = {Main track},
+  doi       = {10.24963/ijcai.2020/417},
+  url       = {https://doi.org/10.24963/ijcai.2020/417},
+}
+</pre>
+                                    <pre class="cite__text" data-format-text="ris" hidden>TY  - CPAPER
+TI  - Evaluating and Aggregating Feature-based Model Explanations
+AU  - Bhatt, Umang
+AU  - Weller, Adrian
+AU  - Moura, José M. F.
+T2  - Proceedings of the Twenty-Ninth International Joint Conference on Artificial Intelligence, IJCAI-20
+PB  - International Joint Conferences on Artificial Intelligence Organization
+PY  - 2020
+SP  - 3016
+EP  - 3022
+DO  - 10.24963/ijcai.2020/417
+UR  - https://doi.org/10.24963/ijcai.2020/417
+ER  - 
+</pre>
+                                <button type="button" class="button" data-copy>Copy</button>
+                <span class="cite__copied" role="status" hidden>Copied</span>
+            </div>
+        </section>
+
+        <section role="tabpanel" id="data" aria-labelledby="tab-data" hidden>
+            <p>Machine-readable versions of this paper, for tools and AI agents:</p>
+            <ul>
+                <li><a href="/proceedings/2020/417.md">Markdown</a> — metadata, abstract, full text and references</li>
+                <li><a href="/proceedings/2020/417.json">JSON</a> — metadata and structured references</li>
+                <li><a href="/proceedings/2020/bibtex/417">BibTeX</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <nav class="article-nav" aria-label="Previous and next paper">
+                    <a class="article-nav__prev" href="/proceedings/2020/416" title="Discriminative Feature Selection via A Structured Sparse Subspace Learning Module">◀ <span class="screen-reader-text">Previous paper</span></a>
+                            <a class="article-nav__next" href="/proceedings/2020/418" title="User Modeling with Click Preference and Reading Satisfaction for News Recommendation"><span class="screen-reader-text">Next paper</span> ▶</a>
+            </nav>
+</div>
+        </div>
+    </article>
+</main>
+
+<section class="image-grid">
+            <a class="image-grid__tile" href="https://ijcai.org/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/welcome.jpg" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">Welcome</span>
+        </a>
+            <a class="image-grid__tile" href="https://ijcai.org/future_conferences/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/future-conferences.jpg" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">Future Conferences</span>
+        </a>
+            <a class="image-grid__tile" href="https://ijcai.org/aijd/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/ai-journal.png" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">AI Journal Division</span>
+        </a>
+            <a class="image-grid__tile" href="https://ijcai.org/all_proceedings/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/proceedings.jpg" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">IJCAI Proceedings</span>
+        </a>
+            <a class="image-grid__tile" href="https://ijcai.org/aboutijcai/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/about.jpg" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">About IJCAI</span>
+        </a>
+            <a class="image-grid__tile" href="https://ijcai.org/awards/">
+            <span class="image-grid__img">
+                <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/grid/awards.jpg" alt="" loading="lazy">
+            </span>
+            <span class="image-grid__caption">IJCAI Awards</span>
+        </a>
+    </section>
+
+<footer class="site-footer">
+    <div class="sponsors">
+    <div class="container">
+        <h2 class="sponsors__title">Organization thanks to</h2>
+        <div class="sponsors__list">
+                            <a class="sponsors__item" href="https://www.didiglobal.com/" target="_blank" rel="noopener">
+                    <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/sponsors/didi.png" alt="DiDi" loading="lazy">
+                </a>
+                            <a class="sponsors__item" href="https://www.baidu.com/" target="_blank" rel="noopener">
+                    <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/sponsors/baidu.png" alt="Baidu" loading="lazy">
+                </a>
+                            <a class="sponsors__item" href="https://www.huawei.com" target="_blank" rel="noopener">
+                    <img src="https://ijcai.org/wp-content/themes/ijcai/assets/img/sponsors/huawei.png" alt="Huawei" loading="lazy">
+                </a>
+                    </div>
+        <hr class="sponsors__divider">
+    </div>
+</div>
+
+    <div class="site-footer__bottom">
+        <div class="container">
+            <div class="footer-columns">
+                                    <div class="footer-column">
+                        <ul id="menu-footer-1" class="footer-menu"><li id="menu-item-250" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-250"><a href="https://ijcai.org/future_conferences/">Conferences</a>
+<ul class="sub-menu">
+	<li id="menu-item-251" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-251"><a href="https://ijcai.org/future_conferences/">Future Conferences</a></li>
+	<li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://ijcai.org/past_conferences/">Past Conferences</a></li>
+</ul>
+</li>
+<li id="menu-item-253" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-253"><a href="https://ijcai.org/all_proceedings/">Proceedings</a>
+<ul class="sub-menu">
+	<li id="menu-item-254" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-254"><a href="/proceedings/2026/">IJCAI 2026 Proceedings</a></li>
+	<li id="menu-item-255" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-255"><a href="https://ijcai.org/all_proceedings/">All Proceedings</a></li>
+</ul>
+</li>
+<li id="menu-item-256" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-256"><a href="https://ijcai.org/awards/">Awards</a></li>
+</ul>                    </div>
+                                    <div class="footer-column">
+                        <ul id="menu-footer-2" class="footer-menu"><li id="menu-item-257" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-257"><a href="https://ijcai.org/trustees/current_trustees/">Trustees/officers</a>
+<ul class="sub-menu">
+	<li id="menu-item-258" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-258"><a href="https://ijcai.org/trustees/current_trustees/">Current trustees</a></li>
+	<li id="menu-item-259" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-259"><a href="https://ijcai.org/trustees/trustees_elect/">Trustees Elect</a></li>
+	<li id="menu-item-260" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-260"><a href="https://ijcai.org/officers/ijcai_secretariat/">IJCAI Secretariat</a></li>
+	<li id="menu-item-261" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><a href="https://ijcai.org/officers/sponsorship_publicity/">IJCAI Sponsorship and Publicity Officers</a></li>
+	<li id="menu-item-262" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-262"><a href="https://ijcai.org/officers/ijcai_team/">IJCAI Team</a></li>
+	<li id="menu-item-263" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-263"><a href="https://ijcai.org/officers/local_arrangements_chairs/">Local Arrangements Chairs</a></li>
+	<li id="menu-item-264" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-264"><a href="https://ijcai.org/trustees/former_trustees_serving_on_the_executive_committee/">Former Trustees serving on the Executive Committee</a></li>
+	<li id="menu-item-265" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-265"><a href="https://ijcai.org/officers/other_former_officers/">Other Former Officers</a></li>
+</ul>
+</li>
+</ul>                    </div>
+                                    <div class="footer-column">
+                        <ul id="menu-footer-3" class="footer-menu"><li id="menu-item-266" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-266"><a href="https://ijcai.org/aijd/">AI Journal</a></li>
+<li id="menu-item-267" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-267"><a href="https://ijcai.org/aboutijcai/">About</a>
+<ul class="sub-menu">
+	<li id="menu-item-268" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-268"><a href="https://ijcai.org/aboutijcai/">About IJCAI</a></li>
+	<li id="menu-item-313" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-313"><a href="https://ijcai.org/documents/">Documents</a></li>
+	<li id="menu-item-269" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-269"><a href="https://ijcai.org/contact/">Contact Information</a></li>
+</ul>
+</li>
+</ul>                    </div>
+                            </div>
+
+            <a href="#top" class="back-to-top">
+                <span class="back-to-top__triangle"></span>
+                <span>Back to top</span>
+            </a>
+
+            <div class="legal-row">
+                                                <span>&copy; 2026 International Joint Conferences on Artificial Intelligence</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/ijcai/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+<script id="hls-js" src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.6.16/hls.min.js"></script>
+<script id="ijcai-archive-js" src="https://ijcai.org/wp-content/themes/ijcai/assets/js/archive.js?ver=1.1.0"></script>
+<script id="ijcai-main-js" src="https://ijcai.org/wp-content/themes/ijcai/assets/js/main.js?ver=1.0.2"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://ijcai.org/wp-includes/js/wp-emoji-release.min.js?ver=7.1.3"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://ijcai.org/wp-includes/js/wp-emoji-loader.min.js
+</script>
+</body>
+</html>

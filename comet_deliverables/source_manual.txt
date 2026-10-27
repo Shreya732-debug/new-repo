@@ -1,0 +1,3006 @@
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  COMET-XAI: Corrected Study Manual &
+  Research Specification
+  Coalition Owen Monotonic Explanation & Temporal Recourse · audited edition, 20 October
+  2026
+
+  Working title: From Disagreement to Durable Recourse: Coalition-Aware Attribution
+  Consensus and Monotonic Glass-Box Modeling for Non-Stationary Credit Risk
+
+  Candidate venues: EJOR, Decision Support Systems, Expert Systems with Applications,
+  Knowledge-Based Systems, ACM ICAIF. Check each venue's scope and current author
+  guidelines before committing.
+
+
+  How to use this manual
+       Part 0 lists every error found in your two source documents and how it is fixed. Read it
+       first.
+       Part 1 is the thesis. Part 2 is the literature with a verification status for each reference.
+       Part 3 builds the ten concepts from the ground up with worked numbers (it assumes
+       only that you know what SHAP and LIME are); read it with a pencil. Part 4 is the
+       algorithm.
+       Part 5 covers datasets and splits. Part 6 covers the six tables, five figures and a work
+       plan.
+       Part 7 is corrected reference code. Part 8 is a formula sheet and self-test.
+
+  Symbols used throughout:                       ✅
+                               standard result or checked against a source ·         ⚠️
+                                                                                 hypothesis,
+  design choice, or item you must confirm ·                  ❌
+                                             error in the originals, corrected here.
+
+  Formulas are written in plain Unicode so they paste cleanly into Word, Google Docs or
+  Notion. Convert them to LaTeX for the manuscript. The original files had many formulas
+  that were blank; all of them are restored here.
+
+
+
+  Part 0. Audit report
+  I merged your two documents, removed the duplication, restored the missing formulas
+  and checked each claim. Everything dated 2026, plus the datasets, was checked online on
+  20 Oct 2026. The items below are ordered by how much damage they would do to the
+
+
+
+
+                                                                                               Page 1 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  paper if left in.
+
+
+  0.1 Errors that change claims
+
+     #          Original statement                           Why it is wrong                   Corrected version
+                                                                                               used in this manual
+
+     1          Ward's clustering on D = 1 −                 Ward's method assumes             Use complete
+                abs(ρ_S); cutting at γ                       Euclidean distances, and 1 −      linkage (Ward only
+                guarantees every within-                     abs(ρ) is not Euclidean. Text,    as an ablation).
+                cluster pair is strongly                     algorithm and code disagree.      Cutting at γ = 1 −
+                correlated. The code actually                The within-cluster guarantee      ρ_max gives: every
+                uses complete linkage.                       holds for complete linkage        within-cluster pair
+                                                             only.                             has abs(ρ_S) ≥
+                                                                                               ρ_max. Nothing is
+                                                                                               guaranteed
+                                                                                               between clusters.
+
+     2          One feature per cluster                      With complete linkage, one        VIF < 2 is an
+                bounds pairwise correlation                  weakly correlated pair is         empirical target
+                by ρ_max and guarantees VIF                  enough to keep two clusters       you measure and
+                < 2.0.                                       apart, so features in different   report, not a
+                                                             clusters can still be highly      guarantee. Single
+                                                             correlated. Pairwise bounds       linkage does give
+                                                             also do not bound multi-          abs(ρ_S) < ρ_max
+                                                             feature VIF.                      across clusters,
+                                                                                               but it can chain.
+                                                                                               Report both.
+
+     3          Summing TreeSHAP values                      True only when the model is       Call it coalition-
+                inside a cluster equals the                  additive across coalitions (for   sum attribution.
+                Owen value or the quotient-                  example an EBM without            Exact grouped
+                game Shapley value.                          interactions). For tree           values need the
+                                                             ensembles with interactions       grouped game
+                                                             it is an approximation.           (groupShapley;
+                                                                                               SHAP's
+                                                                                               PartitionExplainer
+                                                                                               computes Owen-
+                                                                                               type values over a
+                                                                                               hierarchy).
+
+
+
+
+                                                                                                              Page 2 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     #          Original statement                           Why it is wrong                    Corrected version
+                                                                                                used in this manual
+
+     4          Every explainer yields a per-                Permutation importance (PFI)       PFI: grouped
+                instance matrix φ that can be                is global. LIME coefficients       permutation
+                summed inside a coalition.                   are slopes, not contributions.     (shuffle the whole
+                                                             Single-feature PFI                 coalition jointly).
+                                                             understates correlated twins.      LIME: contribution
+                                                                                                = coefficient × (x_j
+                                                                                                − reference_j).
+                                                                                                SHAP and EBM:
+                                                                                                native.
+
+     5          RBO code; expected                           The code sums only to depth        Use RBO_ext
+                coalition-level RBO of 0.82–                 k_max, so even identical lists     (Concept 7) and
+                0.94.                                        score below 1 (0.556 for 5         compare against a
+                                                             items, 0.803 for 10). Coalition    random-
+                                                             lists are shorter, so the metric   permutation null.
+                                                             is biased against your own         Chance overlap
+                                                             method, and 0.82 is                also rises when
+                                                             unreachable.                       lists are shorter.
+
+     6          ESVR is exactly 0.0% for                     Default SHAP and EBM               Define ESVR
+                monotone models.                             attributions are measured          against a median-
+                                                             against the mean                   reference
+                                                             contribution, so a perfectly       baseline. Then
+                                                             monotone model can give a          ESVR = 0 follows
+                                                             negative φ_j for an above-         from monotonicity
+                                                             median x_j. The quartile and       (proof in Concept
+                                                             median definitions were also       7), for constrained
+                                                             mixed up.                          features only.
+
+     7          The split-conformal buffer is                Split conformal covers             Call it a retraining-
+                distribution-free and                        exchangeable test points, not      shift safety
+                guarantees >90% validity.                    future retrained models            margin, calibrated
+                                                             under drift. A bootstrap-          on historical
+                                                             dispersion quantile is a           retraining shifts.
+                                                             heuristic.                         >90% validity is a
+                                                                                                hypothesis.
+
+
+
+
+                                                                                                                 Page 3 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     #          Original statement                           Why it is wrong                    Corrected version
+                                                                                                used in this manual
+
+     8          Proposition 2: monotone                      Monotonicity is a property of      Proposition 2 (no
+                models keep recourse valid                   M_t. It says nothing about         islands along
+                after retraining.                            M_(t+Δt) unless the shift is       constrained
+                                                             bounded, and it covers only        features) plus
+                                                             constrained coordinates.           Proposition 2′
+                                                                                                (bounded shift δ
+                                                                                                plus margin δ gives
+                                                                                                survival). See
+                                                                                                Concept 8.
+
+     9          Annex III covers fraud                       Annex III 5(b) excludes AI         Use K ∈ {4, 5} for
+                detection; regulation                        used to detect financial           the notice. Larger
+                demands recourse; K ∈ {4, 5,                 fraud. ECOA/Reg B and FCRA         K is only a model-
+                8}.                                          require principal reasons or       budget
+                                                             key factors, not recourse.         experiment.
+                                                             FCRA caps key factors at four      Present recourse
+                                                             (five with inquiries). Eight has   as best practice.
+                                                             no regulatory basis.
+
+     10         SEX, MARRIAGE (and AGE)                      Regulation B prohibits using       Exclude SEX and
+                used as model inputs.                        sex or marital status in credit    MARRIAGE from
+                                                             decisions.                         credit models.
+                                                                                                Justify any use of
+                                                                                                AGE.
+
+     11         HELOC has 10,459 rows after                  10,459 is the raw count. 9,871     Fixed in Part 5.
+                dropping all-(−9) rows;                      remain after dropping the all-
+                feature                                      (−9) rows (OpenML). Special
+                NumDelq2PublicRecLast12M.                    codes are −9, −8 and −7. The
+                                                             column
+                                                             NumDelq2PublicRecLast12M
+                                                             does not exist; the real one is
+                                                             MaxDelq2PublicRecLast12M,
+                                                             an ordinal code.
+
+
+
+
+                                                                                                                   Page 4 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     #          Original statement                           Why it is wrong                 Corrected version
+                                                                                             used in this manual
+
+     12         BAF: keep 10% of negatives;                  Subsampling negatives biases    Evaluate on full
+                months are real; give recourse               PR-AUC, Brier score and         test months or
+                to flagged applicants.                       thresholds. BAF is data         reweight. Run
+                                                             generated from a real           recourse
+                                                             dataset, not raw bank           experiments on
+                                                             records. Recourse advice to a   the two credit
+                                                             suspected fraudster is an       datasets only.
+                                                             evasion roadmap.
+
+     13         Several citations (titles,                   See Part 2.                     Corrected or
+                venues, authors, a                                                           flagged.
+                placeholder arXiv ID, an
+                unfindable paper).
+
+
+
+  0.2 Smaller corrections
+         The worked precision example is 800 / 2,800 = 28.6%, not 28.5%. One operating point
+         does not determine ROC-AUC, so the quoted 0.96 was unsupported.
+         N_cf was 5 in one document and 10 in the other. This manual uses 5 and ablates 5, 10,
+         20.
+         BAF window labels were inconsistent (M_3 trained on 4 months, M_5 to M_7 on 5
+         months). A fixed-length scheme is in Part 5.
+         The quoted EBM defaults (5,000 cycles, η = 0.01) are outdated. Current interpret
+         documentation shows learning_rate = 0.015, max_rounds up to 50,000 with early
+         stopping, and interactions default '3x'.
+         For EBM monotonicity, the documentation recommends post-fit monotonize(); a
+         monotone_constraints argument also exists.
+         Code bugs fixed in Part 7: spearmanr on two columns returns a scalar; the recourse
+         selector silently fell back to unsafe candidates; MAD = 0 caused division blow-ups; PFI
+         was treated as per-instance; RBO was truncated.
+         K can exceed M (the number of coalitions). A rule is in Concept 6.
+         With only 5 to 15 coalitions, RRF's k0 = 60 makes ranks almost interchangeable. Sweep
+         small k0 too.
+
+
+
+
+                                                                                                            Page 5 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+       Every number labelled 'expected' in the originals is a hypothesis: RBO 0.82–0.94,
+       ESVR 8–22%, max VIF > 14, TRV > 90%, 45–60% invalidation, +25% TRV. No experiment
+       backs them yet.
+       Taiwan: only BILL_AMT1–6 are strongly collinear (Pearson about 0.80–0.95). PAY status
+       columns are moderately correlated and PAY_AMT columns weakly. Measure Spearman
+       yourself. The raw status columns are PAY_0, PAY_2 … PAY_6 (there is no PAY_1).
+       Wilcoxon signed-rank needs at least 6 paired units to reach two-sided p < 0.05, and
+       more after Holm correction.
+       Table 2 has ten rows (nine baselines plus yours).
+       Rudin (2019) argues, not proves. Rawal et al. (2021) is empirical, not a theoretical proof.
+
+
+
+  Part 1. The thesis, stated honestly
+
+  1.1 Why the two halves belong together
+  When a lender rejects an applicant, two questions follow.
+
+       Part A, diagnostic attribution: why was I rejected? The lender must give specific
+       principal reasons.
+       Part B, prescriptive recourse: what can I change to be approved next time? When the
+       person returns after Δt, the retrained model M_(t+Δt) decides.
+
+  What the law says (               ⚠️ confirm current text before quoting it in a paper):
+       US ECOA / Regulation B requires specific principal reasons for adverse action. The
+       official commentary treats about four reasons as sufficient. CFPB Circular 2022-03
+       says that using a complex algorithm does not excuse the duty to give specific reasons.
+       US FCRA §609(f) requires the key factors that adversely affected a credit score: at
+       most four, plus credit inquiries if they were a key factor.
+       Neither statute requires a recourse plan. Recourse is a best-practice and research
+       goal. Wachter et al. (2017) and Barocas et al. (2020) discuss how counterfactuals differ
+       from principal reasons.
+       EU AI Act, Annex III 5(b): AI that evaluates creditworthiness or credit scores of natural
+       persons is high-risk, with an exception for AI used to detect financial fraud.
+
+  So Part A is a legal duty and Part B is a design goal. Your paper can argue that lenders who
+  choose to offer recourse should make it durable.
+
+
+
+
+                                                                                             Page 6 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  1.2 Two pathologies the experiments must demonstrate (hypotheses, not facts)
+   1. Twin features. Financial data contains blocks of features measuring one economic
+      concept (revolving utilization, balance-to-limit, share of high-utilization trades).
+       Models and explainers split credit among them arbitrarily. Effects: explainers appear to
+       disagree at the feature level; a top-K list fills with copies of one concept; a
+       counterfactual that changes one twin and freezes the other lands off the data
+       manifold.
+   2. Non-monotonic pockets. Deep trees fit noise in month t and create small regions
+      where more debt lowers predicted risk. Effects: sign-violating attributions;
+      counterfactual search, which hunts for the nearest point across the boundary, can land
+       inside a pocket that disappears after retraining.
+
+
+  1.3 The four modules
+
+     Module                         Problem                  Method                     Output
+
+     1. Coalition                   Twin features            Complete-linkage           Partition of the d
+     discovery                                               clustering on 1 −          features into M
+                                                             abs(ρ_S), fit on           concept coalitions
+                                                             training data only
+
+     2. Consensus                   Explainer                Coalition-sum              De-redundant subset
+     and selection                  disagreement;            attribution,               S_K*
+                                    redundant top-K          faithfulness-weighted
+                                                             two-stage RRF, one
+                                                             medoid per coalition
+
+     3. Monotonic                   Sign violations;         Monotone LightGBM          Student models on
+     glass box                      accuracy of compact      or XGBoost; EBM with       S_K*
+                                    models                   monotone constraints
+
+     4. Safe                        Recourse invalidated     DiCE candidates,           Recourse x_cf*
+     recourse                       by retraining            retraining-shift margin,
+                                                             target-class manifold
+                                                             distance
+
+
+
+
+                                                                                                         Page 7 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  1.4 What is and is not novel
+       Robust recourse for tree ensembles already exists (Dutta et al., ICML 2022), as does
+       probabilistically robust recourse (Pawelczyk et al., ICLR 2023). The original claim that
+       nobody has addressed tree ensembles is too strong.
+       A defensible claim, subject to a final literature search: a systematic audit of how de-
+       redundancy plus partial monotonicity affect recourse durability under real retraining,
+       combined with coalition-level explainer consensus, on credit data.
+       The consensus method must be shown to beat naive RRF, single explainers, mRMR and
+       Lasso on VIF, PR-AUC and recourse durability. Until Tables 1–5 are filled, none of this is
+       a result.
+
+
+
+  Part 2. Literature with verification status
+  Status key: ✔ checked online on 20 Oct 2026 · ◐ standard reference from my knowledge
+  (confirm pages when you build the .bib file) · ✖ wrong as cited or not found.
+
+
+  2.1 Stream A: game theory and attribution
+
+     Reference                                               Status   Role and corrections
+
+     Shapley (1953), Contributions to the                    ◐        Unique payoff under efficiency,
+     Theory of Games II, 307–317, Princeton                           symmetry, null player, additivity.
+     UP
+
+     Owen (1977), Values of games with a                     ◐        Shapley for games with a partition into
+     priori unions, in Henn & Moeschlin                               unions; quotient efficiency.
+     (eds.), Mathematical Economics and
+     Game Theory, LNEMS 141, 76–88,
+     Springer
+
+     Lundberg & Lee (2017), NeurIPS 30                       ✔        SHAP.
+
+     Lundberg et al. (2020), Nature Mach.                    ✔        Polynomial-time TreeSHAP.
+     Intell. 2(1), 56–67
+
+     Ribeiro, Singh & Guestrin (2016), KDD,                  ✔        LIME.
+     1135–1144
+
+     Aas, Jullum & Løland (2021), Artificial                 ◐        Shapley values with dependent
+     Intelligence 298, 103502                                         features.
+
+
+
+                                                                                                           Page 8 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Reference                                               Status       Role and corrections
+
+     Jullum, Redelmeier & Aas (2021),                        ◐            ❌ Title is groupShapley, not
+     arXiv:2106.12228                                                     groupSHAP.
+
+     Chen, Lin, Rudin, Shaposhnik, Wang &                    ◐            Two-layer additive model on manual
+     Wang (2018), arXiv:1811.12615                                        FICO subscales. ❌   I would write
+                                                                          'recognised in the FICO challenge'
+                                                                          rather than 'winner'; confirm wording.
+
+     Rudin (2019), Nature Mach. Intell. 1(5),                ✔            ❌ She argues for interpretable
+     206–215                                                              models; she does not prove an
+                                                                          impossibility.
+
+     Nori, Jenkins, Koch & Caruana (2019),                   ✔            InterpretML and EBM.
+     arXiv:1909.09223
+
+     Lou, Caruana, Gehrke & Hooker (2013),                   ◐            Add: GA²M, the basis of EBM.
+     KDD
+
+     Chen, Janizek, Lundberg & Lee (2020),                   ◐            Add: 'true to the model or true to the
+     arXiv:2006.16234                                                     data', the debate behind interventional
+                                                                          vs conditional SHAP.
+
+     Strobl et al. (2008), BMC Bioinformatics;               ◐            Add: permutation importance is biased
+     Hooker, Mentch & Zhou (2021), Stat.                                  under correlation.
+     Comput.
+
+
+
+  2.2 Stream B: disagreement and rank aggregation
+
+     Reference                                                   Status    Role and corrections
+
+     Krishna et al. (2024), TMLR;                                ✔         Practitioner survey plus experiments
+     arXiv:2202.01602                                                      (COMPAS, German Credit).
+                                                                           Documents disagreement; does not
+                                                                           diagnose its cause.
+
+     Rieger & Hansen (2019), arXiv:1903.00519                    ✔         Aggregating explanation methods for
+                                                                           neural networks. Title wording differs
+                                                                           between versions; copy it from the
+                                                                           arXiv page.
+
+
+
+
+                                                                                                              Page 9 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Reference                                               Status   Role and corrections
+
+     Bhatt, Weller & Moura (2020), IJCAI, 3016–              ◐        Evaluation criteria and aggregation of
+     3022                                                             explanations. ❌   The 'Kemeny–Young
+                                                                      / Borda framing' is unverified; my
+                                                                      recollection is a weighted-
+                                                                      combination aggregator. Rename the
+                                                                      Table 2 baseline 'Bhatt aggregation'
+                                                                      and read the paper before describing
+                                                                      it.
+
+     Cormack, Clarke & Buettcher (2009),                     ◐        RRF: score = Σ 1 / (k0 + rank), k0 = 60
+     SIGIR, 758–759                                                   by default.
+
+     Webber, Moffat & Zobel (2010), ACM TOIS                 ◐        Rank-biased overlap.
+     28(4)
+
+     Stow (Jan 2026), Int. J. Computer                       ✔        ❌ Not a preprint, and a single-author
+     Sciences and Engineering 14(1)                                   listing. Metrics are ESCR, weighted
+                                                                      rank divergence and explanation
+                                                                      entropy (not Kendall τ or
+                                                                      Overlap@k). Data: Adult, German
+                                                                      Credit, Bank Marketing; models:
+                                                                      logistic regression, random forest,
+                                                                      XGBoost. Reports lower SHAP–LIME
+                                                                      rank agreement for ensembles (mean
+                                                                      τ about 0.15) than for linear models
+                                                                      (about 0.31). Cite sparingly.
+
+     Balikci, Njume & Cakmak (2026), BMC                     ✔        ❌ Real title: BioMark: biomarker
+     Bioinformatics 27, 42                                            analysis tool, a software paper. RRF
+                                                                      is its default way to merge rankings
+                                                                      from SHAP, LIME, permutation
+                                                                      importance and other methods. That
+                                                                      it 'ignores collinearity' is your own
+                                                                      inference; say 'does not address' only
+                                                                      after checking the paper.
+
+     Gonlachanvit, Senjuntichai &                            ✔        SHAP ranking plus McNemar mid-p
+     Senjuntichai (2026), Machine Learning                            tests for stepwise selection in credit
+     with Applications, doi                                           risk. Single explainer, no coalition
+     10.1016/j.mlwa.2026.100977                                       structure.
+
+
+
+
+                                                                                                         Page 10 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Reference                                                   Status     Role and corrections
+
+     Chen, Calabrese & Martin-Barragan                           ✔          Add: stability of LIME and SHAP
+     (2024), EJOR                                                           under class imbalance in credit
+                                                                            scoring. Confirm volume and pages.
+
+     Ballegeer, Bogaert & Benoit (2025), EJOR                    ✔          LIME and SHAP stability for instance-
+     326(3), 630–640                                                        dependent cost-sensitive credit
+                                                                            models.
+
+
+
+  2.3 Stream C: recourse, drift and conformal ideas
+
+     Reference                                               Status       Role and corrections
+
+     Wachter, Mittelstadt & Russell (2017),                  ◐            Counterfactual explanations.
+     Harvard JOLT 31(2), 841–887
+
+     Ustun, Spangher & Liu (2019), FAT*, 10–                 ◐            Actionable recourse for linear models.
+     19
+
+     Mothilal, Sharma & Tan (2020), FAT*,                    ✔            DiCE.
+     607–617
+
+     Rawal, Kamar & Lakkaraju (2021),                        ✔            Title: Algorithmic Recourse in the Wild:
+     arXiv:2012.11788                                                     Understanding the Impact of Data and
+                                                                          Model Shifts. Empirical study. Your
+                                                                          second document used a different title.
+
+     Upadhyay, Joshi & Lakkaraju (2021),                     ✔            ROAR: minimax robustness to model
+     NeurIPS                                                              shift. Built for linear models, extended
+                                                                          to nonlinear ones through local linear
+                                                                          approximation (my recollection;
+                                                                          confirm).
+
+     Pawelczyk, Datta, van den Heuvel,                       ✔            Add: probabilistically robust recourse
+     Kasneci & Lakkaraju (2023), ICLR;                                    and its cost trade-off.
+     arXiv:2203.06768
+
+     Dutta et al. (2022), ICML                               ◐            Add: robust counterfactuals for tree
+                                                                          ensembles. Prior art you must discuss.
+
+
+
+
+                                                                                                               Page 11 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Reference                                               Status   Role and corrections
+
+     Altmeyer et al.                                         ◐        ❌ AAAI 2024 is Faithful model
+                                                                      explanations through energy-
+                                                                      constrained conformal counterfactuals
+                                                                      (ECCCo). Endogenous macrodynamics
+                                                                      in algorithmic recourse is SaTML 2023.
+
+     Maalej, Sönströd & Johansson (2025),                    ✔        Nearest verified work on conformal
+     PMLR 266, 405–424; Maalej &                                      ideas and counterfactuals.
+     Johansson (2026), IDA, LNCS 16513
+
+     'Johansson et al. (2026), Conformal                     ✖        Not found. Do not cite it. Target-class
+     Counterfactual Explanations and                                  manifold distance can instead be
+     Target-Class Conformity'                                         motivated by Van Looveren & Klaise
+                                                                      (2021, ECML PKDD, 650–665) and
+                                                                      Laugel et al. (2019, IJCAI).
+
+     'Pawelczyk et al. (Oct 2026),                           ✖        ❌ The ID was a placeholder. The paper
+     arXiv:2610.xxxxx'                                                that exists is Algorithmic Recourse
+                                                                      Under Competition, arXiv:2609.39877,
+                                                                      submitted 30 Sep 2026 (submitter
+                                                                      listed as Shahin Jabbari; check the full
+                                                                      author list). It studies acceptance
+                                                                      thresholds shifting when many
+                                                                      applicants follow recourse, not model
+                                                                      retraining.
+
+     Barocas, Selbst & Raghavan (2020),                      ◐        Add: principal reasons vs
+     FAT*; Karimi, Schölkopf & Valera (2021),                         counterfactuals; recourse as
+     FAccT                                                            intervention.
+
+
+
+  2.4 Stream D: benchmarks, credit and statistics
+
+     Reference                                               Status   Role and corrections
+
+     Jesus et al. (2022), NeurIPS Datasets &                 ✔        BAF. Data are generated from a real
+     Benchmarks, arXiv:2211.13358                                     bank-account-opening fraud dataset.
+
+     Bücker, Szepannek, Gosiewska & Biecek                   ✔        Transparency and explainability in
+     (2022), JORS 73(1), 70–90                                        credit scoring.
+
+
+
+
+                                                                                                           Page 12 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Reference                                                        Status    Role and corrections
+
+     Tu & Wu (2025), EJOR 322(2), 647–664                             ✔         Optimal classification trees with
+                                                                                hyperplane splits for credit scoring.
+
+     Demšar (2006), JMLR 7, 1–30; Nadeau &                            ◐         Statistical protocols (Concept 10).
+     Bengio (2003), Mach. Learn. 52, 239–281;
+     Alpaydın (1999), Neural Comput. 11(8),
+     1885–1892; Dietterich (1998), Neural
+     Comput. 10(7), 1895–1923
+
+     Dal Pozzolo et al. (2015), IEEE SSCI                             ◐         Add: probability correction after
+                                                                                undersampling negatives.
+
+
+
+  2.5 Corrected comparison table (for your introduction)
+  The original table asserted outcomes you have not measured. This version separates
+  design properties from results.
+
+
+    Method                        De-                    Multi-           Sign-consistent   Tree               Recourse
+                                  redundant              explainer        by design         ensembles and      durability
+                                  top-K                  consensus                          EBM                evidence
+
+    TreeSHAP or LIME              No                     No               No                Yes                Not designed
+    alone                                                                                                      for it
+
+    groupShapley,                 Group scores           No               No                Yes                Not designed
+    conditional SHAP              only                                                                         for it
+
+    BioMark-style RRF             No (feature-           Yes              No                Yes                Not designed
+                                  level)                                                                       for it
+
+    SHAP-McNemar                  Partial                No               No                Yes                Not evaluated
+                                  (stepwise
+                                  tests)
+
+    ROAR                          No                     No               No                Mainly linear      Yes, with higher
+                                                                                            and local-linear   cost
+
+    Dutta et al. 2022             No                     No               No                Yes (trees)        Yes (robustness
+                                                                                                               for trees)
+
+    COMET-XAI                     Yes,                   Yes, coalition   Yes, for          Yes                To be measured
+                                  measured by            level            constrained                          (Table 4)
+                                  VIF                                     features
+
+
+
+
+                                                                                                                            Page 13 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  Part 3. The ten concepts, built from the ground up
+  This part assumes you know only that SHAP and LIME give each feature a number saying
+  how much it mattered for one prediction. Everything else is built here from small numbers
+  you can check by hand. Each concept follows one rhythm: the idea in plain words, a tiny
+  worked example, then what it means for the paper.
+
+  The numbers in the worked examples are invented for teaching. They are not results.
+
+  Suggested path: read Concept 0 once, then Concepts 3 to 5 (the heart of the method),
+  then the rest in order. Keep a pencil nearby and redo each calculation.
+
+
+  Concept 0. The toolkit: eight small ideas everything else rests on
+  If any of these is already obvious, skim it. The rest of Part 3 uses all of them.
+
+  0.1 A model is a function from features to a risk score. A borrower is a list of numbers, for
+  example x = (revolving utilization 82%, inquiries in the last 6 months 3, delinquencies 0).
+  The model f turns that list into one number between 0 and 1, the predicted risk (a
+  probability of default). Training means picking f so its scores match past outcomes.
+  Explaining means answering one question: how much did each input push this particular
+  score up or down?
+
+  0.2 Probability, odds and log-odds. Odds = p / (1 − p). Log-odds = ln(odds), also called the
+  logit. The sigmoid σ(z) = 1 / (1 + e^(−z)) converts log-odds back to a probability.
+
+
+     Probability p             Odds            Log-odds
+
+     0.50                      1               0
+
+     0.80                      4               1.386
+
+     0.20                      0.25            −1.386
+
+     0.95                      19              2.944
+
+     0.05                      0.0526          −2.944
+
+
+  Why this matters here: log-odds can be any real number and they add up. Boosted trees
+  and EBMs build their score as a sum in log-odds, and SHAP values for them are measured
+  in log-odds too. But equal steps in log-odds are not equal steps in probability. Adding +0.7
+
+
+
+
+                                                                                         Page 14 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  to log-odds 0 moves p from 0.500 to 0.668 (a rise of 0.168). Adding +0.7 to log-odds 3
+  moves p from 0.953 to 0.976 (a rise of 0.023). So a feature's contribution is always relative
+  to where the borrower already sits.
+
+  0.3 Expectation is an average. E[X] means the average of X over the population. E[f(X)] is
+  the average predicted risk over all borrowers. If three borrowers score 0.1, 0.2 and 0.6,
+  then E[f(X)] = 0.3. SHAP and the EBM both measure each feature against this average, so
+  the question they answer is: how far is this borrower from the typical one, and which
+  features account for that gap?
+
+  0.4 Ranks. Replace each value by its position, 1 for the smallest. The values (3, 100, 8, 15)
+  have ranks (1, 4, 2, 3). When we rank features by importance, rank 1 is the most important.
+  Comparing two explainers means comparing their rank lists.
+
+  0.5 Correlation, Pearson and Spearman. Correlation between two columns runs from −1
+  to +1. Pearson measures how closely the points follow a straight line. Spearman is Pearson
+  computed on the ranks, so it detects any steadily rising or falling relationship and ignores
+  outliers. Example: X = (1, 2, 3, 4, 100) and Y = (2, 4, 5, 9, 10). Both columns rise together, so
+  their ranks are identical and Spearman = 1.00. The outlier 100 drags Pearson down to 0.68.
+  Two features whose correlation is near +1 or −1 in absolute value are called twins.
+
+  0.6 Absolute value and sums do not commute. abs(5.0 + (−4.8)) = 0.2, but abs(5.0) +
+  abs(−4.8) = 9.8. Whether you take the absolute value before or after adding is a modelling
+  choice with real consequences; Concept 5 depends on it.
+
+  0.7 Train, calibration and test data; leakage. Anything you fit (the clustering, the feature
+  selection, the model, the safety margin) may use only data from before the test period. If
+  you pick your K best features using test labels, your test score is inflated because the test
+  data helped build the model. That is leakage, and reviewers look for it. Use three roles:
+  train to fit, calibration to tune selection and margins, test to report once.
+
+  0.8 Symbols you will meet.
+
+
+     Symbol           Meaning
+
+     x, d             one borrower's feature vector; number of features
+
+     f(x)             the model's predicted risk, between 0 and 1
+
+     τ (tau)          the decision threshold: reject if f(x) > τ
+
+     φ_j(x)           explainer's credit for feature j on borrower x
+                      (positive raises risk)
+
+
+
+                                                                                             Page 15 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Symbol           Meaning
+
+     C_m, M           concept coalition number m (a cluster of twin
+                      features); how many coalitions
+
+     K, S_K*          feature budget; the final selected set of K features
+
+     s_j              known risk direction of feature j: +1 higher value
+                      raises risk, −1 lowers it, 0 unconstrained
+
+     w_e, k0          weight of explainer e; the smoothing constant in
+                      rank fusion
+
+
+
+  Concept 1. Classification, thresholds and the right metrics
+  The task. Each row is a borrower or transaction: features x and a label y, where y = 1
+  means bad (default or fraud) and y = 0 means good. The model outputs a risk f(x)
+  between 0 and 1. A threshold τ turns the score into a decision: reject if f(x) > τ, approve if
+  f(x) ≤ τ. Throughout this manual lower risk is better, so approval means f ≤ τ.
+
+  Four outcomes. Every decision falls into one cell.
+
+
+                                  Truly bad (y = 1)              Truly good (y = 0)
+
+     Model rejects                True positive (TP): bad one    False positive (FP): good customer
+                                  caught                         wrongly rejected
+
+     Model                        False negative (FN): bad one   True negative (TN): good customer
+     approves                     missed                         correctly approved
+
+
+  Three rates come from these counts: recall (TPR) = TP / (TP + FN), the share of bad cases
+  caught; false positive rate (FPR) = FP / (FP + TN), the share of good cases wrongly
+  rejected; precision = TP / (TP + FP), the share of rejections that were truly bad.
+
+  Why plain accuracy fails. If 1% of transactions are fraud, a model that always says
+  legitimate is 99% accurate and catches nothing. With rare bad outcomes you need
+  metrics that look at the rare class.
+
+  Worked example. 100,000 transactions: 1,000 fraud and 99,000 legitimate. A model flags
+  2,000 legitimate ones and catches 800 fraud cases.
+
+       FP = 2,000 and TN = 97,000, so FPR = 2,000 / 99,000 = 2.02%.
+       TPR = 800 / 1,000 = 80%.
+
+
+
+                                                                                                      Page 16 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+         Precision = 800 / 2,800 = 28.6%, so 71.4% of flagged customers are innocent.
+
+  The ROC curve plots TPR against FPR. Because the good class is huge, even 2,000 false
+  alarms is only a 2% FPR, so ROC-AUC can look excellent while most alerts are wrong.
+  Precision is the number that reveals it.
+
+  PR-AUC by hand. Sort six cases by score from highest to lowest. At each cutoff n (flag the
+  top n), compute precision and recall. Suppose the labels, in score order, are 1, 0, 1, 0, 0, 1.
+
+
+     Flag top n           Label added              TP so far   Precision   Recall
+
+     1                    1                        1           1.000       0.333
+
+     2                    0                        1           0.500       0.333
+
+     3                    1                        2           0.667       0.667
+
+     4                    0                        2           0.500       0.667
+
+     5                    0                        2           0.400       0.667
+
+     6                    1                        3           0.500       1.000
+
+
+  Average precision adds up precision times the increase in recall at each step: AP = 0.333
+  × 1.000 + 0.333 × 0.667 + 0.333 × 0.500 = 0.333 + 0.222 + 0.167 = 0.722. A useless model
+  scores about the prevalence (here 3 of 6 = 0.5; for 1% fraud, 0.01), not 0.5 as ROC-AUC
+  would suggest. That is why a PR-AUC of 0.30 can be excellent when prevalence is 1%.
+
+  Recall at a fixed FPR. A bank often decides in advance how many good customers it will
+  tolerate inconveniencing, say 1%. With 99,000 good customers that is 990 false alarms. Set
+  the threshold so exactly 1% of good cases score above it, then read off recall. This is the
+  operational question: how many bad cases do we catch for a fixed customer-friction
+  budget? Report both 1% and 5%.
+
+  Brier score and calibration. Brier = average of (predicted probability − outcome)². For
+  predictions 0.9, 0.2, 0.7 and outcomes 1, 0, 1: (0.1² + 0.2² + 0.3²) / 3 = (0.01 + 0.04 + 0.09) / 3 =
+  0.047. Lower is better. A model is calibrated if, among borrowers given 20%, about 20%
+  really default. Calibration matters because lenders compute expected loss = PD × LGD ×
+  EAD (probability of default, loss given default, exposure). With PD 0.05, LGD 0.45 and
+  EAD $10,000, expected loss is $225. If the model reports PD 0.10 instead, the lender
+  provisions $450. Ranking quality (AUC) does not catch this; calibration does.
+
+
+
+
+                                                                                                Page 17 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  A trap when you subsample. Suppose you keep only a fraction r of the good cases to
+  speed up training. The model's probabilities are then inflated. With r = 0.1, a subsample
+  score p_s = 0.5 corresponds to a true probability of 0.1 × 0.5 / (0.1 × 0.5 + 0.5) = 0.091. Fix it
+  with p = r p_s / (r p_s + 1 − p_s) (Dal Pozzolo et al. 2015), or train on the subsample and
+  evaluate on the full data.
+
+  What this means for the paper. Report PR-AUC, Recall at 1% and 5% FPR, and Brier score
+  in every table. Never report accuracy alone.
+
+
+  Concept 2. How the models make a prediction
+  You cannot understand an explanation without knowing what is being explained. Three
+  model types appear in this project.
+
+  2.1 A decision tree is a flowchart. It asks yes/no questions about the features and ends in
+  a leaf holding a number (here a log-odds contribution).
+
+       Is utilization above 70%?
+             Yes: is inquiries above 2? Yes gives leaf +1.2; no gives leaf +0.5.
+             No: leaf −0.8.
+
+  A borrower with utilization 82% and 3 inquiries lands in the +1.2 leaf. Two properties
+  matter later. First, a tree is a step function: its output is flat between thresholds and
+  jumps at them. Second, each leaf value is learned from the training rows that fall into it. A
+  leaf built from only four noisy rows has a noisy value; this is the origin of the “pockets” in
+  Part 1.
+
+  2.2 A random forest averages many deep trees, each trained on a random resample of the
+  data. Averaging reduces noise.
+
+  2.3 Gradient boosting (XGBoost, LightGBM) builds trees one after another, each
+  correcting what the previous ones got wrong. Start with a base score. Compute each
+  row's leftover error: for a defaulted borrower (y = 1) currently scored 0.4, the leftover is y
+  − p = 0.6. Fit a small tree to those leftovers, add it with a small step size η (say 0.05), and
+  repeat a few hundred times. The final score is the sum of all trees in log-odds. Because a
+  tree that asks k questions can combine k features in one rule, the sum mixes features in
+  tangled ways. There is no single curve you can point to and say: this is what utilization
+  does. That is why such a model is called a black box.
+
+  2.4 The Explainable Boosting Machine (EBM) gives every feature its own curve. It is still
+  boosting, but each small tree may use one feature only, and the algorithm visits the
+  features in turn, many times, with a very small step size. At the end, all trees that used
+
+
+
+                                                                                              Page 18 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  utilization are added into one lookup table f_util. The prediction is simply
+
+  log-odds = intercept + f_util(utilization) + f_delinq(delinquencies) + f_inq(inquiries)
+
+  and you can plot each f as a curve. This is a glass box: the model is its own explanation.
+
+  Worked example (invented numbers). Each curve below also has its average value over
+  all borrowers.
+
+
+     Term                        Borrower's value            Curve gives   Average of the curve
+
+     Intercept                   —                           −1.0          —
+
+     Utilization                 82%                         +1.2          +0.5
+
+     Delinquencies               0                           −0.3          −0.1
+
+     Inquiries                   3                           +0.4          +0.2
+
+
+       Borrower's log-odds = −1.0 + 1.2 − 0.3 + 0.4 = 0.3, so risk = σ(0.3) = 0.574.
+       The average borrower has log-odds −1.0 + 0.5 − 0.1 + 0.2 = −0.4, so risk = σ(−0.4) =
+       0.401.
+       The gap is 0.3 − (−0.4) = +0.7. Split it by feature, using φ_j = f_j(x_j) − average of f_j:
+       utilization +0.7, delinquencies −0.2, inquiries +0.2. These add to +0.7 exactly.
+
+  That is an exact explanation with no sampling and no approximation. (The interpret
+  package centres the curves differently from this toy, but φ_j is the same.)
+
+  2.5 Pairwise interactions. An EBM can add terms f_ij(x_i, x_j) for selected pairs. They
+  improve accuracy but break the one-curve-per-feature picture and, as Concept 8 shows,
+  they spoil monotonicity guarantees. For the monotone model in this project set
+  interactions = 0.
+
+  2.6 The twin problem, inside an EBM. Suppose utilization (x_1) and balance-to-limit (x_2)
+  are twins. Run the EBM twice with different random seeds. Run A may put most of the
+  signal in f_1 (curve range 1.4) and little in f_2 (range 0.6). Run B may do the reverse. Both
+  runs make nearly identical predictions, because the features carry the same information.
+  Yet someone reading one curve alone would call utilization important in run A and
+  unimportant in run B. The honest statement is about the pair, which is exactly what a
+  coalition is.
+
+
+
+
+                                                                                                  Page 19 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  What this means for the paper. Black-box teachers: XGBoost and LightGBM. Glass-box
+  student: EBM. Constrained variants: LightGBM with monotone constraints, and an EBM
+  with interactions = 0. Current interpret defaults are a learning rate of 0.015 and up to
+  50,000 rounds with early stopping, not the older 5,000 and 0.01.
+
+
+  Concept 3. How SHAP, LIME and permutation importance really work
+  3.1 The question. A model scored this borrower 0.574 while the average borrower scores
+  0.401. An explainer splits that gap among the features. Different explainers use different
+  rules for the split, and the rules give different answers when features are correlated. To
+  see why, you need to see each rule in action.
+
+  3.2 Shapley values: fair credit by averaging over orderings. Imagine features joining a
+  team one at a time. When a feature joins, record how much the team's score rises: its
+  marginal contribution. The result depends on who joined before it, so average over every
+  possible joining order.
+
+  Tiny game with two players. The team scores v(nobody) = 0, v(A alone) = 10, v(B alone) =
+  20, v(A and B) = 50. The players interact: together they do more than the sum.
+
+
+     Joining order              A gets                   B gets
+
+     A first, then B            10                       50 − 10 = 40
+
+     B first, then A            50 − 20 = 30             20
+
+     Average                    20                       30
+
+
+  The credits sum to 50, the full team score. These averages are the Shapley values. Four
+  plain-language fairness rules pin them down uniquely: credits sum to the total
+  (efficiency); identical players get equal credit (symmetry); a player who adds nothing ever
+  gets zero (null player); and credits from two games add up (additivity). With d features
+  there are d! orderings (23! for HELOC), so practical tools use shortcuts. TreeSHAP
+  computes the exact answer for tree models quickly.
+
+  3.3 Turning a model into a game. The team score of a set S of features is the model's
+  average output when the features in S are fixed at this borrower's values and the other
+  features are filled in with draws from a background dataset. With nothing fixed, you get
+  the average prediction; with everything fixed, the borrower's own prediction.
+
+  Worked example with a simple model f = 3·x1 + 2·x2. Background averages are x1 = 1 and x2
+  = 2. The borrower has x1 = 2 and x2 = 5.
+
+
+                                                                                       Page 20 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+         Nothing fixed: v = 3·1 + 2·2 = 7 (the average prediction).
+         Only x1 fixed: v = 3·2 + 2·2 = 10. Only x2 fixed: v = 3·1 + 2·5 = 13.
+         Both fixed: v = 3·2 + 2·5 = 16 (the borrower's prediction).
+         φ_1 = ½[(10 − 7) + (16 − 13)] = 3 and φ_2 = ½[(13 − 7) + (16 − 10)] = 6.
+
+  Check: 7 + 3 + 6 = 16. For a linear model, SHAP is just coefficient × (value − average): 3×1
+  and 2×3. The same recipe works for any model; only the arithmetic gets harder.
+
+  3.4 Why twins break feature-level explanations. Take two features that are perfect twins
+  in the real data (x2 always equals x1). Consider two models that predict identically on real
+  borrowers:
+
+         Model A: f = 2·x1 + 2·x2.
+         Model B: f = 4·x1 + 0·x2.
+
+  Let the averages be 1 and 1, and the borrower have x1 = x2 = 3.
+
+
+     Model          φ for x1                φ for x2         Ranking says                      Twin total
+
+     A              2·(3 − 1) = 4           4                x1 and x2 tie                     8
+
+     B              4·(3 − 1) = 8           0                x1 is everything, x2 irrelevant   8
+
+
+  Both explanations are faithful to their model. But a model trained on twin data has no way
+  to prefer A over B, so the split between twins is arbitrary, and two trained trees, two
+  seeds or two explainers can land on different splits. What is stable is the total for the pair
+  (8). That total is the idea behind coalitions.
+
+  3.5 The SHAP variants you will use.
+
+         Interventional TreeSHAP ( shap.TreeExplainer with a background dataset): the
+         recipe of 3.3, exactly, for trees. Faithful to the model, even where it evaluates
+         unrealistic feature combinations.
+         Path-dependent TreeSHAP: uses how many training rows went down each branch to
+         approximate conditional averages. Needs no background; not true conditional SHAP.
+         PartitionExplainer: respects a hierarchy of feature clusters and yields Owen-type
+         values (Concept 5). Slow, so subsample rows.
+
+  3.6 LIME from scratch. LIME explains one borrower by fitting a simple line locally. Five
+  steps: (1) take the borrower; (2) create many slightly altered copies; (3) ask the model to
+  score every copy; (4) give each copy a weight that shrinks with its distance from the
+
+
+
+
+                                                                                                            Page 21 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  borrower, controlled by a kernel width; (5) fit a weighted linear regression and read its
+  coefficients as the explanation.
+
+  The coefficient is a slope. For a tree, which is a step function, the slope depends entirely
+  on how wide the neighbourhood is. Toy case: f(x) = 0 for x < 5 and 1 for x ≥ 5, and the
+  borrower sits at 4.9.
+
+       Narrow neighbourhood: copies at 4.8 and 4.9 are all scored 0, so the fitted slope is 0.
+       LIME says x does not matter.
+       Wider neighbourhood: copies at 4.5, 4.9, 5.1, 5.5 score 0, 0, 1, 1. With equal weights the
+       regression slope is Sum[(x − 5)(y − 0.5)] / Sum[(x − 5)²] = 0.60 / 0.52 = 1.15. LIME says x
+       matters a lot.
+
+  Same model, same borrower, different answers. Random sampling adds more noise. Two
+  practical points: in the lime package set discretize_continuous = False and
+  sample_around_instance = True to get local slopes; and a slope is not a contribution. To
+  compare with SHAP, convert: contribution = slope × (value − reference value).
+
+  3.7 Permutation importance (PFI). Shuffle one column on validation data so its link to the
+  outcome is broken, then see how much the model's score drops. Large drop means the
+  model leans on that feature. It is a global measure: one number per feature, not per
+  borrower.
+
+  Illustrative numbers: baseline PR-AUC 0.60. Shuffle x1 alone: 0.57, a drop of only 0.03,
+  because its twin x2 still carries the information. Shuffle x1 and x2 together, with the same
+  row shuffle: 0.35, a drop of 0.25. Single-column PFI therefore understates twins; shuffling
+  the whole group together tells the truth about the concept.
+
+  3.8 The five explainers side by side.
+
+
+     Method                                 Question it answers     Per         Main weakness
+                                                                    borrower?
+
+     Interventional                         How does each feature   Yes         Splits credit between
+     TreeSHAP                               move this score away                twins arbitrarily
+                                            from the average?
+
+     PartitionExplainer                     Same, respecting a      Yes         Slow
+                                            feature hierarchy
+
+     EBM native                             Exact contribution of   Yes         Explains the EBM, not
+     contributions                          each curve                          the boosted trees
+
+
+
+
+                                                                                                    Page 22 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Method                                 Question it answers          Per          Main weakness
+                                                                         borrower?
+
+     LIME                                   Slope of a local straight-   Yes          Depends on kernel width
+                                            line fit                                  and seed; slope, not
+                                                                                      contribution
+
+     Permutation                            How much does shuffling      No, global   Understates twins unless
+     importance                             hurt accuracy?                            grouped
+
+
+  3.9 Design rule. Compare explainers on the same model. If you set TreeSHAP on XGBoost
+  beside an EBM's native importance, you are comparing two models as well as two
+  explainers. Treat the EBM as a second teacher and report it separately.
+
+  What this means for the paper. Disagreement among SHAP, LIME and PFI at the feature
+  level is partly the arbitrary twin split of 3.4, partly LIME's instability in 3.6, and partly the
+  single-column bias in 3.7. Concepts 4 to 7 build the tools to separate those causes and
+  measure them.
+
+
+  Concept 4. Finding the twins: correlation, clustering and VIF
+  4.1 Why automate it. The FICO challenge winners grouped features into subscales by
+  hand (Chen et al. 2018). That is subjective and does not transfer to a new dataset. We
+  want a rule that finds twin groups from the training data alone.
+
+  4.2 Turn correlation into distance. Use the Spearman correlation ρ_S between two
+  columns (Concept 0.5). Define the distance D = 1 − abs(ρ_S). Two features that move
+  together almost perfectly have D near 0; unrelated features have D near 1. Using the
+  absolute value means a strong negative relationship also counts as twins.
+
+  4.3 Hierarchical clustering by hand. Start with each feature as its own cluster and
+  repeatedly merge the two closest clusters. Four features A, B, C, D with these absolute
+  correlations:
+
+
+     Pair        abs(ρ_S)            Distance D
+
+     A–B         0.92                0.08
+
+     C–D         0.85                0.15
+
+     A–C         0.15                0.85
+
+     A–D         0.10                0.90
+
+
+
+                                                                                                         Page 23 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Pair        abs(ρ_S)            Distance D
+
+     B–C         0.20                0.80
+
+     B–D         0.12                0.88
+
+
+  With complete linkage the distance between two clusters is the largest distance between
+  any member of one and any member of the other.
+
+   1. Smallest distance is A–B at 0.08. Merge into {A, B} at height 0.08.
+   2. Next smallest is C–D at 0.15. Merge into {C, D} at height 0.15.
+   3. Distance between {A, B} and {C, D} is the largest cross distance, max(0.85, 0.90, 0.80,
+      0.88) = 0.90. Merge at height 0.90.
+
+  Now cut the tree at height γ = 1 − ρ_max. With ρ_max = 0.70, γ = 0.30. Keep only merges at
+  heights up to 0.30. That leaves the two coalitions {A, B} and {C, D}. These are the concept
+  coalitions. No labels were used; only the training features.
+
+  4.4 What the cut guarantees, and what it does not. With complete linkage, every pair
+  inside a cluster has D ≤ γ, so abs(ρ_S) ≥ ρ_max. That is a real guarantee. Nothing is
+  promised about pairs in different clusters. Example with ρ_max = 0.70 (γ = 0.30): abs(ρ) is
+  0.90 for A–B, 0.75 for B–C and 0.40 for A–C, so the distances are 0.10, 0.25 and 0.60.
+
+       Complete linkage merges A and B at 0.10. Then {A, B} versus C is max(0.60, 0.25) = 0.60,
+       above 0.30, so C stays separate. Result: {A, B} and {C}. But B and C have correlation
+       0.75. Pick B from the first cluster and C from the second, and you have selected two
+       highly correlated features.
+       Single linkage uses the smallest cross distance: min(0.60, 0.25) = 0.25, below 0.30, so it
+       merges all three into one cluster even though A and C are only 0.40 correlated. This is
+       called chaining.
+
+
+     Linkage              What it guarantees                        How it fails
+
+     Complete             Every pair inside a cluster is strongly   Strongly correlated features can end
+                          correlated                                up in different clusters
+
+     Single               Features in different clusters are        Chaining: weakly related features get
+                          weakly correlated                         merged
+
+     Ward                 Nothing, for this distance (it assumes    Not valid here; use only as an ablation
+                          Euclidean geometry)
+
+
+
+
+                                                                                                      Page 24 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  This is why “one feature per cluster guarantees VIF < 2” was wrong in your original text.
+  Always compute the VIF of the final subset.
+
+  4.5 VIF from scratch. Regress feature j on the other selected features. The regression's R²
+  is the share of j's variation the others already explain. Then
+
+  VIF_j = 1 / (1 − R²).
+
+  If R² = 0.5, VIF = 2. If R² = 0.9, VIF = 10. The name says what it does: the variance of j's
+  estimated coefficient in a regression is multiplied by this factor, so coefficients become
+  unstable and signs can flip. For just two features, R² equals the squared correlation, so VIF
+  = 1 / (1 − ρ²):
+
+
+     Correlation ρ               0.5        0.7         0.9    0.94
+
+     VIF of the pair             1.33       1.96        5.26   8.59
+
+
+  Rules of thumb: above 5 is worrying, above 10 is severe. Notice that ρ = 0.7 gives a pair VIF
+  just under 2. That is where the target “VIF below 2” comes from. With three or more
+  selected features the combined effect can push VIF higher than any single pair suggests.
+
+  4.6 Practicalities. Cluster on Spearman (it handles skewed financial data), but VIF is a
+  linear measure, so report both a Spearman maximum pairwise correlation and the VIF.
+  Handle special codes such as −9 before computing any correlation. A column that is
+  constant has no defined correlation; drop it.
+
+  What this means for the paper. The defensible statement is: coalitions are found without
+  labels, on training data only; every pair inside a coalition has abs(ρ_S) at least ρ_max; and
+  the VIF of every selected subset is measured and reported, not assumed.
+
+
+  Concept 5. From Shapley to Owen: crediting whole concepts
+  5.1 The idea. Shapley's rule treats every feature as free to join in any order. Twins are not
+  free: they carry one concept and arrive as a bloc. Guillermo Owen (1977) changed the rule
+  so that blocks enter together, in games with “a priori unions”. Credit is shared in two
+  steps: first among the blocks, then among the members of each block.
+
+  5.2 A six-ordering example. Players A and B are twins (one coalition) and C is
+  independent (a second coalition). Team scores: v(A) = 30, v(B) = 30, v(C) = 40, v(A,B) = 40
+  (twins overlap, so together barely more than one alone), v(A,C) = 70, v(B,C) = 70, and
+  v(A,B,C) = 100. The extra 100 − (40 + 40) = 20 is synergy between the two concepts.
+
+
+
+
+                                                                                                 Page 25 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  Shapley: all 6 orders. Each row shows what each player adds when it joins in that order.
+
+
+     Order              A adds          B adds          C adds
+
+     A, B, C            30              10              60
+
+     A, C, B            30              30              40
+
+     B, A, C            10              30              60
+
+     B, C, A            30              30              40
+
+     C, A, B            30              30              40
+
+     C, B, A            30              30              40
+
+     Average            26.67           26.67           46.67
+
+
+  The three averages sum to 100. Adding the twins gives 26.67 + 26.67 = 53.33.
+
+  Owen: only orders where A and B stay together. The orders A,C,B and B,C,A put C
+  between the twins, so Owen drops them. Four orders remain: A,B,C; B,A,C; C,A,B; C,B,A.
+
+       A: (30 + 10 + 30 + 30) / 4 = 25. B: (10 + 30 + 30 + 30) / 4 = 25. C: (60 + 60 + 40 + 40) / 4 =
+       50.
+       The twins together get 25 + 25 = 50.
+
+  Check against the block-level game. Treat the twin block as one player worth 40 alone, C
+  worth 40 alone, and both worth 100. Shapley for that two-player game gives the twin block
+  ½·40 + ½·(100 − 40) = 50. This matches the Owen total for the twins, which is Owen's
+  quotient efficiency property: the members of a coalition together receive exactly what
+  the coalition would get as a single player.
+
+  The lesson. Summing ordinary Shapley values over the twins gave 53.33. The true coalition
+  value is 50. They differ because the two concepts interact (the 20 synergy gets split
+  differently). If there were no synergy, so v(A,B,C) = 80, both methods give the twins 40.
+  So:
+
+       For a model that is additive across coalitions (an EBM with interactions = 0), summing
+       ordinary attributions inside a coalition equals the Owen coalition value exactly.
+       For tree ensembles with interactions between concepts, the sum is an approximation.
+       The original documents called it the Owen value; call it a coalition-sum attribution
+       instead.
+
+
+
+
+                                                                                                 Page 26 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  5.3 The formula, for reference. For feature j in coalition C_k of size c, with M coalitions, Q
+  any set of other coalitions (q of them), S any set of other members of C_k (s of them), and
+  U(Q) the union of the coalitions in Q:
+
+  Owen value of j = Sum over Q and S of [ q!(M − q − 1)!/M! ] × [ s!(c − s − 1)!/c! ] × ( v(U(Q) ∪ S
+  ∪ {j}) − v(U(Q) ∪ S) ).
+
+  The first bracket averages over the order in which coalitions arrive; the second averages
+  over the order of members inside the coalition. The Shapley value uses a single bracket
+  over all features.
+
+  5.4 What we actually compute. For borrower x, add up the explainer's credit over the
+  coalition: Φ_m(x) = sum of φ_j(x) for j in C_m. The coalition's global importance is the
+  average over N borrowers of the absolute value of that sum:
+
+  I(C_m) = (1/N) × Sum over borrowers of abs( Φ_m(x) ).
+
+  5.5 Why the absolute value goes outside the sum. Suppose a twin pair receives φ_1 =
+  +5.0 and φ_2 = −4.8 on some borrower, the classic cancellation when two near-identical
+  features are fitted together. Taking absolute values first gives 9.8 and suggests a huge
+  concept. The actual net push of the concept on the prediction is abs(5.0 − 4.8) = 0.2.
+  Caveat: a coalition may hold forces that genuinely oppose each other and offset on some
+  borrowers. So report the sum of absolute values as a sensitivity check beside the net
+  version.
+
+  5.6 The twin-feature paradox in numbers (invented). Features x_1 and x_2 are twin
+  delinquency counts (correlation 0.92) and x_3 is income. The true signal is 60%
+  delinquency and 40% income.
+
+
+                       x_1        x_2         x_3        Feature ranking Delinquency coalition Income coalition
+
+    Explainer 1        0.32       0.28        0.40       x_3, x_1, x_2   0.60                  0.40
+
+    Explainer 2 0.15              0.45        0.40       x_2, x_3, x_1   0.60                  0.40
+
+
+       At feature level the explainers disagree. Count agreeing and disagreeing pairs: x_1 vs
+       x_2 is reversed, x_1 vs x_3 agrees, x_2 vs x_3 is reversed. Kendall τ = (1 agreeing − 2
+       reversed) / 3 = −1/3. The top-1 features are different, so Overlap@1 = 0.
+       At coalition level both explainers say delinquency (0.60) beats income (0.40), so τ = 1
+       and Overlap@1 = 1.
+
+
+
+
+                                                                                                                  Page 27 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  5.7 A warning about chance. With only 2 items, any two rankings agree about half the
+  time on the top item by luck. Coalition lists are shorter than feature lists, so part of any
+  improvement is automatic. Concept 7 shows how to subtract that chance level.
+
+  What this means for the paper. Use “coalition-sum attribution”. State that it equals the
+  Owen coalition value for models additive across coalitions and approximates it otherwise.
+  Cite Owen (1977) for the idea and groupShapley (Jullum et al. 2021) for the exact grouped
+  computation.
+
+
+  Concept 6. Building the consensus: weighted rank fusion and one representative
+  per concept
+  6.1 The goal. We have several explainers, each producing its own ranking. We want one
+  ranking of concepts we can trust, then K concrete features, one per top concept, to feed
+  a compact model. Two decisions follow: how to merge rankings (Stage 1) and how to pick a
+  representative inside a concept (Stage 2).
+
+  6.2 Reciprocal rank fusion (RRF) by hand. Each explainer gives a rank r to each item. An
+  item's fused score is the sum, over explainers, of w / (k0 + r), where w is the explainer's
+  weight and k0 is a smoothing constant. A high rank (small r) gives a bigger term. Three
+  explainers with equal weights 1/3 rank four coalitions:
+
+
+    Coalition Rank by explainer 1 Explainer 2 Explainer 3 Fused score, k0 = 60 Fused score, k0 = 1
+
+    C1              1                             2          1   0.01631        0.4444
+
+    C2              2                             1          3   0.01613        0.3611
+
+    C3              3                             3          2   0.01596        0.2778
+
+    C4              4                             4          4   0.01563        0.2000
+
+
+  Example calculation, C1 with k0 = 60: (1/3) × (1/61 + 1/62 + 1/61) = (1/3) × 0.04892 = 0.01631.
+  With k0 = 1: (1/3) × (1/2 + 1/3 + 1/2) = 0.4444.
+
+  Both settings give the same order here, C1, C2, C3, C4. The difference is spread. With k0 =
+  60 the four scores differ by only about 4%, because 1/61 and 1/64 are nearly equal. RRF
+  with k0 = 60 was designed for ranking thousands of documents. With only 5 to 15
+  coalitions, a small k0 such as 1 to 10 makes rank differences matter more. That is why the
+  sensitivity study sweeps k0.
+
+  6.3 Why weight the explainers. Some explainers may point at features the model barely
+  uses. A faithfulness test checks this. For each explainer, set its top-k features to typical
+  (median) values and measure how much the model's prediction changes. A big change
+
+
+
+                                                                                                     Page 28 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  means the explainer found features that matter. This is the prediction gap on important
+  features (PGI). Invented numbers: explainer 1 changes predictions by 0.12 on average,
+  explainer 2 by 0.05, explainer 3 by 0.13. Weights are these divided by their total 0.30:
+
+
+                            PGI         Weight
+
+     Explainer 1            0.12        0.40
+
+     Explainer 2            0.05        0.17
+
+     Explainer 3            0.13        0.43
+
+
+  Effect on the fusion above, using weights 0.45, 0.10, 0.45 and k0 = 60: C1 scores 0.01637
+  and C2 scores 0.01604, so the gap between them widens because explainer 2, the only
+  one that preferred C2, now counts for little. Equal weights (w = 1/E) are the unweighted
+  ablation.
+
+  ⚠️ Masking a single twin leaves the other intact, so feature-level PGI can understate a
+  concept. Also try masking whole coalitions.
+
+  6.4 Stage 2: picking one feature inside each winning coalition. Rank the coalition's
+  members by each explainer's mean absolute credit, fuse those ranks the same way, then
+  multiply by the member's centrality, its average absolute correlation with the other
+  members. The member with the highest product is the medoid representative: important
+  and typical of its group.
+
+  Example coalition {x1, x2, x3} with pairwise correlations x1–x2 0.90, x1–x3 0.80, x2–x3 0.85.
+  Two explainers, weights 0.5 each, both rank the members x1, x2, x3. With k0 = 60:
+
+
+     Member             Fused rank score                 Centrality                    Product
+
+     x1                 1/61 = 0.016393                  (1 + 0.90 + 0.80)/3 = 0.900   0.014754
+
+     x2                 1/62 = 0.016129                  (0.90 + 1 + 0.85)/3 = 0.917   0.014785
+
+     x3                 1/63 = 0.015873                  (0.80 + 0.85 + 1)/3 = 0.883   0.014021
+
+
+  x2 wins even though both explainers ranked x1 first, because x2 is more central. The
+  margin is tiny (0.00003), a reminder that the choice inside a coalition can be fragile.
+  Report how often the selected member changes across bootstrap resamples.
+
+
+
+
+                                                                                                  Page 29 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  6.5 When K exceeds the number of coalitions. There is one representative per coalition,
+  so the method returns at most M features. With 23 raw features and ρ_max = 0.7, M is
+  probably well below 20, so budgets of 15 or 20 may be unreachable. Either lower ρ_max so
+  there are more coalitions, or fill the remaining slots with the next-best member of each
+  coalition in fused order and drop any feature that pushes max VIF above 5. State which
+  you did. Measure M first.
+
+  6.6 The whole selection in one paragraph. Find coalitions on training data. For each
+  explainer, compute each coalition's importance and rank the coalitions. Fuse the rankings
+  with faithfulness weights. Keep the top K coalitions. In each, pick the medoid. The result
+  S_K* has K features, each standing for a distinct concept.
+
+  What this means for the paper. Compare this against naive feature-level RRF (the
+  BioMark-style baseline), which has no coalition step and so can fill the budget with three
+  copies of the same concept. The measured VIF and the student's PR-AUC at small K are
+  the evidence.
+
+
+  Concept 7. Measuring agreement and sign violations
+  Two questions need numbers. Do two explainers agree on which features or concepts
+  matter? And does an explanation ever contradict what finance tells us must be true?
+
+  7.1 Agreement between two rankings. Compute each metric twice: on the d raw features
+  and on the M coalitions.
+
+       Overlap@k. The share of the top k that both lists share. Top 3 of list A is {a, b, c}; top 3
+       of list B is {b, a, g}. They share a and b, so Overlap@3 = 2/3 = 0.667. Simple, but it ignores
+       order inside the top k.
+       Kendall τ. Look at every pair of items and ask whether both lists order the pair the
+       same way. Lists (a, b, c, d) and (b, a, c, d) have 6 pairs; 5 are ordered the same and 1 (a
+       versus b) is reversed. τ = (5 − 1) / 6 = 0.667. It weighs a swap at the bottom as much as a
+       swap at the top.
+       Rank-biased overlap (RBO). Like Overlap, but it gives the top ranks more weight,
+       controlled by p (0.85 puts about half the weight on ranks 1 to 4 or 5). The version to use
+       for finite lists is
+
+  RBO_ext = (X_l / l) · p^l + ((1 − p) / p) · Sum over d = 1..l of (X_d / d) · p^d,
+
+  where X_d is the number of items the two lists share within their top d, and l is the list
+  length.
+
+  RBO_ext by hand. Lists (a, b, c) and (a, c, b), p = 0.85.
+
+
+
+                                                                                              Page 30 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Depth d           Shared in top d (X_d)                 X_d / d   p^d      Term (X_d / d) × p^d
+
+     1                 1                                     1.000     0.8500   0.8500
+
+     2                 1                                     0.500     0.7225   0.3613
+
+     3                 3                                     1.000     0.6141   0.6141
+
+
+  The terms sum to 1.8254. Multiply by (1 − p) / p = 0.1765 to get 0.3221. Add the tail term
+  (X_3 / 3) × p^3 = 0.6141. RBO_ext = 0.936. The truncated formula in the original code stops
+  at 0.3221. Even two identical lists of length 3 would score only 1 − 0.85^3 = 0.386 under the
+  truncated version, but exactly 1 under RBO_ext. Because coalition lists are shorter than
+  feature lists, the truncated version would have penalised the coalition level unfairly.
+
+  Subtracting luck. If you rank 23 items twice at random, the expected Overlap@5 is 5 / 23 =
+  0.22. Rank 10 items twice and it is 5 / 10 = 0.50. Agreement at the coalition level starts
+  higher for free. So simulate: draw 1,000 pairs of random rankings at the same list length,
+  compute each metric, and report observed minus null average. Only the gain beyond
+  chance counts as evidence.
+
+  7.2 Sign conflicts (ESCR). Two explainers can agree a feature matters yet disagree on
+  direction: explainer A gives utilization +0.30 (raises risk) and explainer B gives −0.10. The
+  explanation sign conflict rate is the share of top-k features whose signs differ between
+  two explainers on the same borrower. Convert LIME's slope to a contribution (slope ×
+  (value − reference)) first, or the signs are not comparable with SHAP. Write the exact
+  definition in your paper; Stow (2026) is a thin source for it.
+
+  7.3 Economic sign violations (ESVR). Finance gives each feature a known direction s_j:
+  more utilization, more inquiries and more delinquencies raise risk (s = +1); longer clean
+  history lowers it (s = −1). A violation is an explanation saying the opposite: that a
+  borrower's unusually high utilization reduced their risk.
+
+  Why the reference point matters. Suppose utilization has median 40%, and the borrower
+  is at 45%, above the median. The model's utilization curve is increasing, so it is monotone.
+  Its values: f_util(40%) = 0.2 and f_util(45%) = 0.3. A few borrowers with very high
+  utilization pull the curve's average up to 0.5.
+
+         Measured against the average: φ = 0.3 − 0.5 = −0.2. Above-median utilization appears
+         to lower risk. It looks like a violation, yet the model is perfectly monotone.
+         Measured against the median: φ = 0.3 − 0.2 = +0.1. No violation.
+
+
+
+
+                                                                                                       Page 31 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  So define the audit with a median reference. Let m be the median borrower and u = s_j ×
+  (x_j − m_j), the displacement in the risky direction. Let φ_j be the attribution measured
+  from m, positive when it raises risk. A violation is u × φ_j < 0. ESVR is violations divided by
+  pairs tested.
+
+  Proposition (zero violations). If the model is monotone in every constrained feature,
+  ESVR is 0 under median-reference SHAP.
+
+  Why. The SHAP value for j is a weighted average of terms, each comparing the model on
+  two inputs that differ only in feature j (the borrower's x_j against the median m_j). If the
+  model never decreases when x_j moves toward risk, each term has the sign of u or is zero,
+  so the weighted average cannot have the opposite sign. For an additive EBM there is a
+  single term, f_j(x_j) − f_j(m_j).
+
+  An unconstrained model with a noisy pocket can break this. If its curve dips so that a
+  borrower at 82% utilization gets φ = −0.1 against the median, that is a violation. The claim
+  in the originals that unconstrained models commit 8–22% violations is a hypothesis until
+  you measure it.
+
+  7.4 Stability. Retrain the model on bootstrap resamples and compute the RBO between
+  the top-K lists from different resamples. High values mean the explanation does not
+  depend on which rows the model happened to see.
+
+  What this means for the paper. Report agreement as observed minus chance, using
+  RBO_ext. State the ESVR baseline whenever you quote an ESVR figure. Use the zero-
+  violation proposition as a sanity check on your implementation: if a monotone model
+  shows violations under median-reference attributions, you have a bug.
+
+
+  Concept 8. Monotonicity: forcing the model to respect common sense
+  8.1 What it means. A model is monotone in a feature if moving that feature one way, with
+  everything else held fixed, can never move the prediction the wrong way. For credit risk,
+  more revolving utilization can never lower predicted risk (direction s = +1); a longer time
+  since last delinquency can never raise it (s = −1). A feature with s = 0 is left free. “Partially
+  monotone” means monotone in the constrained features only.
+
+  8.2 Why unconstrained trees break it. Trees fit whatever the training rows say. Imagine
+  the model's utilization curve, in six bins from low to high utilization, comes out as risk
+  contributions
+
+  0.10, 0.40, 0.30, 0.60, 0.50, 0.90.
+
+
+
+
+                                                                                              Page 32 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  The third bin (0.30) is lower than the second (0.40), and the fifth (0.50) is lower than the
+  fourth (0.60). Those dips are pockets, probably caused by a handful of noisy rows. A
+  borrower in bin 3 is told that having more utilization than a bin-2 borrower made them
+  safer. SHAP or LIME would faithfully report that. A counterfactual optimiser would love it:
+  the nearest way to look less risky is to step into a dip.
+
+  8.3 The repair by hand (pool adjacent violators). Find neighbours that break the order,
+  replace both by their average, and repeat until the sequence never decreases. Equal
+  weights here (in practice bins are weighted by their row counts).
+
+   1. 0.40 then 0.30 is a violation. Average = 0.35. The sequence is now 0.10, 0.35, 0.35, 0.60,
+       0.50, 0.90.
+   2. 0.60 then 0.50 is a violation. Average = 0.55. The sequence is now 0.10, 0.35, 0.35, 0.55,
+      0.55, 0.90.
+   3. No decreases remain.
+
+  This is the projection the EBM's monotonize step performs on each shape function. It
+  changes the curve as little as the order requirement allows.
+
+  8.4 How boosted trees enforce it. At a split on a feature with s = +1, the builder requires
+  every leaf value in the left child (lower feature values) to be no higher than every leaf
+  value in the right child. A sum of trees that each respect this is monotone. The sigmoid is
+  increasing, so the probability is monotone too. In code: LightGBM and XGBoost take a
+   monotone_constraints list with +1, −1 or 0 for each feature.
+
+  8.5 How the EBM does it. Use interactions = 0, fit, then make each constrained shape
+  function monotone ( monotonize , an isotonic projection; a monotone_constraints
+  argument also exists). Pair terms f_ij(x_i, x_j) are not constrained this way, which is why
+  they are switched off. Always plot every shape function afterward. The
+   monotone_violation_rate helper in Part 7 sweeps one feature and counts borrowers
+  whose predicted risk moves the wrong way.
+
+  8.6 Why monotonicity helps recourse. The acceptance region is the set of feature values
+  with risk at or below the threshold. Consider a borrower at utilization 82% who is
+  rejected.
+
+       Unconstrained model: the acceptance region has an island at utilization 78–82% (a
+       pocket). The nearest accepted point is 80%, which costs only 2 points. DiCE-style
+       search happily returns it. After the bank retrains next month, the island vanishes with
+       the noisy rows that created it, and the borrower is rejected again.
+
+
+
+
+                                                                                            Page 33 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+       Monotone model: if 45% is accepted, then so is every lower value. The only accepted
+       points lie beyond a clean boundary, say 45%. The recourse costs 37 points but is real.
+
+  Proposition 2 (no islands along constrained coordinates). Let I be the constrained
+  features. If a point x' is accepted and x'' agrees with x' outside I but is no riskier in every
+  constrained feature, then x'' is also accepted. Reason: change one constrained coordinate
+  at a time toward lower risk; the model never increases. Features with s = 0 can still hold
+  islands.
+
+  Proposition 2′ (why a margin helps). Suppose retraining moves each score near the
+  counterfactual by at most δ. If the counterfactual's risk is at most τ − δ, it is still accepted
+  after retraining. This is trivial, and it is the real mechanism. Monotonicity removes
+  pockets, which should make δ smaller and smoother; the margin absorbs what remains.
+  Whether δ really is smaller is a question for Table 4, not an assumption.
+
+  8.7 Honest limits. Monotone directions are domain assumptions: take them from the
+  official data dictionary and document them. A constrained model can fit slightly worse,
+  and Table 3 measures that price. Special codes such as −9 sit at the low end of a numeric
+  column and would be treated as the best (or worst) value, so recode them first.
+  Monotonicity is a property of the model you have today; it does not by itself say anything
+  about next month's model.
+
+  What this means for the paper. State Propositions 2 and 2′ exactly as above and claim
+  durability only to the extent that Table 4 supports it.
+
+
+  Concept 9. Recourse and the safety margin
+  9.1 What a counterfactual is. A counterfactual explanation answers: what is the smallest
+  change to this applicant that would flip the decision? Example: risk 0.62 against a
+  threshold τ = 0.50, with utilization 82% and 3 inquiries. Lowering utilization to 45% might
+  bring risk to 0.49. That new point is the counterfactual, and the change is the recourse.
+
+  9.2 Rules for what may change. Features fall into groups. Immutable: age, credit history
+  already written. Directional: a delinquency count can only stay or fall, never fall instantly.
+  Time-gated: inquiries and months since delinquency improve only as time passes.
+  Actionable: utilization can be paid down. The set of allowed changes is written A(x).
+  Search only inside A(x).
+
+  9.3 Measuring effort with MAD. Features have different units, so each change is divided
+  by a scale before adding up. The median absolute deviation (MAD) is the median of how
+  far values sit from their median. Utilization values 20, 30, 40, 50, 90: median 40; distances
+  from it are 20, 10, 0, 10, 50; the median of those is 10. Cutting utilization from 82% to 45%
+
+
+                                                                                            Page 34 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  is 37 points, or 3.7 MAD units. If a feature's MAD is 0 (a count that is mostly zero), use its
+  mean absolute deviation instead. Cost is the sum over changed features: add a 10-point
+  cut in installment burden with scale 5, which costs 2.0, and the total is 5.7.
+
+  9.4 Three ways recourse fails after retraining.
+
+   1. Boundary hugging. The search returns a point at 0.499 when τ = 0.500. Next month's
+      model moves scores by +0.03 and the applicant is at 0.529, rejected.
+   2. Pockets. The search finds an island of acceptance created by noisy rows (Concept 8).
+         Retraining removes it.
+   3. Twin mismatch. The search lowers utilization and leaves its twin balance-to-limit
+      untouched. No real borrower looks like that, and a retrained model may rely on the twin
+         you did not change.
+
+  9.5 Measuring durability. Temporal recourse validity (TRV) is the share of counterfactuals
+  still approved by the model retrained Δt months later. Five applicants receive
+  counterfactuals; under the retrained model four are approved, so TRV = 4 / 5 = 80%. Two
+  things must be reported with it. Coverage: for how many rejected applicants did a
+  counterfactual exist at all? The threshold rule: if the bank resets τ each month to hold its
+  approval rate constant, the same score can pass or fail depending on the new τ. State the
+  rule, and report at least two.
+
+  9.6 The safety margin, by hand. Idea: do not stop at the boundary; aim for a score
+  comfortably below it, with the cushion sized by how much scores really moved in past
+  retrainings.
+
+  Step 1. Take applicants near the boundary and compare their threshold-relative score
+  under two consecutive retrained models. Ten shifts (positive means riskier): +0.02, −0.01,
+  +0.04, 0.00, +0.03, +0.01, −0.02, +0.05, +0.02, +0.01.
+
+  Step 2. Only increases in risk hurt, so keep the positive part: 0.02, 0, 0.04, 0, 0.03, 0.01, 0,
+  0.05, 0.02, 0.01. Sorted: 0, 0, 0, 0.01, 0.01, 0.02, 0.02, 0.03, 0.04, 0.05.
+
+  Step 3. Pick the level α. The cushion q̂ is the ⌈(n + 1)(1 − α)⌉-th smallest of the n values.
+
+
+     α           ⌈(10 + 1)(1 − α)⌉            Cushion q̂     Safe threshold τ − q̂
+
+     0.10        10                           0.05           0.45
+
+     0.20        9                            0.04           0.46
+
+
+
+
+                                                                                              Page 35 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  Step 4. Accept a counterfactual only if its risk is at most the safe threshold. The point at
+  0.49 fails at α = 0.10; utilization 38% giving 0.44 passes. After a +0.03 shift, 0.49 becomes
+  0.52 (rejected) while 0.44 becomes 0.47 (still approved).
+
+  What the margin does and does not promise. If future shifts behave like past shifts, a
+  counterfactual that clears the margin should fail at the boundary with probability roughly
+  α. If the economy changes and shifts become larger, the guarantee is gone. That is why
+  the temporal experiment on real months is essential. Do not call this a formal conformal
+  guarantee for retrained models. On a static dataset with one training window, obtain
+  shifts by retraining on bootstrap resamples and call it a bootstrap-dispersion margin. If
+  the safe threshold falls below the lowest risk any allowed change can reach, no safe
+  recourse exists; count those cases as failures.
+
+  9.7 Choosing among candidates with the manifold distance. The generator (DiCE)
+  returns several valid candidates. Prefer the one that looks like a real approved borrower.
+  For each candidate, find its 5 nearest approved borrowers in the calibration set
+  (measured in MAD units) and average the distances: d_KNN. Choose the candidate with
+  the lowest cost + β × d_KNN. Example with β = 0.5: candidate P costs 4.0 and has d_KNN
+  0.8, total 4.4; candidate Q costs 4.0 but changes only one twin, so d_KNN is 3.5, total 5.75.
+  P wins. In live lending, labels exist only for accepted loans, which complicates this (reject
+  inference); the two credit datasets have all labels.
+
+  9.8 Practicalities. DiCE flips a class at 0.5; wrap the model so its output crosses 0.5
+  exactly at the safe threshold (Part 7, ThresholdShifted). Generate more candidates than
+  needed and filter afterward. Freeze immutable columns. Never fall back to an unsafe
+  candidate; count the applicant as a coverage failure instead.
+
+  What this means for the paper. Present three quantities together for every pipeline:
+  validity after retraining, coverage, and cost (plus manifold distance). A method that
+  achieves high validity by finding recourse for only a few easy applicants has not solved
+  the problem.
+
+
+  Concept 10. Statistics reviewers accept
+  10.1 Two traps. First, cross-validation folds share training rows, so their scores are
+  correlated, and an ordinary t-test treats them as independent and finds differences that
+  are not there. Second, with several baselines some comparisons look significant by luck.
+  Test nine baselines at 5% each and the chance of at least one false alarm is 1 − 0.95⁹ =
+  37%. The tools below handle both.
+
+
+
+
+                                                                                          Page 36 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  10.2 Friedman test by hand. Use it when you compare k methods across N datasets or
+  windows. Rank the methods within each dataset (1 is best), then average the ranks. Three
+  methods on four datasets:
+
+
+     Dataset                    A           B           C
+
+     D1                         1           2           3
+
+     D2                         1           3           2
+
+     D3                         1           2           3
+
+     D4                         2           1           3
+
+     Average rank               1.25        2.00        2.75
+
+
+  Formula: χ² = [12N / (k(k + 1))] × [Sum of squared average ranks − k(k + 1)² / 4]. Here 12 × 4 /
+  (3 × 4) = 4. The squared ranks sum to 1.5625 + 4 + 7.5625 = 13.125. And 3 × 16 / 4 = 12. So χ² =
+  4 × (13.125 − 12) = 4.5.
+
+  The Iman–Davenport version, which Demšar recommends, is F = (N − 1) χ² / (N(k − 1) − χ²)
+  = 3 × 4.5 / (8 − 4.5) = 3.86, compared with an F distribution with 2 and 6 degrees of
+  freedom. The 5% critical value is about 5.14, so this result is not significant. Lesson: with
+  four datasets, even a consistent ordering is not enough. Plan for many windows or
+  datasets.
+
+  10.3 Holm correction by hand. After Friedman rejects, compare your method with each
+  baseline (Wilcoxon, below) and correct the p-values. Sort them from smallest. With m
+  comparisons, the i-th smallest is tested against α / (m − i + 1), and you stop at the first
+  failure.
+
+
+     Sorted p-values                    Thresholds for m =     Result
+                                        3
+
+     0.010, 0.020, 0.040                0.0167, 0.025, 0.050   All three rejected
+
+     0.020, 0.030,                      0.0167, 0.025, 0.050   First fails (0.020 > 0.0167), so stop: none
+     0.040                                                     rejected
+
+
+  The second row shows the price of testing several baselines: p-values all below 0.05 may
+  still not count.
+
+
+
+
+                                                                                                             Page 37 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  10.4 Wilcoxon signed-rank test, and why you need enough windows. For paired scores
+  (your method minus a baseline on each window), rank the absolute differences and add
+  the ranks of the positive ones and of the negative ones. If your method wins on all 6 of 6
+  windows, only one arrangement out of 2⁶ = 64 is that extreme, so the two-sided p is 2 / 64
+  = 0.031. With only 5 windows, even a clean sweep gives 2 / 32 = 0.0625, which can never
+  be below 0.05. After Holm over nine baselines you need far more. This limit drives how
+  many windows you must create.
+
+  10.5 Repeated 2-fold cross-validation (5×2) on static data. Five repetitions of 2-fold CV
+  give 10 scores, but they are correlated through shared rows. Corrected tests exist for
+  exactly this: Dietterich's 5×2 t, Alpaydın's 5×2 F, and the Nadeau–Bengio corrected
+  resampled t-test. The Nadeau–Bengio idea is to inflate the variance by the factor (1/J +
+  n_test / n_train) instead of 1/J. With J = 10 and equal halves the factor is 1.1, not 0.1, so a
+  naive t of 6.6 shrinks to about 2.0. That is the difference between a headline result and a
+  marginal one. For reference, let p_i^(j) be the difference in error between the two
+  methods on fold j of repetition i, p̄ _i the mean of its two folds, and s_i² = (p_i^(1) − p̄ _i)² +
+  (p_i^(2) − p̄ _i)². Dietterich: t = p_1^(1) / sqrt( (1/5) × Sum of s_i² ), with 5 degrees of
+  freedom. Alpaydın: F = Sum over i and j of (p_i^(j))² / ( 2 × Sum of s_i² ), with 10 and 5
+  degrees of freedom.
+
+  10.6 Limits you must state. Rolling windows share training months and are
+  autocorrelated, so p-values are optimistic. Add bootstrap confidence intervals over
+  borrowers and report effect sizes (for example the PR-AUC difference), not only p-values.
+
+  What this means for the paper. Use Friedman plus Holm-corrected Wilcoxon across
+  windows and datasets, corrected tests on static 5×2 splits, and say plainly how many
+  windows you have and what the smallest attainable p-value is.
+
+
+
+  Part 4. Algorithm 1 (corrected)
+  Inputs. Training window D_train(t); calibration window D_cal(t); test window D_test(t);
+  historical windows for the margin; later windows for evaluation. Feature set D = {1..d};
+  threshold ρ_max; budget K; RRF constant k0; monotonicity map s; margin level α;
+  candidate count N_cf = 5; manifold weight β.
+
+  Phase 1. Concept coalitions.
+
+   1. Compute the Spearman matrix on D_train only.
+   2. Set D(j, l) = 1 − abs(ρ_S(j, l)).
+   3. Run complete-linkage clustering and cut at γ = 1 − ρ_max. Record M.
+
+
+                                                                                                 Page 38 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  Phase 2. Consensus and selection.
+
+   4. Fit the reference models (GBDT, EBM) on D_train. Extract the explainers on the same
+       model for the disagreement audit, and per-instance matrices on D_cal.
+   5. Compute faithfulness weights w_e from PGI on D_cal.
+   6. For each coalition and explainer, compute the coalition-sum importance I^(e)(C_m);
+      use grouped PFI for permutation importance.
+   7. Compute RRF(C_m) = Σ_e w_e / (k0 + r_e(C_m)); keep the top K coalitions (apply the
+       K > M rule if needed).
+   8. Within each, choose the medoid j*. Output S_K*. Measure and report the VIF of S_K*.
+
+  Phase 3. Monotone students.
+
+   9. Restrict to S_K* and the matching sub-vector of s.
+ 10. Train monotone LightGBM and an EBM with interactions = 0, made monotone, on
+     D_train.
+
+  Phase 4. Safe recourse.
+
+ 11. Estimate q̂ _α from historical retraining shifts and set τ_safe = τ − q̂ _α.
+ 12. For each rejected applicant in D_test, generate candidates with DiCE under A(x), keep
+     those with f_t(c) ≤ τ_safe, and choose x_cf* by the cost-plus-manifold rule. Log
+       applicants for whom none exists.
+ 13. Return S_K*, glass-box explanations, and x_cf*.
+
+  Leakage rules. Fit clustering, models and margins only on data before the test window.
+  D_cal is used both for selection (steps 4–8) and, in static experiments, for calibration; if
+  data allow, split it in two. Nested cross-validation must repeat Phases 1–3 inside every
+  outer fold.
+
+
+  4.1 A toy run of Algorithm 1, end to end
+  All numbers here are invented to show the mechanics. Six features and one rejected
+  applicant.
+
+
+     Feature           Meaning                               Direction s
+
+     U1                Revolving utilization                 +1
+
+     U2                Balance-to-limit ratio                +1
+
+     Q1                Inquiries in the last 6 months        +1
+
+
+
+                                                                                           Page 39 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Feature           Meaning                                           Direction s
+
+     Q2                Inquiries excluding the last 7 days               +1
+
+     D1                Months since last delinquency                     −1
+
+     H1                Age of oldest account                             −1
+
+
+  Phase 1: coalitions. On training data, abs(ρ_S) is 0.93 for U1–U2 and 0.88 for Q1–Q2; every
+  other pair is below 0.30. The distances 1 − abs(ρ_S) are 0.07 and 0.12 for those two pairs
+  and at least 0.70 for the rest. Complete linkage cut at γ = 0.30 (ρ_max = 0.70) gives four
+  coalitions: Utilization {U1, U2}, Inquiries {Q1, Q2}, Delinquency {D1}, History {H1}. So M =
+  4.
+
+  Phase 2: consensus. Three explainers rank the four coalitions by their coalition-sum
+  importance.
+
+
+     Coalition                 Rank by                       Explainer    Explainer    Fused score (equal weights,
+                               explainer 1                   2            3            k0 = 10)
+
+     Utilization               1                             1            2            0.0884
+
+     Delinquency               2                             3            1            0.0837
+
+     Inquiries                 3                             2            3            0.0791
+
+     History                   4                             4            4            0.0714
+
+
+  Example: Utilization = (1/11 + 1/11 + 1/12) / 3 = 0.0884. With budget K = 3, keep Utilization,
+  Delinquency and Inquiries.
+
+  Medoid inside each kept coalition:
+
+       Utilization: all explainers rank U1 above U2, and both have the same centrality (0.965),
+       so U1 wins.
+       Inquiries: explainer 1 puts Q2 first, explainers 2 and 3 put Q1 first. Q1 scores (1/12 + 1/11
+       + 1/11) / 3 = 0.0884 and Q2 scores (1/11 + 1/12 + 1/12) / 3 = 0.0859. Centrality is equal
+       (0.94), so Q1 wins.
+       Delinquency: a single member, D1.
+
+  Selected set: S_3 = {U1, D1, Q1}. Suppose the pairwise correlations among them are 0.20
+  (U1–D1), 0.25 (U1–Q1) and 0.15 (D1–Q1). Then R² for U1 on the other two is (0.04 + 0.0625 −
+  2×0.20×0.25×0.15) / (1 − 0.0225) = 0.0895, and VIF = 1 / (1 − 0.0895) = 1.10. By contrast, if
+
+
+
+                                                                                                               Page 40 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  naive feature-level fusion had picked U1, U2 and D1, the U1–U2 pair alone gives VIF = 1 / (1 −
+  0.93²) = 7.4.
+
+  Phase 3: monotone student. Train an EBM with interactions = 0 on S_3 with directions (+1,
+  −1, +1) and confirm each shape function is non-decreasing (or non-increasing). The
+  applicant scores risk 0.62 and is rejected at τ = 0.50. Measured from the median borrower,
+  the credits are utilization +0.45, inquiries +0.20 and delinquency history −0.10 (it helped).
+  The notice would list utilization and inquiries as principal reasons.
+
+  Phase 4: safe recourse. From past retrainings the margin is q̂ = 0.05, so the safe threshold
+  is 0.45. DiCE returns five candidates. Utilization has scale 10 points; D1 is time-gated and
+  has scale 6 months. With β = 0.5:
+
+
+    Candidate Change                                         Risk   Passes   Passes   Cost   d_KNN Cost + 0.5 ×
+                                                             now    0.50?    0.45?                 d_KNN
+
+    c1                Utilization 82 to 60%                  0.52   No       No       2.2    n/a    n/a
+
+    c2                Utilization 82 to 45%                  0.49   Yes      No       3.7    n/a    n/a
+
+    c3                Utilization 82 to 38%                  0.44   Yes      Yes      4.4    0.9    4.85
+
+    c4                Utilization to 38% and D1              0.40   Yes      Yes      5.4    1.1    5.95
+                      from 6 to 12 months
+
+    c5                Utilization 82 to 20%                  0.36   Yes      Yes      6.2    3.0    7.70
+
+
+  Only c3, c4 and c5 clear the safe threshold. c3 has the lowest combined score, so it is the
+  recourse: cut utilization to about 38%. Candidate c5 is costly and unusual (few real
+  approved borrowers have utilization that low in this segment, hence the large d_KNN).
+
+  Next month the bank retrains and every score rises by 0.03. The chosen c3 moves from
+  0.44 to 0.47 and is still approved. The tempting c2 would have moved from 0.49 to 0.52 and
+  been rejected. This is the whole story of the paper in one example: de-redundant features
+  give a clean reason list, monotonicity makes the boundary sensible, the margin absorbs
+  the shift.
+
+
+
+  Part 5. Datasets, monotonicity maps and splits
+  Rules for all three datasets. Fit clustering, selection, models and margins on training data
+  only. Never use sex or marital status in credit models. Keep a written data card listing
+  every recoding decision.
+
+
+
+
+                                                                                                           Page 41 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  5.1 FICO HELOC (credit bureau features)
+       Size. 10,459 raw rows. 9,871 rows remain after dropping rows where every value is −9
+       (the OpenML cleaned version). 23 features; target RiskPerformance (Bad or Good),
+       about 52% bad ( ⚠️ recompute after cleaning).
+       Special codes −9, −8 and −7 (roughly: no bureau record, no usable trades or inquiries,
+       condition not met such as no delinquency; ⚠️ confirm in the data dictionary). Left as
+       numbers, they sit at the low end of each column and break monotone constraints.
+       Encode them as missing plus an indicator, or for months-since-delinquency features
+       impute a large value at the low-risk end. Document the choice.
+                                      ⚠️
+       The 23 columns ( from memory; compare with your CSV header):
+       ExternalRiskEstimate, MSinceOldestTradeOpen, MSinceMostRecentTradeOpen,
+       AverageMInFile, NumSatisfactoryTrades, NumTrades60Ever2DerogPubRec,
+       NumTrades90Ever2DerogPubRec, PercentTradesNeverDelq, MSinceMostRecentDelq,
+       MaxDelq2PublicRecLast12M, MaxDelqEver, NumTotalTrades,
+       NumTradesOpeninLast12M, PercentInstallTrades, MSinceMostRecentInqexcl7days,
+       NumInqLast6M, NumInqLast6Mexcl7days, NetFractionRevolvingBurden,
+       NetFractionInstallBurden, NumRevolvingTradesWBalance,
+       NumInstallTradesWBalance, NumBank2NatlTradesWHighUtilization,
+       PercentTradesWBalance.
+                                                   ⚠️
+       Expected twin families ( confirm by clustering): delinquency
+       (PercentTradesNeverDelq, MaxDelq2PublicRecLast12M, MaxDelqEver,
+       MSinceMostRecentDelq), inquiries (NumInqLast6M, NumInqLast6Mexcl7days,
+       MSinceMostRecentInqexcl7days), utilization (NetFractionRevolvingBurden and
+       related).
+       Monotonicity. Take the directions from the monotonicity column in FICO's official data
+       dictionary, not from this manual. Plausible directions: more utilization, more inquiries,
+       more derogatory trades raise risk; longer time since delinquency and higher
+       PercentTradesNeverDelq lower it. PercentInstallTrades and
+       NumRevolvingTradesWBalance are ambiguous, and the MaxDelq columns are ordinal
+       codes with irregular values, so recode before constraining.
+       Actionability. Behavioural and reducible: NetFractionRevolvingBurden,
+       NetFractionInstallBurden, NumBank2NatlTradesWHighUtilization. Time-gated
+       (improve only as time passes, or by avoiding new activity): inquiry counts, months
+       since delinquency. Immutable history: NumTrades60Ever2DerogPubRec,
+
+
+
+
+                                                                                            Page 42 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+       NumTrades90Ever2DerogPubRec, MSinceOldestTradeOpen, AverageMInFile.
+       ExternalRiskEstimate is itself a bureau risk score; consider excluding it or holding it out
+       as a benchmark.
+       Protocol. 5×2 cross-validation with an inner loop for tuning (5 repetitions of 2-fold; the
+       inner loop is what makes it nested). There is no real time axis, so simulate retraining
+       with bootstrap resamples or a covariate-shift split (for example by AverageMInFile
+       terciles). Label these results retraining-variance and covariate-shift robustness, not
+       temporal drift.
+
+  5×2 cross-validation in plain words. Cross-validation scores a model on rows it never
+  trained on. In 2-fold CV, split the data into two halves, train on half 1 and test on half 2,
+  then swap. Repeat the whole thing with 5 different random splits and you have 10 scores
+  (5 × 2). “Nested” adds an inner loop: inside each training half, a further split chooses the
+  hyperparameters, so the test half is never used for tuning. Everything in Phases 1–3 of
+  Algorithm 1 (clustering, selection, training) must run inside the training half only, repeated
+  in every split.
+
+
+  5.2 UCI Taiwan credit card default
+       Size. 30,000 rows, 23 features, 22.1% default.
+       Columns. LIMIT_BAL, SEX, EDUCATION, MARRIAGE, AGE, PAY_0 and PAY_2…PAY_6,
+       BILL_AMT1–6, PAY_AMT1–6.
+       Collinearity. BILL_AMT1–6 are strongly correlated (Pearson roughly 0.80–0.95). PAY
+       status columns are moderately correlated; PAY_AMT columns weakly.         ⚠️
+                                                                               Compute
+       Spearman yourself before claiming a VIF.
+       Monotonicity (needs care). LIMIT_BAL and PAY_AMT: risk-decreasing (−1). The
+       repayment-status columns code −1 (paid duly), 1 to 9 (months of delay), plus
+       undocumented −2 and 0. These codes are not ordered by risk, so a +1 constraint on the
+       raw column is questionable. Recode to months of delay, for example max(PAY_x, 0), or
+       to ordered categories first. A raw BILL_AMT direction is an assumption; prefer a
+       utilization ratio BILL_AMT / LIMIT_BAL with +1, or leave bills unconstrained and say so.
+       Protected attributes. Exclude SEX and MARRIAGE. Treat AGE and EDUCATION as
+       frozen controls and justify using them at all.
+       Protocol. 5×2 cross-validation for Tables 1–3. All six months of history are inside each
+       row, so there is no real temporal split; use bootstrap retraining for Table 4 and label it as
+       in 5.1.
+
+
+
+
+                                                                                             Page 43 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  5.3 Bank Account Fraud (BAF, base variant)
+        Size. 1,000,000 rows, 8 months (0–7), 30 features plus month and label, about 1.1%
+        fraud. The data are generated from a real bank-account-opening dataset, so describe
+        them as realistic, not raw. Protected attributes include age and income.
+        Do not discard negatives for evaluation. Weight classes during training, or train on a
+        subsample and evaluate on full months.
+        Rolling scheme (fixed window W = 4 months). Model M_τ trains on months τ−3 to τ.
+        Split month τ+1 into half A (selection and manifold reference) and half B (test);
+        retrained models exclude half B so test applicants are never in a later training set. Later
+        models M_(τ+1) on [τ−2, τ+1], M_(τ+2) on [τ−1, τ+2], M_(τ+3) on [τ, τ+3].
+        Origins. With eight months, τ = 3 and τ = 4 give all three horizons; τ = 5 gives two.
+        Expect few origins and low statistical power; say so.
+        Where recourse fits. Telling a suspected fraudster what to change is an evasion guide,
+        and Annex III does not treat fraud detection as credit scoring. Use BAF for Tables 1–3
+        and for drift analysis. If you run recourse on it, restrict to applicants flagged by the
+        model whose true label is legitimate (false positives), framed as reducing customer
+        friction. Put the main recourse results (Tables 4–5) on HELOC and Taiwan.
+
+  The rolling scheme, concretely. In every row, month τ+1 is cut in half. Half A is used for
+  selection and the manifold reference; half B is the test set of rejected applicants. Half B is
+  removed from every retrained model, so test applicants never appear in a later training
+  set.
+
+
+    Origin        Model Mτ trains on                     Recourse tested   Retrained models: Δt   Δt = 2      Δt = 3
+    τ             months                                 on                =1
+
+    3             0–3                                    Month 4, half B   Months 1–4             Months 2–   Months 3–6
+                                                                                                  5
+
+    4             1–4                                    Month 5, half B   Months 2–5             Months 3–   Months 4–7
+                                                                                                  6
+
+    5             2–5                                    Month 6, half B   Months 3–6             Months 4–   Not
+                                                                                                  7           available
+
+
+  Every model sees a four-month window (minus half B wherever the test month falls inside
+  it), so differences between models come from the passage of time, not from different
+  training sizes. The thing to notice: there are only two origins with all three horizons. Treat
+  results as case studies with wide uncertainty, and say so.
+
+
+
+
+                                                                                                                       Page 44 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  Part 6. Experiments, figures and work plan
+  Build the empty tables first, then script every cell. Every expected finding below is a
+  hypothesis.
+
+
+  6.1 The six tables
+  Table 1 (RQ1). Does coalition aggregation resolve disagreement? Pairs among TreeSHAP,
+  PartitionSHAP, grouped PFI, EBM and LIME-1k on all three datasets. Columns: Overlap@5,
+  τ, RBO_ext, each at feature level and coalition level, each minus its random-permutation
+  null, plus a bootstrap CI. Hypothesis: the gain survives chance correction. If it does not,
+  report that: it is a finding too.
+
+  Table 2 (RQ2). Compact students and multicollinearity. Ten rows: all features (upper
+  bound), random-K, L1 logistic filter, mRMR, TreeSHAP top-K, LIME top-K, PFI top-K, naive
+  feature-level RRF (BioMark-style), Bhatt aggregation, COMET-XAI. K ∈ {4, 5, 8, 10}.
+  Students: logistic scorecard, depth-4 tree, monotone EBM. Columns: max VIF, mean VIF,
+  PR-AUC, Recall@1% FPR, Recall@5% FPR, Brier, PGI, Holm-corrected p-value. Hypothesis:
+  naive methods give high VIF at small K; COMET-XAI lowers VIF without losing PR-AUC.
+
+  Table 3 (RQ3). Sign violations and the price of monotonicity. Rows: unconstrained
+  XGBoost with TreeSHAP; XGBoost with LIME; LightGBM with TreeSHAP; unconstrained
+  EBM; monotone LightGBM; monotone EBM, all on S_K*. Columns: PR-AUC, Recall@5%
+  FPR, Brier, ESCR@5, ESVR (median-reference baseline), bootstrap RBO stability.
+  Hypothesis: constrained models reach ESVR = 0 (proved) at a PR-AUC cost near zero; the
+  size of the unconstrained ESVR is unknown until measured.
+
+  Table 4 (RQ4). Out-of-time recourse survival. Six pipelines: (1) XGBoost on all features +
+  DiCE; (2) XGBoost on naive-RRF top-K + DiCE; (3) XGBoost on S_K* + DiCE; (4) monotone
+  LightGBM on S_K* + DiCE; (5) monotone EBM on S_K* + DiCE; (6) full COMET-XAI
+  (monotone EBM + margin + manifold selection). Add the 2×2 ablation monotone on or off
+  × margin on or off. Columns: coverage, validity at Δt = 0, 1, 2, 3, MAD cost, sparsity, KNN
+  distance. Report validity under two threshold rules.
+
+  Table 5 (RQ5). Safety-margin sweep. α ∈ {0 (no margin), 0.05, 0.10, 0.15, 0.20}: MAD cost
+  against TRV, with coverage so that failures to find recourse are visible.
+
+  Table 6 (RQ6). Sensitivity. ρ_max ∈ {0.5, …, 0.9}, k0 ∈ {1, 5, 10, 30, 60, 100}, K ∈ {4, 5, 8, 10},
+  linkage ∈ {complete, single, Ward}. The claims that results are insensitive to k0 and best
+  near ρ_max 0.65–0.75 are hypotheses.
+
+
+
+
+                                                                                               Page 45 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  6.2 The five figures
+   1. Diagnostic hook. Dendrogram beside an attribution heatmap, showing explainers
+      scattering credit across twins and agreeing at coalition level.
+   2. Budget curves. Student PR-AUC and max VIF against K for COMET-XAI, raw SHAP, raw
+       LIME, naive RRF and mRMR. Mark where K exceeds M.
+   3. Boundary geometry. Contours of revolving utilization against months since
+      delinquency at t and t+2, for unconstrained XGBoost and monotone EBM, with
+       recourse points overlaid.
+   4. Decay curves. TRV against Δt for the six pipelines.
+   5. Adverse action case card. One real rejected HELOC applicant: contradictory reasons
+       from raw explainers versus four coalition reasons plus a monotone recourse plan. Keep
+       it a research illustration, not a compliance template.
+
+  Save vector PDFs with embedded fonts; check the target venue's figure rules.
+
+
+  6.3 Six-week plan
+
+     Days           Work                                                   Output
+
+     1–4            Environment with pinned versions (numpy, pandas,       data_loader, data cards
+                    scikit-learn, scipy, xgboost, lightgbm, interpret,
+                    shap, lime, dice-ml, statsmodels, matplotlib);
+                    loaders; special-code handling; monotonicity and
+                    actionability maps; splitters
+
+     5–10           Coalition discovery; reference models; five            Table 1, Figure 1
+                    explainers; disagreement audit with null baselines
+
+     11–17          Subscale-RRF; baselines; VIF; students; ESVR           Tables 2–3, Figure 2
+
+     18–25          Recourse pipeline; 300–500 rejected applicants         Tables 4–5, Figures 3–4
+                    per window; retraining across horizons
+
+     26–30          Sensitivity sweeps; Friedman and Holm; case study      Table 6, Figure 5
+
+     31–42          Draft in the venue's LaTeX template; related work      Manuscript
+                    from Part 2; advisor review; final literature search
+                    before submission
+
+
+  Before submission, rerun a literature search for 2026 work, and reconfirm every item
+  marked ◐ in Part 2.
+
+
+
+                                                                                                     Page 46 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+  6.4 How to read the results: what supports the thesis, what contradicts it
+  Decide before running what each outcome would mean. A result that goes against you is
+  still a finding; write it up honestly.
+
+
+     Table        Question                            Result that           Result that         What you would
+                                                      supports the          contradicts it      then write
+                                                      thesis
+
+     1            Is disagreement                     Coalition-level       The gain            Disagreement is
+                  mostly twin-                        agreement beats       disappears once     mostly intrinsic or
+                  splitting?                          the random            chance is           due to LIME
+                                                      baseline by a clear   subtracted          instability; the
+                                                      margin, with a                            coalition story is
+                                                      confidence interval                       weaker
+                                                      excluding zero
+
+     2            Does de-                            Lower max VIF and     PR-AUC no           Present the VIF
+                  redundancy help                     equal or higher PR-   better than         reduction as an
+                  compact models?                     AUC and recall at     mRMR or the         interpretability
+                                                      small K than naive    best single         gain, not an
+                                                      RRF and single-       explainer           accuracy gain
+                                                      explainer top-K
+
+     3            Does                                Constrained           PR-AUC falls        A drop is the price
+                  monotonicity cost                   models match          clearly, or a       of monotonicity
+                  accuracy?                           unconstrained PR-     constrained         and should be
+                                                      AUC within noise      model shows         reported; ESVR
+                                                      and have ESVR of 0    ESVR above 0        above 0 for a
+                                                                                                constrained model
+                                                                                                means a bug,
+                                                                                                because the
+                                                                                                proposition says it
+                                                                                                cannot happen
+
+     4            Does durability                     Validity after        No gain, or gains   Structure alone
+                  improve across                      retraining rises      only because        does not buy
+                  the six pipelines?                  from pipeline 1 to    coverage            durability on these
+                                                      pipeline 6 while      collapses           data
+                                                      coverage stays
+                                                      high
+
+
+
+
+                                                                                                                Page 47 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Table        Question                            Result that           Result that         What you would
+                                                      supports the          contradicts it      then write
+                                                      thesis
+
+     5            What does the                       Validity rises with   Cost explodes or    Report the cost-
+                  margin cost?                        α for a modest rise   coverage falls      validity frontier and
+                                                      in cost               sharply             recommend a
+                                                                                                middle setting
+
+     6            Is the method                       Flat results across   Sensitive results   State it as a
+                  robust to its                       k0 and ρ_max                              limitation; tune only
+                  settings?                                                                     on calibration data
+
+
+  What the table columns mean.
+
+         Max VIF, mean VIF: how redundant the selected features are (Concept 4).
+         PGI: how faithful an explainer is to the model (Concept 6).
+         ESCR: share of sign disagreements between explainers; ESVR: share of explanations
+         that contradict known economics (Concept 7).
+         Recall at 1% or 5% FPR: share of bad cases caught when only that share of good
+         customers may be wrongly flagged (Concept 1).
+         Validity at Δt: share of recourse plans still approved after retraining Δt months later;
+         coverage: share of rejected applicants for whom a plan existed (Concept 9).
+         Cost: recourse effort in MAD units; sparsity: how many features the plan asks the
+         applicant to change (fewer is easier); off-manifold KNN distance: how unlike real
+         approved borrowers the plan is.
+
+  One habit. Every table needs an uncertainty estimate: a bootstrap confidence interval
+  over borrowers or windows, and the number of windows behind each cell. A bare mean
+  invites the reviewer's first question.
+
+
+
+  Part 7. Corrected reference code
+  This replaces the starter code in your first document. What changed: complete linkage
+  (matching the text), a within-cluster check, grouped permutation importance, a correct
+  RBO_ext with a chance baseline, an ESVR function using the median-reference baseline,
+  monotone students with a sweep test, a retraining-shift margin, and a recourse selector
+  that refuses to return an unsafe candidate. Treat it as a reference, not a tested package:
+  run the sanity checks at the end first, and pin library versions.
+
+
+
+                                                                                                                Page 48 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     import numpy as np
+     import pandas as pd
+     from scipy.cluster.hierarchy import linkage, fcluster
+     from scipy.spatial.distance import squareform
+     from sklearn.metrics import average_precision_score, roc_curve
+     from sklearn.neighbors import NearestNeighbors
+     from statsmodels.stats.outliers_influence import variance_inflation_factor
+     from lightgbm import LGBMClassifier
+     from interpret.glassbox import ExplainableBoostingClassifier
+
+
+
+     # ---------- Module 1: coalition discovery (fit on TRAIN only) ----------
+     def discover_concept_coalitions(X_train, rho_max=0.70, method='complete'):
+             # complete linkage: every within-cluster pair has abs(rho_S) >= rho_max
+             # method='ward' is not valid for 1 - abs(rho); use only as an ablation
+             corr = X_train.corr(method='spearman').fillna(0.0).values
+             np.fill_diagonal(corr, 1.0)
+             abs_corr = np.abs(corr)
+             dist = np.clip(1.0 - abs_corr, 0.0, 1.0)
+             dist = (dist + dist.T) / 2.0
+             np.fill_diagonal(dist, 0.0)
+             if X_train.shape[1] == 1:
+                 return {1: list(X_train.columns)}, abs_corr
+             Z = linkage(squareform(dist, checks=False), method=method)
+             labels = fcluster(Z, t=1.0 - rho_max, criterion='distance')
+             coalitions = {}
+             for col, lab in zip(X_train.columns, labels):
+                 coalitions.setdefault(int(lab), []).append(col)
+             return coalitions, abs_corr
+
+
+
+     def min_within_cluster_corr(coalitions, abs_corr, feature_names):
+             idx = {f: i for i, f in enumerate(feature_names)}
+             worst = 1.0
+             for cols in coalitions.values():
+                 for a in cols:
+                             for b in cols:
+                         worst = min(worst, abs_corr[idx[a], idx[b]])
+             return worst # should be >= rho_max for complete linkage
+
+
+
+     # ---------- Module 2: coalition-sum importance and two-stage RRF ----------
+     def coalition_importance(attr, feature_names, coalitions):
+
+
+
+                                                                                  Page 49 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+         # attr: N x d per-instance attributions (SHAP, EBM contributions, LIME
+     contributions)
+             # absolute value is taken AFTER summing inside the coalition
+             df = pd.DataFrame(attr, columns=feature_names)
+             return {c: float(np.mean(np.abs(df[cols].sum(axis=1)))) for c, cols in
+     coalitions.items()}
+
+
+
+     def grouped_permutation_importance(model, X_val, y_val, coalitions,
+     n_repeats=5, seed=0):
+             # shuffle all columns of a coalition TOGETHER (same row permutation)
+             rng = np.random.default_rng(seed)
+             base = average_precision_score(y_val, model.predict_proba(X_val)[:, 1])
+             out = {}
+             for c, cols in coalitions.items():
+                     drops = []
+                     for _ in range(n_repeats):
+                         Xp = X_val.copy()
+                             perm = rng.permutation(len(Xp))
+                             Xp[cols] = X_val[cols].values[perm]
+                             drops.append(base - average_precision_score(y_val,
+     model.predict_proba(Xp)[:, 1]))
+                     out[c] = float(np.mean(drops))
+             return out
+
+
+
+     def two_stage_subscale_rrf(coal_scores, feat_scores, weights, coalitions,
+                                abs_corr, feature_names, K, k0=60):
+             # coal_scores[e][c]: importance of coalition c under explainer e
+         # feat_scores[e][j]: importance of feature j under explainer e (higher =
+     more important)
+             if K > len(coalitions):
+             print('warning: K exceeds the number of coalitions; returning fewer
+     than K features')
+             fused = {c: 0.0 for c in coalitions}
+             for e, sc in coal_scores.items():
+                 order = sorted(sc, key=sc.get, reverse=True)
+                     for r, c in enumerate(order, start=1):
+                             fused[c] += weights[e] / (k0 + r)
+             top = sorted(fused, key=fused.get, reverse=True)[:K]
+             idx = {f: i for i, f in enumerate(feature_names)}
+             selected = []
+             for c in top:
+
+
+
+                                                                                    Page 50 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+                     members = coalitions[c]
+                     if len(members) == 1:
+                             selected.append(members[0])
+                         continue
+                     s = {j: 0.0 for j in members}
+                     for e, fs in feat_scores.items():
+                             order = sorted(members, key=lambda j: fs[j], reverse=True)
+                             for r, j in enumerate(order, start=1):
+                                    s[j] += weights[e] / (k0 + r)
+                     def centrality(j):
+                         return float(np.mean([abs_corr[idx[j], idx[l]] for l in
+     members]))
+                     selected.append(max(members, key=lambda j: s[j] * centrality(j)))
+             return selected, fused
+
+
+
+     def compute_subset_vif(X, cols):
+         Z = X[cols].astype(float)
+             Z = (Z - Z.mean()) / (Z.std() + 1e-8)
+             Z['const'] = 1.0
+             return pd.Series({c: variance_inflation_factor(Z.values, i) for i, c in
+     enumerate(cols)})
+
+
+
+     # ---------- Agreement metrics ----------
+     def rbo_ext(a, b, p=0.85):
+         # extrapolated RBO for equal-length lists; identical lists give exactly 1
+             l = min(len(a), len(b))
+             ov = [len(set(a[:d]) & set(b[:d])) for d in range(1, l + 1)]
+             s = sum((ov[d - 1] / d) * p ** d for d in range(1, l + 1))
+             return (ov[-1] / l) * p ** l + ((1 - p) / p) * s
+
+
+
+     def null_agreement(n_items, k=5, p=0.85, n_draws=1000, seed=0):
+             # expected (Overlap@k, RBO_ext) for two random rankings of n_items
+             rng = np.random.default_rng(seed)
+             vals = []
+             for _ in range(n_draws):
+                     a = list(rng.permutation(n_items))
+                     b = list(rng.permutation(n_items))
+                     vals.append((len(set(a[:k]) & set(b[:k])) / k, rbo_ext(a, b, p)))
+             return np.mean(vals, axis=0)
+
+
+
+
+                                                                                          Page 51 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     def recall_at_fpr(y_true, p, fpr_target=0.05):
+             fpr, tpr, _ = roc_curve(y_true, p)
+             return float(np.interp(fpr_target, fpr, tpr))
+
+
+
+     def esvr(phi, X, signs, medians):
+         # phi: risk-direction attributions from a MEDIAN-REFERENCE baseline
+     (positive raises risk)
+             # signs: {feature: -1/0/+1}; medians: training medians
+             viol, tested = 0, 0
+             for j, s in signs.items():
+                     if s == 0:
+                         continue
+                     u = s * (X[j].values - medians[j])
+                     ph = phi[j].values
+                     m = u != 0
+                     viol += int(np.sum(u[m] * ph[m] < 0))
+                     tested += int(m.sum())
+             return viol / max(tested, 1)
+
+
+
+     # ---------- Module 3: monotone students ----------
+     def train_monotone_models(X_train, y_train, cols, monotone_map, seed=42):
+             mono = [int(monotone_map.get(c, 0)) for c in cols]
+             lgbm = LGBMClassifier(n_estimators=300, max_depth=5, learning_rate=0.05,
+                                   monotone_constraints=mono, random_state=seed,
+     verbose=-1)
+             lgbm.fit(X_train[cols], y_train)
+             ebm = ExplainableBoostingClassifier(feature_names=list(cols),
+     interactions=0,
+                                                             random_state=seed)
+             ebm.fit(X_train[cols], y_train)
+             for i, s in enumerate(mono):
+                     if s != 0:
+                 # check the monotonize signature in your interpret version, then
+     plot shape functions
+                             ebm.monotonize(i, increasing=(s > 0))
+             return lgbm, ebm
+
+
+
+     def monotone_violation_rate(model, X, col, s, n_rows=200, n_grid=40, seed=0):
+         # sweep one feature over its 1st-99th percentile for sampled rows; count
+
+
+
+                                                                                  Page 52 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     rows where risk moves the wrong way
+             base = X.sample(min(n_rows, len(X)),
+     random_state=seed).reset_index(drop=True)
+         grid = np.linspace(X[col].quantile(0.01), X[col].quantile(0.99), n_grid)
+             bad = 0
+             for _, row in base.iterrows():
+                     Xg = pd.DataFrame([row.values] * n_grid, columns=X.columns)
+                     Xg[col] = grid
+                     d = np.diff(model.predict_proba(Xg)[:, 1]) * s
+                 bad += int(np.any(d < -1e-9))
+             return bad / len(base)
+
+
+
+     # ---------- Module 4: margin and recourse ----------
+     def retraining_shift_margin(shifts, alpha=0.10):
+         # shifts: threshold-relative score changes between consecutive retrained
+     models
+             s = np.maximum(np.asarray(shifts, dtype=float), 0.0)
+             n = len(s)
+             q = min(1.0, np.ceil((n + 1) * (1 - alpha)) / n)
+             return float(np.quantile(s, q, method='higher'))            # older numpy:
+     interpolation='higher'
+
+
+
+     def threshold_for_approval_rate(scores, approve_rate):
+         return float(np.quantile(scores, approve_rate))                # approve if risk <=
+     threshold
+
+
+
+     def mad_scale(X_train):
+             med = X_train.median()
+             mad = (X_train - med).abs().median()
+             mean_ad = (X_train - X_train.mean()).abs().mean()
+             scale = mad.where(mad > 0, mean_ad)             # mean absolute deviation when MAD =
+     0
+             return scale.where(scale > 0, 1.0).values
+
+
+
+     class ThresholdShifted:
+         # wraps a risk model so DiCE's 0.5 boundary sits at risk = tau
+             def __init__(self, model, tau):
+                 self.model, self.tau = model, tau
+             def predict_proba(self, X):
+
+
+
+                                                                                               Page 53 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+                     p = np.clip(self.model.predict_proba(X)[:, 1], 1e-9, 1 - 1e-9)
+                     z = np.log(p / (1 - p)) - np.log(self.tau / (1 - self.tau))
+                     q = 1.0 / (1.0 + np.exp(-z))
+                     return np.column_stack([1 - q, q])
+             def predict(self, X):
+                     return (self.predict_proba(X)[:, 1] > 0.5).astype(int)
+
+
+
+     def select_conformal_recourse(x_orig, cands, model, X_ref_good, scale,
+     tau_safe, beta=0.5):
+             p = model.predict_proba(cands)[:, 1]
+             ok = p <= tau_safe
+             if not ok.any():
+                 return None # no safe recourse: count it as a coverage failure, do
+     not fall back
+             c = cands[ok]
+             cost = np.sum(np.abs(c - x_orig) / scale, axis=1)
+             nn = NearestNeighbors(n_neighbors=5, metric='manhattan').fit(X_ref_good /
+     scale)
+         d, _ = nn.kneighbors(c / scale)
+             knn = d.mean(axis=1)
+             i = int(np.argmin(cost + beta * knn))
+             return c[i], float(cost[i]), float(knn[i])
+
+
+
+     def temporal_recourse_validity(cf_matrix, future_model, tau_future):
+             return float(np.mean(future_model.predict_proba(cf_matrix)[:, 1] <=
+     tau_future))
+
+
+
+     # ---------- Statistics ----------
+     def holm(pvals, alpha=0.05):
+         order = np.argsort(pvals)
+             m = len(pvals)
+             reject = [False] * m
+             for rank, i in enumerate(order):
+                     if pvals[i] <= alpha / (m - rank):
+                         reject[i] = True
+                     else:
+                             break
+         return reject
+     # Friedman: scipy.stats.friedmanchisquare(*per_method_scores); Wilcoxon:
+     scipy.stats.wilcoxon
+
+
+
+                                                                                      Page 54 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     # ---------- Sanity checks: run these first ----------
+     assert abs(rbo_ext(list('abcde'), list('abcde')) - 1.0) < 1e-12
+     assert abs(1.0 / (1 - 0.94 ** 2) - 8.59) < 0.01                                    # VIF of a rho = 0.94 pair
+     assert holm([0.001, 0.02, 0.04]) == [True, True, True]
+
+
+  Usage order. Discover coalitions on training data and check min_within_cluster_corr ≥
+  ρ_max. Fit reference models. Extract per-instance attributions for SHAP, the EBM and
+  LIME (converted to contributions). Compute grouped PFI separately. Build coal_scores
+  and feat_scores, weights from PGI, and call two_stage_subscale_rrf. Measure VIF. Train
+  the monotone students and run monotone_violation_rate for every constrained feature
+  before trusting any ESVR number.
+
+
+
+  Part 8. Formula sheet and self-test
+
+  8.1 Formula sheet
+
+     Quantity                                Formula
+
+     Rates                                   TPR = TP / (TP + FN); FPR = FP / (FP + TN); precision
+                                             = TP / (TP + FP)
+
+     PR-AUC                                  AP = Σ_n (R_n − R_(n−1)) P_n; random baseline =
+                                             prevalence
+
+     Brier                                   (1/N) Σ (p̂ _i − y_i)²
+
+     Undersampling fix                       p = r p_s / (r p_s + 1 − p_s), r = fraction of negatives
+                                             kept
+
+     Spearman distance                       D(j, l) = 1 − abs(ρ_S(j, l)); cut at γ = 1 − ρ_max
+                                             (complete linkage)
+
+     VIF                                     1 / (1 − R_j²); for a pair, 1 / (1 − ρ²)
+
+     Shapley                                 Sum over S ⊆ D without j of [ s! (d − s − 1)! / d! ] (v(S
+                                             ∪ {j}) − v(S)), where s = number of players in S
+
+
+
+
+                                                                                                                Page 55 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+     Quantity                                Formula
+
+     Owen                                    Sum over Q and S of [ q! (M − q − 1)! / M! ] [ s! (c − s
+                                             − 1)! / c! ] (v(U(Q) ∪ S ∪ {j}) − v(U(Q) ∪ S)); q =
+                                             coalitions in Q, s = players in S, c = size of j's
+                                             coalition, U(Q) = their union
+
+     EBM contribution                        φ_j(x) = f_j(x_j) − E[f_j(X_j)]
+
+     Coalition importance                    I(C_m) = (1/N) Σ_i abs( Σ_(j ∈ C_m) φ_j(x^(i)) )
+
+     Faithfulness weight                     PGI_e(k) = (1/N) Σ abs(f(x) − f(x with top-k
+                                             masked)); w_e = PGI_e / Σ PGI
+
+     Fused rank                              RRF(C) = Σ_e w_e / (k0 + r_e(C))
+
+     Medoid score                            [ Σ_e w_e / (k0 + r_e^in(j)) ] × mean abs ρ_S(j, l)
+                                             over l in the coalition
+
+     RBO_ext                                 (X_l / l) p^l + ((1 − p) / p) Σ_(d ≤ l) (X_d / d) p^d
+
+     ESVR                                    share of pairs with u · φ_j < 0, u = s_j (x_j −
+                                             median_j), median-reference attributions
+
+     Recourse cost                           Σ_j abs(x'_j − x_j) / MAD_j
+
+     Margin                                  q̂ _α = empirical ⌈(n+1)(1 − α)⌉/n quantile of max(0,
+                                             s_i); τ_safe = τ − q̂ _α
+
+     TRV                                     share of x_cf with f_(t+Δt)(x_cf) ≤ τ_(t+Δt)
+
+     Friedman                                χ²_F = [12N / (k(k+1))] [Σ R_j² − k(k+1)² / 4]
+
+     Holm                                    reject H_(i) if p_(i) ≤ α / (m − i + 1), stop at first
+                                             failure
+
+
+
+  8.2 Self-test
+  Try each question before reading the answer.
+
+   1. Why can ROC-AUC look excellent while most alerts are false? The FPR denominator
+       is the huge count of legitimate cases, so 2,000 false alarms is only 2% FPR. Precision
+       (28.6%) exposes the problem.
+
+
+
+
+                                                                                                        Page 56 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+   2. Why complete linkage and not Ward on 1 − abs(ρ)? Ward assumes Euclidean
+       distances. Complete linkage bounds the largest within-cluster distance by γ, giving
+       abs(ρ_S) ≥ ρ_max for every pair inside a cluster.
+   3. Does one feature per cluster guarantee VIF < 2? No. Features in different clusters can
+      still be highly correlated, and pairwise bounds do not bound multi-feature VIF. Measure
+       and report VIF.
+   4. When does a sum of SHAP values over a coalition equal the Owen coalition value?
+       When the model is additive across coalitions, such as an EBM with interactions = 0.
+       Otherwise it is an approximation.
+   5. Why put the absolute value outside the coalition sum, and what is the risk? It nets
+       out compensating twin attributions (5.0 and −4.8 give 0.2, not 9.8). The risk is hiding
+       genuinely opposing forces, so also report the sum of absolute values.
+   6. Why does single-feature permutation importance mislead for twins? Shuffling one
+       twin leaves the other intact, so the model barely changes. Shuffle the whole coalition
+       together.
+   7. Why would the truncated RBO of two identical 5-item lists be 0.556? It equals 1 − p^5
+       with p = 0.85, because the tail beyond depth 5 is dropped. RBO_ext adds the
+       extrapolation term and returns 1.
+   8. Why can a monotone model show a negative attribution for an above-median value?
+       Default attributions are measured against the mean contribution over a background,
+       not against the median. A median-reference baseline makes every attribution sign
+       follow the monotone direction.
+   9. What does Proposition 2′ say, and what must you measure to use it? If the model shift
+       is at most δ near the counterfactual and the counterfactual clears τ − δ, it survives.
+       Measure the distribution of shifts between consecutive retrained models.
+ 10. Why is a bootstrap-dispersion margin not a conformal guarantee? Conformal
+     coverage needs the test point to be exchangeable with the calibration data. Future
+       retrained models under drift are not, and bootstrap spread is not the same as a
+       retraining shift.
+ 11. Which of the three datasets has real temporal structure? Only BAF (and it is
+       generated data). HELOC and Taiwan need simulated retraining and must be labelled
+       that way.
+ 12. How many paired windows does a two-sided Wilcoxon test need to reach p < 0.05?
+       At least 6 (smallest possible p is 2 / 2^6 = 0.031 at N = 6, and 0.0625 at N = 5).
+
+  Further questions on the ground-up Part 3.
+
+
+
+
+                                                                                            Page 57 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+ 13. A two-player game has v(A) = 10, v(B) = 20 and v(A and B) = 50. What are the Shapley
+       values? A gets 20 and B gets 30: average A's gain over the two joining orders (10 and
+       30), and B's (20 and 40).
+ 14. For f = 3·x1 + 2·x2 with background averages 1 and 2 and a borrower at (2, 5), what
+       are the SHAP values? 3 for x1 and 6 for x2. They add to 9, the gap between the
+       borrower's prediction (16) and the average prediction (7).
+ 15. Why does LIME report a slope of 0 near a step in a tree's output? If every perturbed
+       copy falls on one side of the step, the model output is constant across them, so the
+       fitted slope is 0. Widen the neighbourhood and the slope jumps.
+ 16. In the six-ordering example, why do the twins get 50 from Owen but 53.33 from
+       summed Shapley values? Owen discards the orderings in which the independent
+       coalition lands between the twins, and the two concepts interact (20 of synergy). With
+       no synergy both give 40.
+ 17. With complete linkage, ρ_max = 0.70 and correlations A–B 0.90, B–C 0.75, A–C 0.40,
+     what are the clusters, and what is the catch? {A, B} and {C}. The catch: B and C are
+       0.75 correlated and sit in different clusters, so selecting one from each gives a
+       redundant pair.
+ 18. What is the VIF of a pair of features correlated at 0.9? 1 / (1 − 0.81) = 5.26.
+ 19. Given the ten sorted positive shifts 0, 0, 0, 0.01, 0.01, 0.02, 0.02, 0.03, 0.04, 0.05, what
+       is the safe threshold at α = 0.20 when τ = 0.50? The cushion is the 9th smallest, 0.04,
+       so the safe threshold is 0.46.
+
+
+  8.3 Glossary
+       Twin features: features that measure nearly the same concept and are highly
+       correlated.
+       Coalition (a-priori union): a cluster of twins treated as one player.
+       Medoid representative: the most central, most consistently important member of a
+       coalition.
+       PGI: prediction gap on important features; a faithfulness score from masking top
+       features.
+       RRF: reciprocal rank fusion, a rank-aggregation rule.
+       ESCR / ESVR: explainer sign conflict rate (two explainers disagree on sign) / economic
+       sign violation rate (an explainer contradicts the known risk direction).
+       TRV: temporal recourse validity, the share of counterfactuals still approved after
+       retraining.
+
+
+
+                                                                                            Page 58 of 59
+COMET-XAI: Corrected Study Manual & Research Specification
+
+
+
+
+       Recourse: a feasible set of changes that would flip a rejection.
+       Adverse action notice: the lender's statement of the principal reasons for a rejection.
+
+
+
+
+                                                                                         Page 59 of 59
+

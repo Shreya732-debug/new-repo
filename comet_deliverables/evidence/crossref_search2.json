@@ -1,0 +1,753 @@
+[
+  {
+    "query": "BioMark biomarker analysis tool",
+    "results": [
+      {
+        "title": [
+          "BioMark: biomarker analysis tool"
+        ],
+        "DOI": "10.1186/s12859-025-06346-3",
+        "author": [
+          {
+            "given": "Mehmet Ali",
+            "family": "Balikci",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Cyrille Mesue",
+            "family": "Njume",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ali",
+            "family": "Cakmak",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "abstract": null,
+        "published": {
+          "date-parts": [
+            [
+              2026,
+              1,
+              20
+            ]
+          ]
+        }
+      },
+      {
+        "title": [
+          "BioMark-X: Biomarker Discovery and Validation Tool"
+        ],
+        "DOI": "10.2139/ssrn.7324361",
+        "author": [
+          {
+            "given": "Kerem  Ihsan",
+            "family": "Mercan",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Emre",
+            "family": "Bozkurt",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0009-0001-6527-9108",
+            "authenticated-orcid": true,
+            "given": "Cyrille  Mesue",
+            "family": "Njume",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Katarzyna",
+            "family": "Goljanek-Whysall",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-4011-6732",
+            "authenticated-orcid": true,
+            "given": "Leo R.",
+            "family": "Quinlan",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Agnieszka",
+            "family": "Fiszer",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-7691-1957",
+            "authenticated-orcid": true,
+            "given": "Roberta",
+            "family": "Ghidoni",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ali",
+            "family": "\u00c7akmak",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "abstract": "<jats:p>The rapid expansion of high-throughput omics technologies has revolutionized biomarker discovery, offering unprecedented insights into complex biological systems. However, translating massive, heterogeneous datasets into clinically actionable knowledge remains a significant bottleneck. While the original BioMark platform streamlined single-omics analysis, the increasing demand for integrated, multi-layered data interpretation requires far more robust computational frameworks.To address these evolving needs, we present BioMark-X, a significantly expanded web-based platform available at . BioMark-X introduces seamless multi-omics data integration, supported by newly designed preprocessing options that offer both a standard pipeline and a specialized MOGONET pipeline. To ensure robust machine learning performance on skewed clinical datasets, the platform now incorporates advanced Class Imbalance Resampling techniques, specifically SMOTE and ADASYN. Furthermore, we have vastly enriched the statistical analysis suite by introducing non-parametric tests, including the Wilcoxon rank-sum and Kruskal-Wallis tests, alongside Volcano plot visualizations for highly intuitive differential expression analysis.Beyond statistical discovery, BioMark-X bridges the gap to clinical interpretation. The platform features an expanded array of rank- and weight-based feature aggregation methods, as well as new survival analysis modules to evaluate the prognostic value of identified biomarkers. Crucially, BioMark-X automates biological interpretation through integrated pathway enrichment analyses with KEGG/GO and external biomarker validation against established clinical databases such as Open Targets, EWAS Atlas, and JensenLab DISEASES. Supported by a newly engineered user management system with asynchronous task queuing, the platform enables researchers to securely track their analysis history and seamlessly resume workflows at any time. Ultimately, BioMark-X provides a highly scalable, end-to-end environment that empowers researchers to confidently discover, evaluate, and validate clinically relevant molecular signatures.</jats:p>",
+        "published": {
+          "date-parts": [
+            [
+              2026
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "query": "stability LIME SHAP credit Chen Calabrese",
+    "results": [
+      {
+        "title": [
+          "Credit Card Fraud Detection with LIME and SHAP"
+        ],
+        "DOI": "10.22214/ijraset.2024.63375",
+        "author": [
+          {
+            "given": "Pavuluri",
+            "family": "Swetha",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "abstract": "<jats:p>Abstract: The rate of credit card theft has increased in recent years due to the widespread adoption of advanced technology and worldwide communication networks. Scammers are always searching for novel techniques to engage in unlawful activities, irrespective of the fact that credit card fraud results in billions of dollars in losses for individuals and financial institutions annually. Therefore, the absence of fraud detection technologies significantly hampers the successful functioning of banks and other financial organisations. The objective of the project is to create a credit card fraud detection system using machine learning models such as XGBoost and Decision Tree. The accuracy of these models will be assessed using LIME and SHAP models, which provide explanations for the chosen models. Ultimately, a comparison examination of the machine learning models will be conducted.</jats:p>",
+        "published": {
+          "date-parts": [
+            [
+              2024,
+              6,
+              30
+            ]
+          ]
+        }
+      },
+      {
+        "title": [
+          "SHAP and LIME: An Evaluation of Discriminative Power in Credit Risk"
+        ],
+        "DOI": "10.3389/frai.2021.752558",
+        "author": [
+          {
+            "given": "Alex",
+            "family": "Gramegna",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Paolo",
+            "family": "Giudici",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "abstract": "<jats:p>In credit risk estimation, the most important element is obtaining a probability of default as close as possible to the effective risk. This effort quickly prompted new, powerful algorithms that reach a far higher accuracy, but at the cost of losing intelligibility, such as Gradient Boosting or ensemble methods. These models are usually referred to as \u201cblack-boxes\u201d, implying that you know the inputs and the output, but there is little way to understand what is going on under the hood. As a response to that, we have seen several different Explainable AI models flourish in recent years, with the aim of letting the user see why the black-box gave a certain output. In this context, we evaluate two very popular eXplainable AI (XAI) models in their ability to discriminate observations into groups, through the application of both unsupervised and predictive modeling to the weights these XAI models assign to features locally. The evaluation is carried out on real Small and Medium Enterprises data, obtained from official italian repositories, and may form the basis for the employment of such XAI models for post-processing features extraction.</jats:p>",
+        "published": {
+          "date-parts": [
+            [
+              2021,
+              9,
+              17
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "query": "Ballegeer Bogaert Benoit instance dependent",
+    "results": [
+      {
+        "title": [
+          "Ballegeer, Ime"
+        ],
+        "DOI": "10.1093/benz/9780199773787.article.b00010793",
+        "author": null,
+        "abstract": null,
+        "published": {
+          "date-parts": [
+            [
+              2011,
+              10,
+              31
+            ]
+          ]
+        }
+      },
+      {
+        "title": [
+          "Bogaert, Gaston"
+        ],
+        "DOI": "10.1093/benz/9780199773787.article.b00021760",
+        "author": null,
+        "abstract": null,
+        "published": {
+          "date-parts": [
+            [
+              2011,
+              10,
+              31
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "query": "feature grouping explanation stability correlated SHAP",
+    "results": [
+      {
+        "title": [
+          "An Investigation of Feature-Grouping for Robust SHAP Explanations in IoT Intrusion Detection"
+        ],
+        "DOI": "10.1109/itnac66378.2025.11302604",
+        "author": [
+          {
+            "given": "Dedy",
+            "family": "Hendro",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Victoria University of Wellington,School of Engineering and Computer Science,New Zealand"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Yi",
+            "family": "Mei",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Victoria University of Wellington,School of Engineering and Computer Science,New Zealand"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Ian",
+            "family": "Welch",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Victoria University of Wellington,School of Engineering and Computer Science,New Zealand"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "abstract": null,
+        "published": {
+          "date-parts": [
+            [
+              2025,
+              11,
+              26
+            ]
+          ]
+        }
+      },
+      {
+        "title": [
+          "Feature importance explanation of prosthetic valve endocarditis through machine learning via SHAP"
+        ],
+        "DOI": "10.1093/eurheartj/ehae666.1973",
+        "author": [
+          {
+            "given": "L F",
+            "family": "Matorra",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Nuclear Diagnostic Center Foundation , Buenos Aires ,",
+                "place": [
+                  "Argentina"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "A M",
+            "family": "Scholtens",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Meander Medical Center, Nuclear Medicine , Amersfoort ,",
+                "place": [
+                  "Netherlands (The)"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "S",
+            "family": "Traverso",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Nuclear Diagnostic Center Foundation , Buenos Aires ,",
+                "place": [
+                  "Argentina"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "E",
+            "family": "De Vrey",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Meander Medical Center , Amersfoort ,",
+                "place": [
+                  "Netherlands (The)"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "F",
+            "family": "Funes",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Nuclear Diagnostic Center Foundation , Buenos Aires ,",
+                "place": [
+                  "Argentina"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "R",
+            "family": "Aguero",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Nuclear Diagnostic Center Foundation , Buenos Aires ,",
+                "place": [
+                  "Argentina"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "S",
+            "family": "Cusimano",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Nuclear Diagnostic Center Foundation , Buenos Aires ,",
+                "place": [
+                  "Argentina"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "B",
+            "family": "Ruijsink",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University Medical Center Utrecht, Department of Cardiology, Division Heart & Lungs , Utrecht ,",
+                "place": [
+                  "Netherlands (The)"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "R",
+            "family": "Geronazzo",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Nuclear Diagnostic Center Foundation , Buenos Aires ,",
+                "place": [
+                  "Argentina"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "M",
+            "family": "Namias",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Nuclear Diagnostic Center Foundation , Buenos Aires ,",
+                "place": [
+                  "Argentina"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "L E",
+            "family": "Juarez-Orozco",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University Medical Center Utrecht, Department of Cardiology, Division Heart & Lungs , Utrecht ,",
+                "place": [
+                  "Netherlands (The)"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "abstract": "<jats:title>Abstract</jats:title>\n               <jats:sec>\n                  <jats:title>Introduction</jats:title>\n                  <jats:p>Diagnosing prosthetic valve endocarditis poses a significant challenge in daily clinical practice. Accurately identifying these patients is vital due to its treatment implications. Clinical and imaging assessment of suspected cases yields a substantial number of interrelated variables, which can be analyzed through machine learning techniques in order to improve diagnostic accuracy. Feature ranking facilitates identification and interpretability of relevant clinical and imaging variables in this task.</jats:p>\n               </jats:sec>\n               <jats:sec>\n                  <jats:title>Purpose</jats:title>\n                  <jats:p>To utilize machine learning feature ranking and modeling in order to improve interpretable identification of patients with prosthetic valve endocarditis.</jats:p>\n               </jats:sec>\n               <jats:sec>\n                  <jats:title>Methods</jats:title>\n                  <jats:p>89 cases defined by the endocarditis team and 173 controls were analyzed. We implemented the SHapley Additive exPlanations (SHAP) method to evaluate feature importance. 5-fold cross-validated Xgboost models were trained and independently tested with additive clinical, echocardiographic and 18F-FDG PET/CT data. Performance was evaluated through confusion matrices, F1-scores and AUCs. These were compared against conventional logistic regression of the Duke Criteria classification.</jats:p>\n               </jats:sec>\n               <jats:sec>\n                  <jats:title>Results</jats:title>\n                  <jats:p>Mean age was 59.6 \u00b1 15.7, with 29.7% women. 14 clinical (demographic, laboratory and cultures), 2 echocardiographic, and 5 PET/CT features were included. The XGBoost model trained with all additive features demonstrated an AUC of 0.91\u00b10.1 and outperformed simpler models as well as the Duke classification model (AUC=0.85). The clinical variables alone achieved an AUC of 0.85\u00b10.11, while integration with echocardiography enhanced its performance to 0.90\u00b10.04 (Fig. 1). Feature ranking demonstrated that antibiotic treatment duration, positive blood cultures, valve type, weight and CRP were the most relevant clinical variables, while the presence of vegetation or abscess, and abnormal uptake and uptake focality on PET/CT represented the most relevant imaging variables (Fig. 2).</jats:p>\n               </jats:sec>\n               <jats:sec>\n                  <jats:title>Conclusion</jats:title>\n                  <jats:p>Machine learning-based feature ranking and modeling may significantly enhance identification of patients with prosthetic valve endocarditis beyond standard clinical criteria. Feature selection offers interpretable performance in identifying these cases, model testing in clinical decision support may be warranted.Fig. 1:Comparative AUC Analysis.Fig. 2:SHAP feature importance.</jats:p>\n               </jats:sec>",
+        "published": {
+          "date-parts": [
+            [
+              2024,
+              10
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "query": "Faithful model explanations energy constrained conformal counterfactuals",
+    "results": [
+      {
+        "title": [
+          "Faithful Model Explanations through Energy-Constrained Conformal Counterfactuals"
+        ],
+        "DOI": "10.1609/aaai.v38i10.28956",
+        "author": [
+          {
+            "given": "Patrick",
+            "family": "Altmeyer",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Mojtaba",
+            "family": "Farmanbar",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Arie",
+            "family": "Van Deursen",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Cynthia C. S.",
+            "family": "Liem",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "abstract": "<jats:p>Counterfactual explanations offer an intuitive and straightforward way to explain black-box models and offer algorithmic recourse to individuals. To address the need for plausible explanations, existing work has primarily relied on surrogate models to learn how the input data is distributed. This effectively reallocates the task of learning realistic explanations for the data from the model itself to the surrogate. Consequently, the generated explanations may seem plausible to humans but need not necessarily describe the behaviour of the black-box model faithfully. We formalise this notion of faithfulness through the introduction of a tailored evaluation metric and propose a novel algorithmic framework for generating Energy-Constrained Conformal Counterfactuals that are only as plausible as the model permits. Through extensive empirical studies, we demonstrate that ECCCo reconciles the need for faithfulness and plausibility. In particular, we show that for models with gradient access, it is possible to achieve state-of-the-art performance without the need for surrogate models. To do so, our framework relies solely on properties defining the black-box model itself by leveraging recent advances in energy-based modelling and conformal prediction. To our knowledge, this is the first venture in this direction for generating faithful counterfactual explanations. Thus, we anticipate that ECCCo can serve as a baseline for future research. We believe that our work opens avenues for researchers and practitioners seeking tools to better distinguish trustworthy from unreliable models.</jats:p>",
+        "published": {
+          "date-parts": [
+            [
+              2024,
+              3,
+              24
+            ]
+          ]
+        }
+      },
+      {
+        "title": [
+          "Logical Satisfiability of Counterfactuals for Faithful Explanations in NLI"
+        ],
+        "DOI": "10.1609/aaai.v37i8.26174",
+        "author": [
+          {
+            "given": "Suzanna",
+            "family": "Sia",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Anton",
+            "family": "Belyy",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Amjad",
+            "family": "Almahairi",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Madian",
+            "family": "Khabsa",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Luke",
+            "family": "Zettlemoyer",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Lambert",
+            "family": "Mathias",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "abstract": "<jats:p>Evaluating an explanation's faithfulness is desired for many reasons such as trust, interpretability and diagnosing the sources of model's errors. In this work, which focuses on the NLI task, we introduce the methodology of Faithfulness-through-Counterfactuals, which first generates a counterfactual hypothesis based on the logical predicates expressed in the explanation, and then evaluates if the model's prediction on the counterfactual is consistent with that expressed logic (i.e. if the new formula is \\textit{logically satisfiable}). In contrast to existing approaches, this does not require any explanations for training a separate verification model. We first validate the efficacy of automatic counterfactual hypothesis generation, leveraging on the few-shot priming paradigm. Next, we show that our proposed metric distinguishes between human-model agreement and disagreement on new counterfactual input. In addition, we conduct a sensitivity analysis to validate that our metric is sensitive to unfaithful explanations.</jats:p>",
+        "published": {
+          "date-parts": [
+            [
+              2023,
+              6,
+              26
+            ]
+          ]
+        }
+      }
+    ]
+  }
+]

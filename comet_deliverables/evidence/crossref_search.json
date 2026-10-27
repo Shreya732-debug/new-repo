@@ -1,0 +1,543 @@
+[
+  {
+    "query": "Stow explanation disagreement 2026",
+    "results": [
+      {
+        "title": [
+          "Quantifying Explanation Disagreement Between SHAP and LIME Across Tabular Classification Models"
+        ],
+        "DOI": "10.26438/ijcse.v14i1.7255",
+        "year": {
+          "date-parts": [
+            [
+              2026,
+              1,
+              31
+            ]
+          ]
+        },
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0009-0006-8653-8363",
+            "authenticated-orcid": false,
+            "given": "May",
+            "family": "Stow",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "abstract": "<jats:p>Explainable artificial intelligence (XAI) methods such as SHapley Additive exPlanations (SHAP) and Local Interpretable Model-Agnostic Explanations (LIME) have become essential tools for interpreting machine learning predictions. Despite their distinct theoretical foundations, practitioners often use these methods interchangeably, assuming convergent outputs. This study systematically quantifies disagreement between SHAP and LIME explanations across three benchmark tabular datasets (Adult Income, German Credit, and Bank Marketing) and three classification models (Logistic Regression, Random Forest, and XGBoost). The methodology introduces complementary disagreement metrics: Explanation Sign Conflict Rate (ESCR) measuring directional attribution disagreement, Weighted Rank Divergence (WRD) capturing importance-weighted ranking differences, and Explanation Entropy quantifying attribution distribution characteristics. Experimental results reveal substantial disagreement, with Kendall tau rank correlations ranging from 0.006 to 0.375 across configurations. Linear models demonstrate consistently higher agreement (mean tau = 0.309) compared to ensemble models (mean tau = 0.158 for Random Forest, 0.153 for XGBoost). LIME stability analysis confirms that observed disagreements reflect genuine methodological differences rather than stochastic noise, with variance below 0.01 across all configurations. Disagreement between methods does not indicate which explanation is correct; rather, it serves as a diagnostic signal revealing where explanations should be interpreted with caution. These findings provide practitioners with quantitative benchmarks for expected explanation divergence.</jats:p>"
+      },
+      {
+        "title": [
+          "Disagreement, Anti-realism about Reasons, and Inference to the Best Explanation"
+        ],
+        "DOI": "10.1093/9780197749852.003.0017",
+        "year": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              10
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "Brian",
+            "family": "Leiter",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "abstract": "<jats:title>Abstract</jats:title>\n                  <jats:p>I revisit, refine, and defend an inference to the best explanation (IBE) argument for antirealism about reasons for acting based on the history of intractable disagreement in moral philosophy. The four key premises of the argument are: (1) If there were objective reasons for action, epistemically well-situated observers would eventually converge upon them after two thousand years; (2) contemporary philosophers, as the beneficiaries of two thousand years of philosophy, are epistemically well-situated observers; (3) contemporary philosophers have not converged upon reasons for action; (4) conclusion: there are no objective reasons for action (IBE from the first three premises). The key premises of the IBE are (1) sentimentalism, (2) noncognitivism about basic affects; and (3) philosophical arguments for what our reasons for action are always involve arguments that depend on a basic intuitive moral judgment (that can be explained in terms of a basic noncognitive affect). All these premises are explored in detail, and various objections addressed.</jats:p>"
+      },
+      {
+        "title": [
+          "Quantifying overall agreement between explanation methods to address the disagreement problem"
+        ],
+        "DOI": "10.1007/s12065-026-01145-y",
+        "year": {
+          "date-parts": [
+            [
+              2026,
+              2
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "Gaurav",
+            "family": "Parashar",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Alka",
+            "family": "Chaudhary",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Dilkeshwar",
+            "family": "Pandey",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "abstract": ""
+      }
+    ]
+  },
+  {
+    "query": "BioMark biomarker analysis tool Balikci",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "query": "Gonlachanvit Senjuntichai 2026",
+    "results": [
+      {
+        "title": [
+          "SHAP-McNemar stepwise feature selection for machine learning in credit risk modeling"
+        ],
+        "DOI": "10.1016/j.mlwa.2026.100977",
+        "year": {
+          "date-parts": [
+            [
+              2026,
+              9
+            ]
+          ]
+        },
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0009-0007-0847-3995",
+            "authenticated-orcid": false,
+            "given": "Passawish",
+            "family": "Gonlachanvit",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0009-0007-4251-2628",
+            "authenticated-orcid": false,
+            "given": "Angsumalin",
+            "family": "Senjuntichai",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0001-5806-0610",
+            "authenticated-orcid": false,
+            "given": "Teerapong",
+            "family": "Senjuntichai",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "abstract": ""
+      },
+      {
+        "title": [
+          "Machine Learning Models for Vertical Vibrations of Flexible Strip Foundation on Transversely Isotropic Poroelastic Soils"
+        ],
+        "DOI": "10.30919/es2512",
+        "year": {
+          "date-parts": [
+            [
+              2026
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "Barami",
+            "family": "Phulsawat",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Center of Excellence in Applied Mechanics and Structures, Department of Civil Engineering, Faculty of Engineering, Chulalongkorn University, Bangkok, 10330, Thailand"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Teerapong",
+            "family": "Senjuntichai",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Center of Excellence in Applied Mechanics and Structures, Department of Civil Engineering, Faculty of Engineering, Chulalongkorn University, Bangkok, 10330, Thailand"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Angsumalin",
+            "family": "Senjuntichai",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Industrial Engineering, Faculty of Engineering, Chulalongkorn University, Bangkok 10330, Thailand"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Divesh Ranjan",
+            "family": "Kumar",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Center of Excellence in Applied Mechanics and Structures, Department of Civil Engineering, Faculty of Engineering, Chulalongkorn University, Bangkok, 10330, Thailand"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "R. K. N. D.",
+            "family": "Rajapakse",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Civil Engineering, Sri Lanka Institute of Information Technology, Malabe, 10115, Sri Lanka"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Suraparb",
+            "family": "Keawsawasvong",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Civil Engineering, Thammasat School of Engineering, Thammasat University, Khlong Luang, Pathum thani, 12120, Thailand"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Kongtawan",
+            "family": "Sangjinda",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Center of Excellence in Applied Mechanics and Structures, Department of Civil Engineering, Faculty of Engineering, Chulalongkorn University, Bangkok, 10330, Thailand"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "abstract": ""
+      },
+      {
+        "title": [
+          "Predicting vertical vibrations of circular foundation on transversely isotropic saturated soils using machine learning models"
+        ],
+        "DOI": "10.1007/s41062-026-02643-9",
+        "year": {
+          "date-parts": [
+            [
+              2026,
+              4,
+              22
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "Barami",
+            "family": "Phulsawat",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0001-5806-0610",
+            "authenticated-orcid": false,
+            "given": "Teerapong",
+            "family": "Senjuntichai",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Angsumalin",
+            "family": "Senjuntichai",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Divesh Ranjan",
+            "family": "Kumar",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Suraparb",
+            "family": "Keawsawasvong",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "abstract": ""
+      }
+    ]
+  },
+  {
+    "query": "Chen Calabrese Martin Barragan stability LIME SHAP",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "query": "Ballegeer Bogaert Benoit 2025",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "query": "feature grouping explanation stability correlated SHAP 2025 2026",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "query": "Maalej Johansson counterfactual 2026",
+    "results": [
+      {
+        "title": [
+          "Plausibility through Coherence: Evaluating Counterfactual Explanations in SHAP-Space"
+        ],
+        "DOI": "10.1007/978-3-032-37976-4_25",
+        "year": {
+          "date-parts": [
+            [
+              2026,
+              9,
+              19
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "Ulf",
+            "family": "Johansson",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Aicha",
+            "family": "Maalej",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "abstract": ""
+      },
+      {
+        "title": [
+          "Counterfactual Explanations for\u00a0Conformal Regression Intervals"
+        ],
+        "DOI": "10.1007/978-3-032-23833-7_11",
+        "year": {
+          "date-parts": [
+            [
+              2026
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "Aicha",
+            "family": "Maalej",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Ulf",
+            "family": "Johansson",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "abstract": ""
+      },
+      {
+        "title": [
+          "COUNTERFACTUAL REASONING IN SURROGATE DECISION MAKING - ANOTHER LOOK"
+        ],
+        "DOI": "10.1111/j.1467-8519.2009.01768.x",
+        "year": {
+          "date-parts": [
+            [
+              2009,
+              10,
+              28
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "MATS",
+            "family": "JOHANSSON",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "LINUS",
+            "family": "BROSTR\u00d6M",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "abstract": ""
+      }
+    ]
+  },
+  {
+    "query": "Faithful model explanations energy constrained conformal counterfactuals",
+    "error": "HTTP Error 429: Too Many Requests"
+  }
+]

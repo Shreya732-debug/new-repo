@@ -1,0 +1,3091 @@
+[
+  {
+    "title": "Stability without concealment",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "COMET-XAI LITE",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "Stability without concealment",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "Proposal + executed preliminary pilot | Core question inspired by Krishna et al. and groupShapley [S03, S04]",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "1",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.6,
+        "y": 1.65,
+        "w": 11.9,
+        "h": 0.75,
+        "text": "When does grouping correlated inputs improve explanation stability\nwithout hiding useful information?",
+        "size": 22.0,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 2.8,
+        "w": 3.9,
+        "h": 2.35,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 2.8,
+        "w": 0.045,
+        "h": 2.35,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 2.96,
+        "w": 3.54,
+        "h": 0.45,
+        "text": "THE PROBLEM",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 3.53,
+        "w": 3.54,
+        "h": 1.52,
+        "text": "Similar predictions can\nproduce different\nfeature rankings after\nretraining.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 4.7,
+        "y": 2.8,
+        "w": 3.9,
+        "h": 2.35,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 4.7,
+        "y": 2.8,
+        "w": 0.045,
+        "h": 2.35,
+        "color": "BC7412"
+      },
+      {
+        "type": "text",
+        "x": 4.88,
+        "y": 2.96,
+        "w": 3.54,
+        "h": 0.45,
+        "text": "THE TRAP",
+        "size": 17,
+        "color": "BC7412",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 4.88,
+        "y": 3.53,
+        "w": 3.54,
+        "h": 1.52,
+        "text": "Shorter lists and random\ngrouping can also\nappear more stable.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 8.8,
+        "y": 2.8,
+        "w": 3.9,
+        "h": 2.35,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 8.8,
+        "y": 2.8,
+        "w": 0.045,
+        "h": 2.35,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 8.98,
+        "y": 2.96,
+        "w": 3.54,
+        "h": 0.45,
+        "text": "OUR TEST",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 8.98,
+        "y": 3.53,
+        "w": 3.54,
+        "h": 1.52,
+        "text": "Compare matched\ngroups; measure\nstability plus fidelity and\ncancellation.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 5.55,
+        "w": 12,
+        "h": 0.5,
+        "text": "Credit benchmark \u2022 interpretable baseline \u2022 controlled comparisons \u2022 eight weeks",
+        "size": 18.0,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 6.23,
+        "w": 12,
+        "h": 0.42,
+        "text": "[Student name] | [Roll number] | B.Tech IT, DTU | Prof. Rahul Gupta",
+        "size": 17,
+        "color": "53667A",
+        "bold": false
+      }
+    ],
+    "notes": "Opening, about 60 seconds. My project asks whether grouping correlated inputs makes model explanations more reliable, or only makes them look more consistent. Imagine six monthly bill amounts: models can distribute importance among these related measurements differently after retraining. I want to distinguish a useful group summary from a summary that hides information. I narrowed the initial COMET proposal because temporal recourse, conformal margins and feature selection would require different evidence. The scope is now feasible in eight weeks on a laptop. The work completed is the proposal audit, literature review and a reproducible logistic-regression pilot; the full experiment is not complete. Name and roll-number fields are editable. Do not call this a finished paper or a new Shapley algorithm."
+  },
+  {
+    "title": "What the literature establishes \u2014 and what we will test",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "COMET-XAI LITE",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "What the literature establishes \u2014 and what we will test",
+        "size": 27.5,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "Sources: SHAP [S01]; disagreement [S03]; groupShapley [S04]; ITNAC 2025 [N03]; agreement 2026 [N04]",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "2",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.65,
+        "w": 12.1,
+        "h": 1.0,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.8,
+        "y": 1.7999999999999998,
+        "w": 3.0,
+        "h": 0.65,
+        "text": "SHAP + dependence",
+        "size": 18,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 4,
+        "y": 1.77,
+        "w": 8.4,
+        "h": 0.38,
+        "text": "Credit depends on model, background and explanation game.",
+        "size": 17,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 4,
+        "y": 2.2199999999999998,
+        "w": 8.4,
+        "h": 0.25,
+        "text": "Lundberg & Lee; Aas et al.",
+        "size": 12,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 2.77,
+        "w": 12.1,
+        "h": 1.0,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.8,
+        "y": 2.92,
+        "w": 3.0,
+        "h": 0.65,
+        "text": "Disagreement +\naggregation",
+        "size": 18,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 4,
+        "y": 2.89,
+        "w": 8.4,
+        "h": 0.38,
+        "text": "Agreement is a research problem; fusion already exists.",
+        "size": 17,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 4,
+        "y": 3.34,
+        "w": 8.4,
+        "h": 0.25,
+        "text": "Krishna et al.; Bhatt et al.",
+        "size": 12,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 3.89,
+        "w": 12.1,
+        "h": 1.0,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.8,
+        "y": 4.04,
+        "w": 3.0,
+        "h": 0.65,
+        "text": "Grouped\nexplanations",
+        "size": 18,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 4,
+        "y": 4.01,
+        "w": 8.4,
+        "h": 0.38,
+        "text": "groupShapley and recent robustness work are close prior art.",
+        "size": 17,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 4,
+        "y": 4.46,
+        "w": 8.4,
+        "h": 0.25,
+        "text": "Jullum et al.; Hendro et al. (2025)",
+        "size": 12,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 5.24,
+        "w": 12.1,
+        "h": 1.22,
+        "color": "11283F"
+      },
+      {
+        "type": "text",
+        "x": 0.85,
+        "y": 5.42,
+        "w": 11.6,
+        "h": 0.75,
+        "text": "Proposed gap: test stability beyond matched random grouping,\ntogether with information loss and known-ground-truth fidelity.",
+        "size": 21,
+        "color": "FFFFFF",
+        "bold": true
+      }
+    ],
+    "notes": "About 75 seconds. SHAP explains a specified model output using a defined coalition-value game. Krishna and colleagues show that different explanation methods can disagree. groupShapley already explains groups, so grouping is not my invention. I also found a 2025 ITNAC paper on feature grouping for robust SHAP and a 2026 paper on agreement and faithfulness-weighted consensus. Their full methods need to be compared before a novelty claim. Our proposed question is whether correlation grouping beats random partitions with the same group sizes, while preserving fidelity and internal information. We will use synthetic cases with a known explanation game and public credit data. The contribution is an empirical evaluation protocol and findings, not an assertion that combining existing tools creates a new theory. Primary links: https://arxiv.org/abs/2106.12228 ; https://arxiv.org/abs/2202.01602 ; https://doi.org/10.1109/ITNAC66378.2025.11302604 ."
+  },
+  {
+    "title": "Methodology and controlled evaluation",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "COMET-XAI LITE",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "Methodology and controlled evaluation",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "Core method: train-only correlation grouping; coalition sums; size-matched controls. No temporal or causal recourse claim.",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "3",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.75,
+        "w": 2.88,
+        "h": 1.65,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.75,
+        "y": 1.9,
+        "w": 2.55,
+        "h": 0.4,
+        "text": "01",
+        "size": 20,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.75,
+        "y": 2.38,
+        "w": 2.6,
+        "h": 0.35,
+        "text": "Split + preprocess",
+        "size": 16,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.75,
+        "y": 2.87,
+        "w": 2.55,
+        "h": 0.35,
+        "text": "Fit only on training data",
+        "size": 13,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 3.68,
+        "y": 1.75,
+        "w": 2.88,
+        "h": 1.65,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 3.83,
+        "y": 1.9,
+        "w": 2.55,
+        "h": 0.4,
+        "text": "02",
+        "size": 20,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 3.83,
+        "y": 2.38,
+        "w": 2.6,
+        "h": 0.35,
+        "text": "Retrain + explain",
+        "size": 16,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 3.83,
+        "y": 2.87,
+        "w": 2.55,
+        "h": 0.35,
+        "text": "Same held-out people",
+        "size": 13,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 6.76,
+        "y": 1.75,
+        "w": 2.88,
+        "h": 1.65,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 6.91,
+        "y": 1.9,
+        "w": 2.55,
+        "h": 0.4,
+        "text": "03",
+        "size": 20,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 6.91,
+        "y": 2.38,
+        "w": 2.6,
+        "h": 0.35,
+        "text": "Group + controls",
+        "size": 16,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 6.91,
+        "y": 2.87,
+        "w": 2.55,
+        "h": 0.35,
+        "text": "Match group sizes exactly",
+        "size": 13,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 9.84,
+        "y": 1.75,
+        "w": 2.88,
+        "h": 1.65,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 9.99,
+        "y": 1.9,
+        "w": 2.55,
+        "h": 0.4,
+        "text": "04",
+        "size": 20,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 9.99,
+        "y": 2.38,
+        "w": 2.6,
+        "h": 0.35,
+        "text": "Evaluate",
+        "size": 16,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 9.99,
+        "y": 2.87,
+        "w": 2.55,
+        "h": 0.35,
+        "text": "Stability AND retained detail",
+        "size": 12.5,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 3.8,
+        "w": 5.9,
+        "h": 2.45,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 3.8,
+        "w": 0.045,
+        "h": 2.45,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 3.96,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "MEASURE",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 4.529999999999999,
+        "w": 5.54,
+        "h": 1.62,
+        "text": "RBO stability \u2022 matched-random difference\nCancellation \u2022 synthetic attribution error\nAP / ROC-AUC / Brier \u2022 runtime",
+        "size": 18,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 6.72,
+        "y": 3.8,
+        "w": 5.95,
+        "h": 2.45,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 6.72,
+        "y": 3.8,
+        "w": 0.045,
+        "h": 2.45,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 6.8999999999999995,
+        "y": 3.96,
+        "w": 5.59,
+        "h": 0.45,
+        "text": "CONTROL",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 6.8999999999999995,
+        "y": 4.529999999999999,
+        "w": 5.59,
+        "h": 1.62,
+        "text": "No grouping \u2022 same-size random groups\nKnown additive + interaction cases\nFixed model/output/background per\ncomparison",
+        "size": 18,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 6.47,
+        "w": 12,
+        "h": 0.28,
+        "text": "Minimum scope: synthetic data + UCI credit; logistic + one tree family. HELOC is conditional on verified access.",
+        "size": 13,
+        "color": "53667A",
+        "bold": false
+      }
+    ],
+    "notes": "About 90 seconds. We split data before fitting preprocessing or clusters. We retrain several models and explain the same held-out individuals. Each explanation is a vector of contributions in a stated output scale. We summarize either individual features or groups formed from training correlation. We compare the resulting stability to random groups with exactly the same number and sizes of groups. That controls a major shorter-list artefact. Next, we examine cancellation, synthetic exact group values and perturbation fidelity so a stable summary cannot simply hide opposing components. The initial model is logistic regression, where interventional logit contributions have an exact closed form. A small tree model and TreeSHAP are planned. The primary partition stays fixed across retraining; reclustering uncertainty is a separate analysis. We keep data, explainer and retraining randomness distinct. Removing model features, causal recourse and drift guarantees are outside the minimum project."
+  },
+  {
+    "title": "Pilot results and eight-week validation plan",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "COMET-XAI LITE",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "Pilot results and eight-week validation plan",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "Measured run: code/results/pilot.json | 10 bootstrap fits; 45 dependent pairs; 30 random partitions | Preliminary only",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "4",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 1.65,
+        "w": 6.1,
+        "h": 0.43,
+        "text": "11 groups; matched group sizes",
+        "size": 19,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 2.26,
+        "w": 5.7,
+        "h": 0.3,
+        "text": "Correlation groups",
+        "size": 15,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 2.6399999999999997,
+        "w": 5.3,
+        "h": 0.24,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 2.6399999999999997,
+        "w": 4.8972,
+        "h": 0.24,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 6.05,
+        "y": 2.4699999999999998,
+        "w": 0.7,
+        "h": 0.5,
+        "text": "0.924",
+        "size": 18,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 3.08,
+        "w": 5.7,
+        "h": 0.3,
+        "text": "Matched random groups",
+        "size": 15,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 3.46,
+        "w": 5.3,
+        "h": 0.24,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 3.46,
+        "w": 4.5744299999999996,
+        "h": 0.24,
+        "color": "53667A"
+      },
+      {
+        "type": "text",
+        "x": 6.05,
+        "y": 3.29,
+        "w": 0.7,
+        "h": 0.5,
+        "text": "0.863",
+        "size": 18,
+        "color": "53667A",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 4.05,
+        "w": 6,
+        "h": 0.6,
+        "text": "Controlled RBO difference: +0.061",
+        "size": 22.0,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 4.83,
+        "w": 6,
+        "h": 1.0,
+        "text": "30,000 rows \u2022 24k train / 6k test\nAP 0.489 \u2022 AUC 0.713 \u2022 Brier 0.148\n9 checks pass; deterministic replay matches",
+        "size": 16,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 7.05,
+        "y": 1.65,
+        "w": 5.55,
+        "h": 3.95,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 7.05,
+        "y": 1.65,
+        "w": 0.045,
+        "h": 3.95,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 7.2299999999999995,
+        "y": 1.8099999999999998,
+        "w": 5.1899999999999995,
+        "h": 0.45,
+        "text": "EIGHT-WEEK VALIDATION",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 7.2299999999999995,
+        "y": 2.38,
+        "w": 5.1899999999999995,
+        "h": 3.12,
+        "text": "W1\u20132 Data + synthetic oracle\nW3\u20134 Tree SHAP + matched controls\nW5\u20136 Fidelity + replication\nW7\u20138 Paper + advisor review",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 6.0,
+        "w": 12.0,
+        "h": 0.63,
+        "color": "FFF2DD"
+      },
+      {
+        "type": "text",
+        "x": 0.8,
+        "y": 6.14,
+        "w": 11.6,
+        "h": 0.36,
+        "text": "Limit: one split, logistic model only. No significance, causal recourse or publication claim.",
+        "size": 15,
+        "color": "BC7412",
+        "bold": true
+      }
+    ],
+    "notes": "About 90 seconds. The official UCI dataset contains 30,000 rows. Our pilot used 24,000 training and 6,000 test rows; 500 held-out rows were explained for ten bootstrap logistic models. Correlation grouping produced eleven groups from nineteen inputs. Its ranking RBO was .924, compared with .863 for random partitions with the same sizes: an absolute difference of .061. This is not a 6.1 percent improvement in correctness, and it is not a significance claim. Predictive metrics were AP .489, ROC-AUC .713 and Brier .148. Nine mathematical/data-contract checks pass; a repeated run reproduces deterministic outputs. The main limitation is one split and one simple model, including numeric handling of repayment-status codes. The next steps are synthetic ground truth, fidelity/cancellation analysis, a tree model and additional splits/data. I would like approval for this narrowed scope and feedback on whether an empirical evaluation paper meets project requirements. Target a future ICAIF call or a suitable ECML PKDD workshop, with final venue dependent on results."
+  },
+  {
+    "title": "The concepts you need before the experiment",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 01 \u2022 FIRST PRINCIPLES",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "The concepts you need before the experiment",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "DTU \u2022 [Student name] \u2022 [Roll number] \u2022 Prof. Rahul Gupta \u2022 28 October 2026",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "5",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.7,
+        "w": 5.9,
+        "h": 2.1,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.7,
+        "w": 0.045,
+        "h": 2.1,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 1.8599999999999999,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "MODEL",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 2.4299999999999997,
+        "w": 5.54,
+        "h": 1.27,
+        "text": "Inputs \u2192 learned function \u2192 default\nprobability. Testing asks whether\npredictions generalize.",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 1.7,
+        "w": 5.9,
+        "h": 2.1,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 1.7,
+        "w": 0.045,
+        "h": 2.1,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 1.8599999999999999,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "ATTRIBUTION",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 2.4299999999999997,
+        "w": 5.54,
+        "h": 1.27,
+        "text": "A contribution to a stated model output,\nrelative to a specified background.",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 4.05,
+        "w": 5.9,
+        "h": 2.1,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 4.05,
+        "w": 0.045,
+        "h": 2.1,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 4.21,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "STABILITY",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 4.779999999999999,
+        "w": 5.54,
+        "h": 1.27,
+        "text": "Does the explanation change when the\nmodel is retrained on resampled data?",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 4.05,
+        "w": 5.9,
+        "h": 2.1,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 4.05,
+        "w": 0.045,
+        "h": 2.1,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 4.21,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "FIDELITY",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 4.779999999999999,
+        "w": 5.54,
+        "h": 1.27,
+        "text": "Does the explanation reflect the\nspecified model/game? Stability alone is\ninsufficient.",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      }
+    ],
+    "notes": "Use this if asked to define terms. A feature is an input column, a label is the observed outcome, and a model is a learned mapping. Local attribution concerns one row; global attribution aggregates rows. Stability, fidelity and usefulness are distinct. The full study guide begins before these terms and includes examples."
+  },
+  {
+    "title": "The \u201ccorrected\u201d manual still needs correction",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 02 \u2022 DOCUMENT AUDIT",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "The \u201ccorrected\u201d manual still needs correction",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "Detailed 36-point audit with printed PDF page numbers is in the Research Dossier.",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "6",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 1.8,
+        "w": 11.8,
+        "h": 0.68,
+        "text": "\u2022 Lower correlation cutoff \u2192 more merging, not more groups.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 2.56,
+        "w": 11.8,
+        "h": 0.68,
+        "text": "\u2022 Coalition sums are not generally Owen / exact group values.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 3.3200000000000003,
+        "w": 11.8,
+        "h": 0.68,
+        "text": "\u2022 Mean logit transformed by sigmoid is not mean probability.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 4.08,
+        "w": 11.8,
+        "h": 0.68,
+        "text": "\u2022 Margin code has an order-statistic error; alpha direction is reversed.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 4.84,
+        "w": 11.8,
+        "h": 0.68,
+        "text": "\u2022 Static credit data cannot validate temporal, actionable recourse.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 5.6,
+        "w": 11.8,
+        "h": 0.68,
+        "text": "\u2022 Agreement, monotonicity and lower VIF do not prove explanation quality.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      }
+    ],
+    "notes": "The manual contains many sensible corrections but is not fully reliable. Lowering rho merges more groups, not fewer. The proposed quantile code can select the wrong order statistic. Alpha=0 is not a no-margin setting. Mean probability is not sigmoid of mean logit. An additive model does not automatically imply the needed additive conditional attribution game. PFI need not always understate correlated features. Historical repayment data do not support feasible causal recourse. These are reasons for a narrower design, not reasons to discard all explainability research."
+  },
+  {
+    "title": "A linear attribution you can calculate by hand",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 03 \u2022 EXACT BASELINE",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "A linear attribution you can calculate by hand",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "Illustrative arithmetic, not a measured applicant. Pilot uses the same identity on standardized logit inputs.",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "7",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.75,
+        "y": 1.8,
+        "w": 11.8,
+        "h": 0.8,
+        "text": "Score = 3x\u2081 + 2x\u2082 Reference = (1, 2) Input = (2, 5)",
+        "size": 25,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.7,
+        "y": 3.0,
+        "w": 3.8,
+        "h": 2.1,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.7,
+        "y": 3.0,
+        "w": 0.045,
+        "h": 2.1,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.8799999999999999,
+        "y": 3.16,
+        "w": 3.44,
+        "h": 0.45,
+        "text": "BASE SCORE",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.8799999999999999,
+        "y": 3.73,
+        "w": 3.44,
+        "h": 1.27,
+        "text": "3\u00d71 + 2\u00d72 = 7",
+        "size": 23,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 4.75,
+        "y": 3.0,
+        "w": 3.8,
+        "h": 2.1,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 4.75,
+        "y": 3.0,
+        "w": 0.045,
+        "h": 2.1,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 4.93,
+        "y": 3.16,
+        "w": 3.44,
+        "h": 0.45,
+        "text": "CONTRIBUTIONS",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 4.93,
+        "y": 3.73,
+        "w": 3.44,
+        "h": 1.27,
+        "text": "3\u00d7(2\u22121) = 3\n2\u00d7(5\u22122) = 6",
+        "size": 22,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 8.8,
+        "y": 3.0,
+        "w": 3.8,
+        "h": 2.1,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 8.8,
+        "y": 3.0,
+        "w": 0.045,
+        "h": 2.1,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 8.98,
+        "y": 3.16,
+        "w": 3.44,
+        "h": 0.45,
+        "text": "RECONSTRUCTION",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 8.98,
+        "y": 3.73,
+        "w": 3.44,
+        "h": 1.27,
+        "text": "7 + 3 + 6 = 16",
+        "size": 23,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.8,
+        "y": 5.6,
+        "w": 11.8,
+        "h": 0.65,
+        "text": "Always state the explained output scale. The pilot explains log-odds, not\npercentage points.",
+        "size": 19.0,
+        "color": "087F8C",
+        "bold": true
+      }
+    ],
+    "notes": "For score=3*x1+2*x2, reference means 1 and 2 give base 7. At x=(2,5), the feature differences contribute 3 and 6. They sum to the nine-point score difference, and base plus contributions equals sixteen. In logistic regression this is the logit score, not probability. The actual pilot calculates the background mean after each model\u2019s fitted preprocessor and checks this identity for all 500 audit cases. This verifies implementation of a stated attribution, not that the model is causally correct."
+  },
+  {
+    "title": "Stable summaries can conceal different things",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 04 \u2022 INFORMATION LOSS",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "Stable summaries can conceal different things",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "Coalition sum versus grouped game: groupShapley [S04]. Worked numbers are illustrative.",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "8",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.8,
+        "w": 5.9,
+        "h": 3.6,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.8,
+        "w": 0.045,
+        "h": 3.6,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 1.96,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "CANCELLATION",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 2.5300000000000002,
+        "w": 5.54,
+        "h": 2.77,
+        "text": "Feature credits: +5 and \u22124.8\nNet group contribution: 0.2\nUnsigned internal mass: 9.8\nA stable net can hide strong\ncomponents.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 1.8,
+        "w": 5.9,
+        "h": 3.6,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 1.8,
+        "w": 0.045,
+        "h": 3.6,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 1.96,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "GROUPING CHANGES THE GAME",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 2.5300000000000002,
+        "w": 5.54,
+        "h": 2.77,
+        "text": "Three-player unanimity game:\nordinary A + B = 2/3\nmerged {A,B} group = 1/2\nCoalition sum \u2260 exact group value.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 5.8,
+        "w": 12,
+        "h": 0.65,
+        "text": "Retain group summaries AND feature drill-down; test interactions with a small\nexact oracle.",
+        "size": 19.0,
+        "color": "087F8C",
+        "bold": true
+      }
+    ],
+    "notes": "Two different issues are shown. Cancellation: +5 and minus 4.8 net to .2, while the unsigned total is 9.8. Net contribution is legitimate but can hide strong opposing components. Game semantics: in a three-player unanimity game every feature gets one third; summing A and B gives two thirds. Treat AB as one group and C as another, and each group gets one half. So the order of grouping and Shapley computation matters. We retain within-group drill-down and use exact small-game values as an oracle."
+  },
+  {
+    "title": "Pilot provenance and what its numbers mean",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 05 \u2022 ACTUAL EXECUTED WORK",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "Pilot provenance and what its numbers mean",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "Official UCI dataset 350, CC BY 4.0 | https://doi.org/10.24432/C55S3H | SHA256 and versions in pilot.json",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "9",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.75,
+        "w": 5.9,
+        "h": 4.35,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.75,
+        "w": 0.045,
+        "h": 4.35,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 1.91,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "DATA + MODEL",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 2.48,
+        "w": 5.54,
+        "h": 3.5199999999999996,
+        "text": "30,000 observed customer records\n19 numeric inputs after exclusions\n24,000 train / 6,000 test\n500 held-out audit rows\n10 bootstrap logistic models\nExact interventional logit attribution",
+        "size": 18,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 1.75,
+        "w": 5.9,
+        "h": 4.35,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 1.75,
+        "w": 0.045,
+        "h": 4.35,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 1.91,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "MEASUREMENTS",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 2.48,
+        "w": 5.54,
+        "h": 3.5199999999999996,
+        "text": "19-feature RBO: 0.776\n11-group RBO: 0.924\nSize-matched random RBO: 0.863\nControlled difference: +0.061\nMax reconstruction error: 2.22e\u221215\nNo inferential p-value claimed",
+        "size": 18,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 6.35,
+        "w": 12,
+        "h": 0.3,
+        "text": "Single split + simple model + fixed partition. Fidelity, second dataset and full benchmark remain unrun.",
+        "size": 14,
+        "color": "BC7412",
+        "bold": true
+      }
+    ],
+    "notes": "The official dataset was downloaded during this task and hashed. Ten bootstrap models share the same held-out test set. Forty-five pairwise comparisons share models and are not independent experimental units. Feature RBO .776 has nineteen items and group RBO .924 has eleven, so that raw difference is not the main controlled comparison. Random groups preserve the exact group sizes and average .863. This pilot does not implement the full proposed train/development/test protocol; it uses a prespecified 80/20 split without tuning. Numeric repayment-status encoding remains a known limitation."
+  },
+  {
+    "title": "Full experiment: isolate one source of change at a time",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 06 \u2022 RESEARCH DESIGN",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "Full experiment: isolate one source of change at a time",
+        "size": 27.5,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "DTU \u2022 [Student name] \u2022 [Roll number] \u2022 Prof. Rahul Gupta \u2022 28 October 2026",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "10",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 1.75,
+        "w": 11.9,
+        "h": 0.6900000000000001,
+        "text": "\u2022 Data: controlled synthetic cases + UCI; verified HELOC if available.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 2.52,
+        "w": 11.9,
+        "h": 0.6900000000000001,
+        "text": "\u2022 Models: logistic regression first; one small tree ensemble next.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 3.29,
+        "w": 11.9,
+        "h": 0.6900000000000001,
+        "text": "\u2022 Split: 60% train / 20% development / 20% locked test.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 4.0600000000000005,
+        "w": 11.9,
+        "h": 0.6900000000000001,
+        "text": "\u2022 Separate: model resampling, explainer sampling and reclustering.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 4.83,
+        "w": 11.9,
+        "h": 0.6900000000000001,
+        "text": "\u2022 Controls: singleton, random same-size, domain and giant groups.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 5.6,
+        "w": 11.9,
+        "h": 0.6900000000000001,
+        "text": "\u2022 Small exact group games verify additive and interaction cases.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      }
+    ],
+    "notes": "For the final study, save stratified train/development/test IDs. Train-only transforms and clusters prevent leakage. The primary experiment freezes the correlation partition while retraining models. A separate reclustering analysis measures group discovery uncertainty. A separate explainer-repeat experiment measures sampling variance. Add a synthetic known-game oracle and one tree family. HELOC is conditional on obtaining a verified release and dictionary. The study can succeed as a negative-result evaluation if gains vanish under controls; do not keep expanding modules to force a positive result."
+  },
+  {
+    "title": "Evaluation must measure more than consistency",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 07 \u2022 METRICS",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "Evaluation must measure more than consistency",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "DTU \u2022 [Student name] \u2022 [Roll number] \u2022 Prof. Rahul Gupta \u2022 28 October 2026",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "11",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 1.7,
+        "w": 12,
+        "h": 1.02,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.85,
+        "y": 1.8499999999999999,
+        "w": 3.15,
+        "h": 0.6,
+        "text": "Stability",
+        "size": 19,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 4.3,
+        "y": 1.8499999999999999,
+        "w": 8.05,
+        "h": 0.65,
+        "text": "RBO at p=.85; sensitivity at .7/.95; fixed audit individuals.",
+        "size": 18,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 2.88,
+        "w": 12,
+        "h": 1.02,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.85,
+        "y": 3.03,
+        "w": 3.15,
+        "h": 0.6,
+        "text": "Controlled gain",
+        "size": 19,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 4.3,
+        "y": 3.03,
+        "w": 8.05,
+        "h": 0.65,
+        "text": "Correlation-group stability minus size-matched random-group\nstability.",
+        "size": 18,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 4.06,
+        "w": 12,
+        "h": 1.02,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.85,
+        "y": 4.21,
+        "w": 3.15,
+        "h": 0.6,
+        "text": "Retained information",
+        "size": 18.5,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 4.3,
+        "y": 4.21,
+        "w": 8.05,
+        "h": 0.65,
+        "text": "Cancellation, drill-down, exact synthetic error and masker\nsensitivity.",
+        "size": 18,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 5.24,
+        "w": 12,
+        "h": 1.02,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.85,
+        "y": 5.390000000000001,
+        "w": 3.15,
+        "h": 0.6,
+        "text": "Model + uncertainty",
+        "size": 19,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 4.3,
+        "y": 5.390000000000001,
+        "w": 8.05,
+        "h": 0.65,
+        "text": "AP / AUC / Brier; paired effects; honest conditional uncertainty.",
+        "size": 18,
+        "color": "11283F",
+        "bold": false
+      }
+    ],
+    "notes": "RBO is the primary ranking stability measure. The main effect subtracts the mean of matched random partitions, but this is still a descriptive effect until replicated. Cancellation captures net-versus-unsigned attribution compression. Synthetic oracle error compares against a defined exact game, not assumed causal truth. AP, AUC and Brier validate the predictor; they do not validate explanations. Borrower confidence intervals with fixed models are conditional intervals, not a universal measure of model uncertainty. Report all denominators and failures."
+  },
+  {
+    "title": "What would falsify the project hypothesis?",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 08 \u2022 NEGATIVE RESULTS",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "What would falsify the project hypothesis?",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "DTU \u2022 [Student name] \u2022 [Roll number] \u2022 Prof. Rahul Gupta \u2022 28 October 2026",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "12",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.8,
+        "w": 5.9,
+        "h": 3.8,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.8,
+        "w": 0.045,
+        "h": 3.8,
+        "color": "BC7412"
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 1.96,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "EVIDENCE AGAINST",
+        "size": 17,
+        "color": "BC7412",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 2.5300000000000002,
+        "w": 5.54,
+        "h": 2.9699999999999998,
+        "text": "Random groups perform equally well.\nInformation loss offsets stability.\nResults disappear on new splits.\nClosest prior art already answers the\nquestion.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 1.8,
+        "w": 5.9,
+        "h": 3.8,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 1.8,
+        "w": 0.045,
+        "h": 3.8,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 1.96,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "HONEST RESPONSE",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 2.5300000000000002,
+        "w": 5.54,
+        "h": 2.9699999999999998,
+        "text": "Report the failure conditions.\nKeep all runs and controls.\nRevise claims and scope.\nDo not invent expected results or tune\non test.",
+        "size": 20,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 6.0,
+        "w": 12,
+        "h": 0.5,
+        "text": "Research quality comes from a valid answer, not from forcing a positive outcome.",
+        "size": 18.5,
+        "color": "087F8C",
+        "bold": true
+      }
+    ],
+    "notes": "A useful project must be able to fail its hypothesis. If matched random groups are just as stable, there is little evidence that correlation-specific grouping is the cause. If group summaries hide major opposing contributions or fail known-game fidelity checks, stability is insufficient. If benefit exists only in one model/split, generality is weak. If closest prior work already includes the proposed controls, novelty must be revised. These cases can support a careful replication or limitation study, but they do not guarantee publication."
+  },
+  {
+    "title": "The code demonstration: two minutes, no hand-waving",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 09 \u2022 IMPLEMENTATION",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "The code demonstration: two minutes, no hand-waving",
+        "size": 28.0,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "DTU \u2022 [Student name] \u2022 [Roll number] \u2022 Prof. Rahul Gupta \u2022 28 October 2026",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "13",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.8,
+        "w": 5.9,
+        "h": 3.9,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.8,
+        "w": 0.045,
+        "h": 3.9,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 1.96,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "SHOW THE FILES",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 2.5300000000000002,
+        "w": 5.54,
+        "h": 3.07,
+        "text": "demo.py \u2014 measured baseline\ntest_demo.py \u2014 9 checks\ndownload_data.py \u2014 official input\nresults/pilot.json \u2014 traceable evidence\nColab_Quickstart.ipynb \u2014 CPU route",
+        "size": 18,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 1.8,
+        "w": 5.9,
+        "h": 3.9,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 6.7,
+        "y": 1.8,
+        "w": 0.045,
+        "h": 3.9,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 1.96,
+        "w": 5.54,
+        "h": 0.45,
+        "text": "EXPLAIN THE CHECKS",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 6.88,
+        "y": 2.5300000000000002,
+        "w": 5.54,
+        "h": 3.07,
+        "text": "Disjoint training/test IDs\nComplete-linkage condition\nHand-computed RBO and linear values\nExact logit reconstruction\nIdentical deterministic rerun",
+        "size": 18,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 6.08,
+        "w": 12,
+        "h": 0.42,
+        "text": "Not implemented yet: tree SHAP, LIME, full synthetic oracle, recourse, second-data validation.",
+        "size": 16.0,
+        "color": "BC7412",
+        "bold": true
+      }
+    ],
+    "notes": "Show demo.py, test_demo.py and results/pilot.json. Explain the data exclusions and split, the linear attribution formula, and the matched random partitions. Run the tests; nine should pass. Open the saved result and identify model/data counts and limitations. The quantile helper is only an audit correction and is not used by the main pipeline. The starter includes a downloader and Colab notebook, but no personal Colab account run has been performed. Be candid about AI assistance and your responsibility for validation."
+  },
+  {
+    "title": "Eight weeks, with a deliverable gate each fortnight",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 10 \u2022 EXECUTION PLAN",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "Eight weeks, with a deliverable gate each fortnight",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "DTU \u2022 [Student name] \u2022 [Roll number] \u2022 Prof. Rahul Gupta \u2022 28 October 2026",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "14",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 1.8,
+        "w": 12,
+        "h": 1.0,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.85,
+        "y": 2.0,
+        "w": 2.65,
+        "h": 0.4,
+        "text": "WEEKS 1\u20132",
+        "size": 18,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 3.75,
+        "y": 1.96,
+        "w": 8.5,
+        "h": 0.68,
+        "text": "Understand baseline; audit data; verify exact synthetic games.",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 2.9299999999999997,
+        "w": 12,
+        "h": 1.0,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.85,
+        "y": 3.13,
+        "w": 2.65,
+        "h": 0.4,
+        "text": "WEEKS 3\u20134",
+        "size": 18,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 3.75,
+        "y": 3.09,
+        "w": 8.5,
+        "h": 0.68,
+        "text": "Add tree SHAP; run matched-group stability and negative\ncontrols.",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 4.06,
+        "w": 12,
+        "h": 1.0,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.85,
+        "y": 4.26,
+        "w": 2.65,
+        "h": 0.4,
+        "text": "WEEKS 5\u20136",
+        "size": 18,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 3.75,
+        "y": 4.22,
+        "w": 8.5,
+        "h": 0.68,
+        "text": "Measure information loss; replicate; freeze main results.",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.65,
+        "y": 5.1899999999999995,
+        "w": 12,
+        "h": 1.0,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "text",
+        "x": 0.85,
+        "y": 5.39,
+        "w": 2.65,
+        "h": 0.4,
+        "text": "WEEKS 7\u20138",
+        "size": 18,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 3.75,
+        "y": 5.35,
+        "w": 8.5,
+        "h": 0.68,
+        "text": "Write, review, replay and prepare a venue-specific submission.",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      }
+    ],
+    "notes": "Week 1 learn and reproduce baseline; week 2 finish data cards and synthetic oracle. Weeks 3 and 4 add the tree explanation and controlled stability experiment. Weeks 5 and 6 assess fidelity, cancellation and replication. Weeks 7 and 8 write and independently replay the work with advisor feedback. Optional features are dropped if core gates fail. Use bounded Cursor tasks; do not ask it to generate a whole paper and system in one pass. Free Colab CPU is sufficient for the scoped experiments."
+  },
+  {
+    "title": "Publication plan: target fit, not a promise",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 11 \u2022 VENUES",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "Publication plan: target fit, not a promise",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "Verified series pages: icaif2026.org \u2022 ecmlpkdd.org \u2022 pakdd.org | No upcoming deadline commitment",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "15",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.85,
+        "w": 3.9,
+        "h": 3.55,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 0.6,
+        "y": 1.85,
+        "w": 0.045,
+        "h": 3.55,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 2.0100000000000002,
+        "w": 3.54,
+        "h": 0.45,
+        "text": "PRIMARY FIT",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.78,
+        "y": 2.58,
+        "w": 3.54,
+        "h": 2.7199999999999998,
+        "text": "Future ACM ICAIF call\nFinancial ML +\nexplainability\n2026 submissions closed\nVerify next CFP with\nadvisor",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 4.7,
+        "y": 1.85,
+        "w": 3.9,
+        "h": 3.55,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 4.7,
+        "y": 1.85,
+        "w": 0.045,
+        "h": 3.55,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 4.88,
+        "y": 2.0100000000000002,
+        "w": 3.54,
+        "h": 0.45,
+        "text": "EVALUATION OPTION",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 4.88,
+        "y": 2.58,
+        "w": 3.54,
+        "h": 2.7199999999999998,
+        "text": "ECML PKDD XAI /\ntrustworthy-ML workshop\nCheck actual workshop\nand archival policy",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "rect",
+        "x": 8.8,
+        "y": 1.85,
+        "w": 3.9,
+        "h": 3.55,
+        "color": "EDF3F7"
+      },
+      {
+        "type": "rect",
+        "x": 8.8,
+        "y": 1.85,
+        "w": 0.045,
+        "h": 3.55,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 8.98,
+        "y": 2.0100000000000002,
+        "w": 3.54,
+        "h": 0.45,
+        "text": "STRETCH",
+        "size": 17,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 8.98,
+        "y": 2.58,
+        "w": 3.54,
+        "h": 2.7199999999999998,
+        "text": "PAKDD research track\nRequires stronger\nmethodological evidence\nNo deadline verified",
+        "size": 19,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.65,
+        "y": 5.85,
+        "w": 12,
+        "h": 0.65,
+        "text": "Ask the supervisor: Is the narrowed empirical study suitable, and what\npublication format does DTU require?",
+        "size": 19.0,
+        "color": "087F8C",
+        "bold": true
+      }
+    ],
+    "notes": "ICAIF is the best topical fit among these targets for credit explainability, but the 2026 main submissions are closed and workshop submissions closed October 12. Its 2026 event is November 14 to 17 in Milan. We would target a future call, plausibly 2027, after verifying the actual CFP. An appropriate ECML PKDD workshop may fit an evaluation/reproducibility study, but its archival publication policy must satisfy DTU requirements. PAKDD is a stretch if the methodological contribution becomes strong. EJOR, DSS, ESWA and KBS listed in the old manual are journals, not conferences. There is no guarantee of acceptance and no fee/payment/submission has been made."
+  },
+  {
+    "title": "Selected references and the novelty checkpoint",
+    "elements": [
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 13.333333,
+        "h": 7.5,
+        "color": "FFFFFF"
+      },
+      {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "w": 0.16,
+        "h": 7.5,
+        "color": "087F8C"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.27,
+        "w": 12,
+        "h": 0.25,
+        "text": "BACKUP 12 \u2022 REFERENCES",
+        "size": 10,
+        "color": "087F8C",
+        "bold": true
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 0.73,
+        "w": 12.2,
+        "h": 0.85,
+        "text": "Selected references and the novelty checkpoint",
+        "size": 29,
+        "color": "11283F",
+        "bold": true
+      },
+      {
+        "type": "rect",
+        "x": 0.55,
+        "y": 6.96,
+        "w": 12.2,
+        "h": 0.015,
+        "color": "CCD8E2"
+      },
+      {
+        "type": "text",
+        "x": 0.55,
+        "y": 7.08,
+        "w": 11.4,
+        "h": 0.22,
+        "text": "Full linked bibliography, verification levels and recent-work audit are in the Research Dossier.",
+        "size": 9,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 12.1,
+        "y": 7.06,
+        "w": 0.5,
+        "h": 0.25,
+        "text": "16",
+        "size": 10,
+        "color": "53667A",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 1.75,
+        "w": 11.9,
+        "h": 0.7000000000000001,
+        "text": "\u2022 Lundberg & Lee (2017). A Unified Approach to Interpreting Model Predictions. arXiv:1705.07874.",
+        "size": 17,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 2.5300000000000002,
+        "w": 11.9,
+        "h": 0.7000000000000001,
+        "text": "\u2022 Krishna et al. The Disagreement Problem in Explainable Machine Learning. arXiv:2202.01602.",
+        "size": 17,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 3.31,
+        "w": 11.9,
+        "h": 0.7000000000000001,
+        "text": "\u2022 Jullum, Redelmeier & Aas. groupShapley. arXiv:2106.12228.",
+        "size": 17,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 4.09,
+        "w": 11.9,
+        "h": 0.7000000000000001,
+        "text": "\u2022 Chen et al. (2020). True to the Model or True to the Data? arXiv:2006.16234.",
+        "size": 17,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 4.87,
+        "w": 11.9,
+        "h": 0.7000000000000001,
+        "text": "\u2022 Hendro, Mei & Welch (2025). Feature-Grouping for Robust SHAP. DOI:\n10.1109/ITNAC66378.2025.11302604.",
+        "size": 17,
+        "color": "11283F",
+        "bold": false
+      },
+      {
+        "type": "text",
+        "x": 0.7,
+        "y": 5.65,
+        "w": 11.9,
+        "h": 0.7000000000000001,
+        "text": "\u2022 Quantifying overall agreement\u2026 (2026). DOI: 10.1007/s12065-026-01145-y.",
+        "size": 17,
+        "color": "11283F",
+        "bold": false
+      }
+    ],
+    "notes": "Read the closest sources rather than memorizing citation counts. SHAP defines the attribution framework; Krishna documents disagreement; groupShapley is the central grouping baseline; Chen and colleagues explain model-versus-data semantics. The 2025 feature-grouping robustness paper and 2026 consensus/agreement paper require closest-work comparison before claiming novelty. Do not claim to have reviewed their entire full text if only metadata or abstract was accessible. The research dossier includes more than thirty linked primary sources and distinguishes unresolved references."
+  }
+]

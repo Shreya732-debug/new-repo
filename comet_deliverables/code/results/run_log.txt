@@ -1,0 +1,83 @@
+{
+  "status": "preliminary single-split real-data logistic baseline; not full method validation",
+  "dataset": "UCI Default of Credit Card Clients, ID 350",
+  "n_rows": 30000,
+  "train_rows": 24000,
+  "test_rows": 6000,
+  "audit_rows": 500,
+  "default_prevalence": 0.2212,
+  "groups": [
+    [
+      "BILL_AMT1",
+      "BILL_AMT2",
+      "BILL_AMT3",
+      "BILL_AMT4",
+      "BILL_AMT5",
+      "BILL_AMT6"
+    ],
+    [
+      "PAY_AMT5"
+    ],
+    [
+      "PAY_AMT6"
+    ],
+    [
+      "PAY_AMT4"
+    ],
+    [
+      "PAY_AMT1"
+    ],
+    [
+      "PAY_AMT3"
+    ],
+    [
+      "PAY_AMT2"
+    ],
+    [
+      "PAY_2",
+      "PAY_3"
+    ],
+    [
+      "PAY_4",
+      "PAY_5",
+      "PAY_6"
+    ],
+    [
+      "PAY_0"
+    ],
+    [
+      "LIMIT_BAL"
+    ]
+  ],
+  "bootstrap_fits": 10,
+  "bootstrap_pairs": 45,
+  "random_partitions": 30,
+  "mean_AP": 0.48940370838208996,
+  "mean_ROC_AUC": 0.7130352643922316,
+  "mean_Brier": 0.14765037952357002,
+  "feature_RBO": 0.7761305844672964,
+  "group_RBO": 0.9240238119184465,
+  "matched_random_mean_RBO": 0.863110737605383,
+  "matched_random_sd_RBO": 0.027262412634543074,
+  "group_minus_matched_random_RBO": 0.060913074313063476,
+  "max_logit_additivity_error": 2.220446049250313e-15,
+  "data_sha256": "30c6be3abd8dcfd3e6096c828bad8c2f011238620f5369220bd60cfc82700933",
+  "python": "3.12.14",
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "xlrd": "2.0.1"
+  },
+  "elapsed_seconds": 1.9494294390001414,
+  "limitations": [
+    "one fixed split",
+    "logistic model only",
+    "no LIME or tree SHAP",
+    "bootstrap pairs dependent; no inferential p-values",
+    "no temporal, causal, recourse, or publication claim",
+    "grouping fixed; group discovery uncertainty not measured",
+    "random partition score spread is not a confidence interval"
+  ]
+}

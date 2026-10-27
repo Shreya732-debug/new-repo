@@ -1,0 +1,350 @@
+[
+  {
+    "query": "Chen Calabrese Martin-Barragan interpretable imbalanced credit",
+    "results": [
+      {
+        "title": [
+          "Interpretable machine learning for imbalanced credit scoring datasets"
+        ],
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0000-0002-5380-0189",
+            "authenticated-orcid": false,
+            "given": "Yujia",
+            "family": "Chen",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Raffaella",
+            "family": "Calabrese",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Belen",
+            "family": "Martin-Barragan",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "DOI": "10.1016/j.ejor.2023.06.036",
+        "published": {
+          "date-parts": [
+            [
+              2024,
+              1
+            ]
+          ]
+        },
+        "volume": "312",
+        "issue": "1",
+        "page": "357-372",
+        "abstract": null
+      },
+      {
+        "title": [
+          "JointLIME: An interpretation method for machine learning survival models with endogenous time\u2010varying covariates in credit scoring"
+        ],
+        "author": [
+          {
+            "given": "Yujia",
+            "family": "Chen",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Business School University of Edinburgh Edinburgh UK"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Raffaella",
+            "family": "Calabrese",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Business School University of Edinburgh Edinburgh UK"
+              },
+              {
+                "name": "European University Institute Via dei Roccettini, Fiesole Tuscany Italy"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Belen",
+            "family": "Martin\u2010Barragan",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Business School University of Edinburgh Edinburgh UK"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "DOI": "10.1111/risa.17679",
+        "published": {
+          "date-parts": [
+            [
+              2024,
+              11,
+              20
+            ]
+          ]
+        },
+        "volume": "45",
+        "issue": "12",
+        "page": "4135-4156",
+        "abstract": "<jats:title>Abstract</jats:title>\n                  <jats:p>In this work, we introduce JointLIME, a novel interpretation method for explaining black\u2010box survival (BBS) models with endogenous time\u2010varying covariates (TVCs). Existing interpretation methods, like SurvLIME, are limited to BBS models only with time\u2010invariant covariates. To fill this gap, JointLIME leverages the Local Interpretable Model\u2010agnostic Explanations (LIME) framework to apply the joint model to approximate the survival functions predicted by the BBS model in a local area around a new individual. To achieve this, JointLIME minimizes the distances between survival functions predicted by the black\u2010box survival model and those derived from the joint model. The outputs of this minimization problem are the coefficient values of each covariate in the joint model, serving as explanations to quantify their impact on survival predictions. JointLIME uniquely incorporates endogenous TVCs using a spline\u2010based model coupled with the Monte Carlo method for precise estimations within any specified prediction period. These estimations are then integrated to formulate the joint model in the optimization problem. We illustrate the explanation results of JointLIME using a US mortgage data set and compare them with those of\u00a0SurvLIME.</jats:p>"
+      },
+      {
+        "title": [
+          "ECS-VTabNet: A secure and interpretable federated learning approach for imbalanced credit classification"
+        ],
+        "author": [
+          {
+            "given": "Zhongyi",
+            "family": "Wang",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Wai Ting Eric",
+            "family": "Ngai",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Zhang",
+            "family": "Wen",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Yuhang",
+            "family": "Tian",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Sihan",
+            "family": "Li",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "DOI": "10.2139/ssrn.6138019",
+        "published": {
+          "date-parts": [
+            [
+              2026
+            ]
+          ]
+        },
+        "volume": null,
+        "issue": null,
+        "page": null,
+        "abstract": null
+      }
+    ]
+  },
+  {
+    "query": "Ballegeer Bogaert Benoit LIME SHAP stability",
+    "results": [
+      {
+        "title": [
+          "Evaluating the stability of model explanations in instance-dependent cost-sensitive credit scoring"
+        ],
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0009-0006-0881-5644",
+            "authenticated-orcid": false,
+            "given": "Matteo",
+            "family": "Ballegeer",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-4502-0764",
+            "authenticated-orcid": false,
+            "given": "Matthias",
+            "family": "Bogaert",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0001-9901-8507",
+            "authenticated-orcid": false,
+            "given": "Dries F.",
+            "family": "Benoit",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "DOI": "10.1016/j.ejor.2025.05.039",
+        "published": {
+          "date-parts": [
+            [
+              2025,
+              11
+            ]
+          ]
+        },
+        "volume": "326",
+        "issue": "3",
+        "page": "630-640",
+        "abstract": null
+      },
+      {
+        "title": [
+          "Explainable Student Performance Prediction using XGBoost: A Stability-Based Comparative Study of SHAP and LIME"
+        ],
+        "author": [
+          {
+            "given": "Kashish",
+            "family": "Tomar",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Anshu",
+            "family": "Jain",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Dr. Rinky",
+            "family": "Ahuja",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "DOI": "10.2139/ssrn.6687138",
+        "published": {
+          "date-parts": [
+            [
+              2026
+            ]
+          ]
+        },
+        "volume": null,
+        "issue": null,
+        "page": null,
+        "abstract": "<jats:p>Predicting student academic success is essential for providing early support to at-risk learners. However, high-accuracy models such as Extreme Gradient Boosting (XGBoost) are often underutilized by educators due to their opaque decision-making processes. This paper implements a predictive framework using the UCI Student Performance dataset (649 records). We evaluate Random Forest, XGBoost, Logistic Regression, and a Multi-Layer Perceptron (MLP) baseline, with our XGBoost model achieving a classification accuracy of 0.892 and an F1-score of 0.936. To provide transparency, we integrate SHAP (SHapley Additive exPlanations) and LIME (Local Interpretable Model-Agnostic Explanations) as Explainable AI (XAI) methods. Our analysis shows that previous academic results (G2) and past failures are the most significant predictors. We quantitatively compare these XAI methods, finding that SHAP demonstrates near-perfect stability (\u22481.000) compared to LIME (0.846). A demographic parity evaluation confirms equitable prediction across socioeconomic groups. This study provides a practical framework for educational decision support, integrating predictive performance with the interpretability required for institutional trust.</jats:p>"
+      },
+      {
+        "title": [
+          "Supplemental Information 6: Explainability SHAP and LIME."
+        ],
+        "author": null,
+        "DOI": "10.7717/peerj-cs.4106/supp-6",
+        "published": null,
+        "volume": null,
+        "issue": null,
+        "page": null,
+        "abstract": null
+      }
+    ]
+  }
+]
